@@ -3,23 +3,27 @@ import { Button } from "../ui/button/button";
 import { ModeToggle } from "./components/theme/mode-toggle";
 import LanguageSwitcher from "./components/theme/language-switcher";
 import { useTranslation } from "react-i18next";
+import { BriefcaseBusiness } from "lucide-react";
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
 
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) => {
     return isActive
-      ? "font-semibold text-primary"
-      : "font-semibold text-gray-500 hover:text-primary";
+      ? "font-bold text-primary"
+      : "font-bold text-gray-500 hover:text-primary";
   };
 
   return (
-    <header className="h-20 border-b-2 rounded-3xl border-primary">
+    <header className="h-20 border-b-2 rounded-b-xl border-primary">
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
         <Link to="/">
-          <h1 className="text-2xl font-bold text-primary">Jobify</h1>
+          <div className="flex flex-row items-center space-x-2 text-primary px-6 py-2 rounded-2xl ">
+            <BriefcaseBusiness />
+            <h1 className="text-2xl font-bold text-primary">Jobify</h1>
+          </div>
         </Link>
-        <nav className="flex space-x-14">
+        <nav className="flex space-x-14 ">
           <NavLink className={getNavLinkClass} to="">
             {t("header-comp.nav-link-vacancies")}
           </NavLink>
