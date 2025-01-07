@@ -48,7 +48,9 @@ const Header: React.FC = () => {
               </Avatar>
             </Link>
           ) : ( */}
-          <Button>Log In</Button>
+          <Link to="/login">
+            <Button>Log In</Button>
+          </Link>
           <div className="space-x-1">
             <LanguageSwitcher />
             <ModeToggle />

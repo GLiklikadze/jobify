@@ -1,6 +1,6 @@
 import { Heart, Mail, MapPin } from "lucide-react";
 import { VacancyBox } from "./VacancyBox";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button/button";
 import jobifyLogo from "@/assets/jobify-logo.png";
 
 const announcements = [

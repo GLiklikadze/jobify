@@ -40,7 +40,7 @@ const RegisterPage = () => {
 
   return (
     <div className="flex px-4 my-24">
-      <Card className="mx-auto w-[30rem] max-h-96 ">
+      <Card className="mx-auto w-[30rem] max-h-96">
         <CardHeader>
           <CardTitle className="mx-auto text-2xl font-bold">
             {t("register-page.register-header")}

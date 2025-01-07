@@ -1,13 +1,15 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-import HeaderEn from "@/i18n/en/HeaderEn.json";
-import HeaderKa from "@/i18n/ka/HeaderKa.json";
+import HeaderEn from "@/i18n/en/components/HeaderEn.json";
+import HeaderKa from "@/i18n/ka/components/HeaderKa.json";
 
-import modeToggleEn from "@/i18n/en/modeToggleEn.json";
-import modeToggleKa from "@/i18n/ka/modeToggleKa.json";
-import RegisterPageEn from "@/i18n/en/RegisterPageEn.json";
-import RegisterPageKa from "@/i18n/ka/RegisterPageKa.json";
+import modeToggleEn from "@/i18n/en/components/modeToggleEn.json";
+import modeToggleKa from "@/i18n/ka/components/modeToggleKa.json";
+import RegisterPageEn from "@/i18n/en/pages/RegisterPageEn.json";
+import RegisterPageKa from "@/i18n/ka/pages/RegisterPageKa.json";
+import LoginPageEn from "@/i18n/en/pages/LoginPageEn.json";
+import LoginPageKa from "@/i18n/ka/pages/LoginPageKa.json";
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -16,6 +18,7 @@ i18n.use(initReactI18next).init({
         "header-comp": HeaderKa,
         "mode-toggle": modeToggleKa,
         "register-page": RegisterPageKa,
+        "login-page": LoginPageKa,
       },
     },
     en: {
@@ -23,6 +26,7 @@ i18n.use(initReactI18next).init({
         "header-comp": HeaderEn,
         "mode-toggle": modeToggleEn,
         "register-page": RegisterPageEn,
+        "login-page": LoginPageEn,
       },
     },
   },

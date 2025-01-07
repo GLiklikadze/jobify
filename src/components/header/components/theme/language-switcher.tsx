@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import i18next from "i18next";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 type languagesObj = { code: string; name: string };
 
@@ -19,14 +20,23 @@ const languages: languagesObj[] = [
 ];
 
 export default function LanguageSwitcher() {
-  const [currentLanguage, setCurrentLanguage] = useState(languages[0]);
+  const { lang } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
 
+  const [currentLanguage, setCurrentLanguage] = useState(languages[0]);
+  console.log(location);
   const handleLanguageChange = (language: languagesObj) => {
+    let newPath;
     setCurrentLanguage(language);
     if (currentLanguage.code === "ka") {
       i18next.changeLanguage("en");
-    } else {
+      newPath = location.pathname.replace(`/${lang}`, `/en`);
+      navigate(newPath);
+    } else if (currentLanguage.code === "en") {
       i18next.changeLanguage("ka");
+      newPath = location.pathname.replace(`/${lang}`, `/ka`);
+      navigate(newPath);
     }
   };
 

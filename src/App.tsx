@@ -1,17 +1,44 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "./components/header/components/theme/theme-provider";
 import RootLayout from "./components/layout/RootLayout";
 import VacanciesPage from "./pages/vacancies/VacanciesPage";
 import RegisterPage from "./pages/register/RegisterPage";
+import LoginPage from "./pages/login/LoginPage";
+import { useEffect } from "react";
+import { supabase } from "./supabase/supabaseClient";
+import { useAuthContext } from "./context/hooks/useAuthContext";
+import IsAuthGuard from "./route-guards/isAuthGuard";
 
 function App() {
+  const { handleSetUserId, setIsLoading } = useAuthContext();
+
+  useEffect(() => {
+    const fetchUser = async () =>
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        handleSetUserId(session?.user);
+        setIsLoading(false);
+      });
+    fetchUser();
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      handleSetUserId(session?.user);
+    });
+
+    return () => subscription.unsubscribe();
+  }, [handleSetUserId, setIsLoading]);
+
   return (
     <ThemeProvider defaultTheme="system">
       <Routes>
-        <Route element={<RootLayout />}>
-          <Route path="/" element={<VacanciesPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+        <Route path="/:lang" element={<RootLayout />}>
+          <Route path="vacancies" element={<VacanciesPage />} />
+          <Route element={<IsAuthGuard />}>
+            <Route path="register" element={<RegisterPage />} />
+            <Route path="login" element={<LoginPage />} />
+          </Route>
         </Route>
+        <Route path="/" element={<Navigate to="/ka/vacancies" />} />
       </Routes>
     </ThemeProvider>
   );
