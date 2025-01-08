@@ -14,6 +14,6 @@ export default defineConfig(() => {
         "@": srcPath,
       },
     },
-    assetsInclude: ["**/*.PNG"],
+    assetsInclude: ["**/*.png", "**/*.PNG"],
   };
 });

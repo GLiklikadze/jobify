@@ -40,7 +40,7 @@ export const useLogOut = ({
   return useMutation<void, PostgrestError, void>({
     mutationKey: ["log-out"],
     mutationFn: logOut,
-    onSuccess: () => navigate("/login"),
+    onSuccess: () => navigate("/"),
     ...mutationOptions,
   });
 };

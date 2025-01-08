@@ -10,6 +10,8 @@ import RegisterPageEn from "@/i18n/en/pages/RegisterPageEn.json";
 import RegisterPageKa from "@/i18n/ka/pages/RegisterPageKa.json";
 import LoginPageEn from "@/i18n/en/pages/LoginPageEn.json";
 import LoginPageKa from "@/i18n/ka/pages/LoginPageKa.json";
+import ProfilePageEn from "@/i18n/en/pages/ProfilePageEn.json";
+import ProfilePageKa from "@/i18n/ka/pages/ProfilePageKa.json";
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -19,6 +21,7 @@ i18n.use(initReactI18next).init({
         "mode-toggle": modeToggleKa,
         "register-page": RegisterPageKa,
         "login-page": LoginPageKa,
+        "profile-page": ProfilePageKa,
       },
     },
     en: {
@@ -27,6 +30,7 @@ i18n.use(initReactI18next).init({
         "mode-toggle": modeToggleEn,
         "register-page": RegisterPageEn,
         "login-page": LoginPageEn,
+        "profile-page": ProfilePageEn,
       },
     },
   },

@@ -8,6 +8,10 @@ import { useEffect } from "react";
 import { supabase } from "./supabase/supabaseClient";
 import { useAuthContext } from "./context/hooks/useAuthContext";
 import IsAuthGuard from "./route-guards/isAuthGuard";
+import ProfilePage from "./pages/profile/ProfilePage";
+import IsUnAuthGuard from "./route-guards/isUnAuthGuard";
+import AddVacanciesPage from "./pages/add-vacancies/AddVacanciesPage";
+import CompaniesPage from "./pages/companies/CompaniesPage";
 
 function App() {
   const { handleSetUserId, setIsLoading } = useAuthContext();
@@ -33,9 +37,14 @@ function App() {
       <Routes>
         <Route path="/:lang" element={<RootLayout />}>
           <Route path="vacancies" element={<VacanciesPage />} />
+          <Route path="add-vacancies" element={<AddVacanciesPage />} />
+          <Route path="companies" element={<CompaniesPage />} />
           <Route element={<IsAuthGuard />}>
             <Route path="register" element={<RegisterPage />} />
             <Route path="login" element={<LoginPage />} />
+          </Route>
+          <Route element={<IsUnAuthGuard />}>
+            <Route path="profile" element={<ProfilePage />} />
           </Route>
         </Route>
         <Route path="/" element={<Navigate to="/ka/vacancies" />} />

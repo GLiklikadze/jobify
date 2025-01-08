@@ -25,7 +25,6 @@ export default function LanguageSwitcher() {
   const navigate = useNavigate();
 
   const [currentLanguage, setCurrentLanguage] = useState(languages[0]);
-  console.log(location);
   const handleLanguageChange = (language: languagesObj) => {
     let newPath;
     setCurrentLanguage(language);
@@ -43,9 +42,9 @@ export default function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="secondary" className="p-4  border-2">
+        <Button variant="secondary" className="px-2  border-2">
           <Globe />
-          {currentLanguage.name.slice(0, 3)}
+          <span className="text-xs">{currentLanguage.name.slice(0, 3)}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-30">
