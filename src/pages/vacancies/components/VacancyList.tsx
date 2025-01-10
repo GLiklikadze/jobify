@@ -1,7 +1,6 @@
-import { Heart, Mail, MapPin } from "lucide-react";
+import { Briefcase, Heart, Mail, MapPin } from "lucide-react";
 import { VacancyBox } from "./VacancyBox";
 import { Button } from "@/components/ui/button/button";
-import jobifyLogo from "@/assets/jobify-logo.png";
 import { useGetVacanciesList } from "@/react-query/query/vacancies/vacanciesQuery";
 import { getFormattedDate } from "@/utils/dateFormatter";
 import { useNavigate } from "react-router-dom";
@@ -83,7 +82,7 @@ const VacancyList = () => {
         onClick={() => handleClick(announcement.id)}
       >
         <div className="overflow-hidden rounded-2xl border-2">
-          <img src={jobifyLogo} className="h-20 w-28" />
+          <Briefcase className="h-20 w-28" />
         </div>
         <div className="flex flex-col space-y-1">
           <div className="flex flex-row items-center space-x-2">
