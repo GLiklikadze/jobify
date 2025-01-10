@@ -45,43 +45,55 @@ export type Database = {
       vacancies: {
         Row: {
           benefits: string | null
+          companyName: string | null
+          contactEmail: string | null
           created_at: string
           description: string | null
-          email: string | null
           id: number
           jobType: string | null
           liked: boolean | null
           location: string | null
           qualifications: string | null
+          requirements: string | null
           responsibilities: string | null
+          salaryMax: string | null
+          salaryMin: string | null
           title: string | null
           user_id: string | null
         }
         Insert: {
           benefits?: string | null
+          companyName?: string | null
+          contactEmail?: string | null
           created_at?: string
           description?: string | null
-          email?: string | null
           id?: number
           jobType?: string | null
           liked?: boolean | null
           location?: string | null
           qualifications?: string | null
+          requirements?: string | null
           responsibilities?: string | null
+          salaryMax?: string | null
+          salaryMin?: string | null
           title?: string | null
           user_id?: string | null
         }
         Update: {
           benefits?: string | null
+          companyName?: string | null
+          contactEmail?: string | null
           created_at?: string
           description?: string | null
-          email?: string | null
           id?: number
           jobType?: string | null
           liked?: boolean | null
           location?: string | null
           qualifications?: string | null
+          requirements?: string | null
           responsibilities?: string | null
+          salaryMax?: string | null
+          salaryMin?: string | null
           title?: string | null
           user_id?: string | null
         }

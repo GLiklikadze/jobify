@@ -12,6 +12,8 @@ import ProfilePage from "./pages/profile/ProfilePage";
 import IsUnAuthGuard from "./route-guards/isUnAuthGuard";
 import AddVacanciesPage from "./pages/add-vacancies/AddVacanciesPage";
 import CompaniesPage from "./pages/companies/CompaniesPage";
+import SingleVacancy from "./pages/vacancies/views/single/SingleVacancy";
+import HomePage from "./pages/home/HomePage";
 
 function App() {
   const { handleSetUserId, setIsLoading } = useAuthContext();
@@ -36,7 +38,9 @@ function App() {
     <ThemeProvider defaultTheme="system">
       <Routes>
         <Route path="/:lang" element={<RootLayout />}>
+          <Route path="home" element={<HomePage />} />
           <Route path="vacancies" element={<VacanciesPage />} />
+          <Route path="vacancies/:vac_id" element={<SingleVacancy />} />
           <Route path="add-vacancies" element={<AddVacanciesPage />} />
           <Route path="companies" element={<CompaniesPage />} />
           <Route element={<IsAuthGuard />}>
@@ -47,7 +51,7 @@ function App() {
             <Route path="profile" element={<ProfilePage />} />
           </Route>
         </Route>
-        <Route path="/" element={<Navigate to="/ka/vacancies" />} />
+        <Route path="/" element={<Navigate to="/ka/home" />} />
       </Routes>
     </ThemeProvider>
   );

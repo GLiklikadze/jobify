@@ -25,14 +25,12 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const { mutate: mutateLogout } = useLogOut();
   return (
-    <header className="h-20 border-b-2 rounded-b-xl border-primary  z-50 bg-gray-50 dark:bg-gray-800">
+    <header className="h-20 border-b-2 rounded-b-xl border-primary z-50 bg-gray-50 dark:bg-gray-800">
       <div className="mx-auto flex items-center justify-between px-4 py-4">
         <Link to="/">
-          <div className="flex flex-row items-center space-x-2 text-primary px-6 py-2 rounded-2xl ">
+          <div className="flex flex-row items-center space-x-2 text-orange-700 px-6 py-2 rounded-2xl ">
             <BriefcaseBusiness />
-            <h1 className="text-2xl font-bold text-primary dark:text-orange-700">
-              Jobify
-            </h1>
+            <h1 className="text-2xl font-bold text-primary">Jobify</h1>
           </div>
         </Link>
         <nav className="flex space-x-14 ">
@@ -56,7 +54,7 @@ const Header: React.FC = () => {
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <div className="flex flex-row bg-secondary items-center px-2 py-1 space-x-2 border-2 border-primary rounded-3xl cursor-pointer">
+                <div className="flex flex-row bg-secondary items-center px-2 py-1 space-x-2 border-2 border-foregraund rounded-3xl cursor-pointer">
                   <UserRound className="text-blue-600 w-6 h-6 border-2 p-1 border-primary rounded-full" />
                   <div className="font-bold text-xs text-secondary-foreground">
                     {user?.email}

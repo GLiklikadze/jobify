@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button/button";
 import jobifyLogo from "@/assets/jobify-logo.png";
 import { useGetVacanciesList } from "@/react-query/query/vacancies/vacanciesQuery";
 import { getFormattedDate } from "@/utils/dateFormatter";
+import { useNavigate } from "react-router-dom";
 
 // const announcements = [
 //   {
@@ -70,8 +71,12 @@ import { getFormattedDate } from "@/utils/dateFormatter";
 
 const VacancyList = () => {
   const { data: vacanciesList } = useGetVacanciesList();
+  const navigate = useNavigate();
+  const handleClick = (vac_id: number) => {
+    navigate(`${vac_id}`);
+  };
   return vacanciesList?.map((announcement, index) => (
-    <div key={index}>
+    <div key={index} onClick={() => handleClick(announcement.id)}>
       <VacancyBox>
         <div className="flex flex-row justify-between cursor-pointer">
           <div className="rounded-2xl border-2 overflow-hidden">
@@ -85,14 +90,14 @@ const VacancyList = () => {
                 size="1.2rem"
               />
             </div>
-            <p>{announcement?.description}</p>
+            <p>{announcement?.companyName}</p>
             <p className="flex items-center space-x-1 text-primary text-sm">
               <MapPin className="inline-flex" size="1rem" />
-              <span> საქართველო, თბილისი</span>
+              <span> საქართველო, {announcement?.location}</span>
             </p>
           </div>
           <div className="flex flex-col space-y-8">
-            <div>ანაზღაურება - {announcement?.salary} ₾</div>
+            <div>ანაზღაურება - {announcement?.salaryMin} ₾</div>
             <div>{getFormattedDate(announcement?.created_at)}</div>
           </div>
           <div className="flex flex-col justify-between">
