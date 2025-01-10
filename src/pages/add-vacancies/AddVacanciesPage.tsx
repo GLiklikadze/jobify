@@ -73,10 +73,10 @@ const AddVacanciesPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-3xl">
+    <div className="container mx-auto max-w-3xl p-4">
       <Card>
         <CardHeader className="flex flex-row items-center gap-4">
-          <img src={new_vacancy_svg} className="w-16 h-20" />
+          <img src={new_vacancy_svg} className="h-20 w-16" />
           <CardTitle className="text-2xl text-primary">
             Create New Job Posting
           </CardTitle>

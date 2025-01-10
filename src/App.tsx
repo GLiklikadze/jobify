@@ -14,6 +14,7 @@ import AddVacanciesPage from "./pages/add-vacancies/AddVacanciesPage";
 import CompaniesPage from "./pages/companies/CompaniesPage";
 import SingleVacancy from "./pages/vacancies/views/single/SingleVacancy";
 import HomePage from "./pages/home/HomePage";
+import MyVacancies from "./pages/my-vacancies.tsx/MyVacancies";
 
 function App() {
   const { handleSetUserId, setIsLoading } = useAuthContext();
@@ -41,6 +42,7 @@ function App() {
           <Route path="home" element={<HomePage />} />
           <Route path="vacancies" element={<VacanciesPage />} />
           <Route path="vacancies/:vac_id" element={<SingleVacancy />} />
+          <Route path="my-vacancies" element={<MyVacancies />} />
           <Route path="add-vacancies" element={<AddVacanciesPage />} />
           <Route path="companies" element={<CompaniesPage />} />
           <Route element={<IsAuthGuard />}>

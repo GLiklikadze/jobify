@@ -75,40 +75,42 @@ const VacancyList = () => {
   const handleClick = (vac_id: number) => {
     navigate(`${vac_id}`);
   };
-  return vacanciesList?.map((announcement, index) => (
-    <div key={index} onClick={() => handleClick(announcement.id)}>
-      <VacancyBox>
-        <div className="flex flex-row justify-between cursor-pointer">
-          <div className="rounded-2xl border-2 overflow-hidden">
-            <img src={jobifyLogo} className="w-28 h-20" />
-          </div>
-          <div className="flex flex-col space-y-1">
-            <div className="flex flex-row space-x-2 items-center">
-              <h1 className="text-primary font-bold">{announcement?.title} </h1>
-              <Heart
-                className="text-primary hover:fill-primary"
-                size="1.2rem"
-              />
-            </div>
-            <p>{announcement?.companyName}</p>
-            <p className="flex items-center space-x-1 text-primary text-sm">
-              <MapPin className="inline-flex" size="1rem" />
-              <span> საქართველო, {announcement?.location}</span>
-            </p>
-          </div>
-          <div className="flex flex-col space-y-8">
-            <div>ანაზღაურება - {announcement?.salaryMin} ₾</div>
-            <div>{getFormattedDate(announcement?.created_at)}</div>
-          </div>
-          <div className="flex flex-col justify-between">
-            <Button variant="default" className="p-6">
-              <Mail />
-              რეზიუმეს გაგზავნა
-            </Button>
-          </div>
+  return vacanciesList?.map((announcement) => (
+    <VacancyBox>
+      <div
+        className="flex cursor-pointer flex-row justify-between"
+        key={announcement?.id}
+        onClick={() => handleClick(announcement.id)}
+      >
+        <div className="overflow-hidden rounded-2xl border-2">
+          <img src={jobifyLogo} className="h-20 w-28" />
         </div>
-      </VacancyBox>
-    </div>
+        <div className="flex flex-col space-y-1">
+          <div className="flex flex-row items-center space-x-2">
+            <h1 className="font-bold text-primary">{announcement?.title} </h1>
+            <Heart className="text-primary hover:fill-primary" size="1.2rem" />
+          </div>
+          <p>{announcement?.companyName}</p>
+          <p className="flex items-center space-x-1 text-sm text-primary">
+            <MapPin className="inline-flex" size="1rem" />
+            <span> საქართველო, {announcement?.location}</span>
+          </p>
+        </div>
+        <div className="flex flex-col space-y-8">
+          <div>
+            {" "}
+            {announcement?.salaryMin}- {announcement?.salaryMax} ₾
+          </div>
+          <div>{getFormattedDate(announcement?.created_at)}</div>
+        </div>
+        <div className="flex flex-col justify-between">
+          <Button variant="default" className="p-6">
+            <Mail />
+            გაგზავნა
+          </Button>
+        </div>
+      </div>
+    </VacancyBox>
   ));
 };
 

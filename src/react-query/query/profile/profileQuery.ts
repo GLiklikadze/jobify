@@ -3,10 +3,18 @@ import {
   UseQueryOptions,
   UseQueryResult,
 } from "@tanstack/react-query";
-import { getProfileInfo } from "@/supabase/profile/httpProfile";
+import { getProfileInfo, getProfileList } from "@/supabase/profile/httpProfile";
 import { PROFILE_QUERY_KEYS } from "./profileQuery.enum";
 import { PostgrestError } from "@supabase/supabase-js";
 import { profileResponse } from "./profileQuery.types";
+
+export const useProfileList = () => {
+  return useQuery({
+    queryKey: ["profile-list"],
+    queryFn: getProfileList,
+    retry: false,
+  });
+};
 
 export const useProfileInfo = (
   userId?: string,

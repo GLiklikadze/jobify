@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Button } from "./button/button";
 import { Upload } from "lucide-react";
-import { t } from "i18next";
 
 const CustomFileInput = React.forwardRef<
   HTMLInputElement,
@@ -25,7 +24,7 @@ const CustomFileInput = React.forwardRef<
         className="focus-within:border-blue flex flex-grow cursor-pointer items-center gap-2 rounded-l-md bg-transparent pr-3 text-sm focus-within:border focus-within:ring-2 hover:border-gray-400"
       >
         <Button className="h-full min-w-32">
-          <Upload /> {t("file-input.upload-button")}
+          <Upload /> Image
         </Button>
         <input
           type={type}
@@ -34,7 +33,7 @@ const CustomFileInput = React.forwardRef<
           {...props}
         />
         <div className="w-full truncate text-center text-gray-500">
-          {file ? file?.name : t("file-input.upload-placeholder")}
+          {file ? file?.name : "Please Upload file"}
         </div>
       </div>
     </div>

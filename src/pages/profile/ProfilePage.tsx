@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuthContext } from "@/context/hooks/useAuthContext";
 import { UserRoundPen } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TabsList, Tabs, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useTranslation } from "react-i18next";
 import { Controller, useForm } from "react-hook-form";
@@ -19,11 +19,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { CustomFileInput } from "@/components/ui/customFileInput";
 
 const initialPayload = {
   company_name: "",
   company_name_ka: "",
-  logo_url: "",
+  logo_file: null,
   phone_number: "",
   address: "",
 };
@@ -43,14 +44,16 @@ const ProfilePage = () => {
 
   const { user } = useAuthContext();
   const { t } = useTranslation();
+  const { data: receivedProfileData } = useProfileInfo(user?.id);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const company_name_ka = watch("company_name_ka");
   const company_name = watch("company_name");
   const address = watch("address");
-  const logo_url = watch("logo_url");
+  const logo_url = receivedProfileData?.logo_url;
   const phone_number = watch("phone_number");
 
-  const { data: receivedProfileData } = useProfileInfo(user?.id);
+  // const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (receivedProfileData) {
@@ -58,7 +61,6 @@ const ProfilePage = () => {
         ...prev,
         company_name: receivedProfileData?.company_name ?? "",
         company_name_ka: receivedProfileData?.company_name_ka ?? "",
-        logo_url: receivedProfileData?.logo_url ?? "",
         phone_number: receivedProfileData?.phone_number ?? "",
         address: receivedProfileData?.address ?? "",
       }));
@@ -75,10 +77,9 @@ const ProfilePage = () => {
       clearErrors();
     }
   };
-  console.log(errors);
 
   const onSubmit = (fieldValues: ProfileFormValues) => {
-    console.log(fieldValues);
+    reset();
     handleToggleEdit();
     editProfileData({ ...fieldValues, id: user?.id as string });
   };
@@ -99,9 +100,9 @@ const ProfilePage = () => {
             <div className="flex h-20 w-20 flex-col rounded-lg bg-slate-500 p-1">
               {logo_url && (
                 <img
-                  src={logo_url ?? ""}
+                  src={`https://gimdvoaobxziodrpnvkh.supabase.co/storage/v1/object/public/${logo_url}`}
                   className="rounded-lg"
-                  alt="avatar-pic"
+                  alt="logo-pic"
                 />
               )}
             </div>
@@ -215,39 +216,30 @@ const ProfilePage = () => {
             )}
           </Tabs>
           <div className="flex min-h-10 flex-row items-start gap-14 overflow-hidden">
-            <Label htmlFor="logoUrl" className="w-24">
+            <Label htmlFor="logo_file" className="w-24">
               {t("profile-page.avatar-url-label")}
             </Label>
             {!toggleEdit ? (
-              <p className="w-60 overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-green-600">
-                {logo_url}
-              </p>
+              <p className="w-60 overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-green-600"></p>
             ) : (
-              <div className="flex w-56 flex-col">
+              <div className="grid gap-4">
                 <Controller
-                  name="logo_url"
                   control={control}
-                  rules={{
-                    required: t("profile-page.avatar-required-error"),
-                  }}
-                  render={({ field: { value, onChange, onBlur } }) => {
+                  name="logo_file"
+                  render={({ field: { onChange } }) => {
                     return (
-                      <Input
-                        type="url"
-                        id="avatarUrl"
-                        className={`max-w-56 ${errors.logo_url && "border-red-500"}`}
-                        value={value}
-                        onChange={onChange}
-                        onBlur={onBlur}
+                      <CustomFileInput
+                        id="logo_file"
+                        type="file"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          onChange(file);
+                        }}
+                        ref={fileInputRef}
                       />
                     );
                   }}
                 />
-                {errors.logo_url && (
-                  <div className="mt-1 max-w-56 text-right text-red-700">
-                    {errors?.logo_url.message}
-                  </div>
-                )}
               </div>
             )}
           </div>
