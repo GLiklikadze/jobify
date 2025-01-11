@@ -75,10 +75,9 @@ const VacancyList = () => {
     navigate(`${vac_id}`);
   };
   return vacanciesList?.map((announcement) => (
-    <VacancyBox>
+    <VacancyBox key={announcement?.id}>
       <div
         className="flex cursor-pointer flex-row justify-between"
-        key={announcement?.id}
         onClick={() => handleClick(announcement.id)}
       >
         <div className="overflow-hidden rounded-2xl border-2">
