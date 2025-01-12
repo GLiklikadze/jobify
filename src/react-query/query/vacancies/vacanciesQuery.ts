@@ -1,4 +1,5 @@
 import {
+  getFilteredVacancies,
   getSingleVacancy,
   getVacancies,
 } from "@/supabase/vacancies/httpVacancies";
@@ -11,9 +12,18 @@ export const useGetVacanciesList = () => {
   });
 };
 
+export const useGetFilteredVacanciesList = (searchText?: string) => {
+  return useQuery({
+    queryKey: ["get-filtered-vacancies", searchText],
+    queryFn: () => getFilteredVacancies(searchText ?? ""),
+    staleTime: 5 * 60 * 1000,
+    gcTime: 5 * 60 * 1000,
+  });
+};
+
 export const useGetSingleVacancy = (id: string) => {
   return useQuery({
-    queryKey: ["single-vacancy"],
+    queryKey: ["single-vacancy", id],
     queryFn: () => getSingleVacancy(id),
   });
 };

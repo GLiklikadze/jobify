@@ -15,6 +15,7 @@ import CompaniesPage from "./pages/companies/CompaniesPage";
 import SingleVacancy from "./pages/vacancies/views/single/SingleVacancy";
 import HomePage from "./pages/home/HomePage";
 import MyVacancies from "./pages/my-vacancies.tsx/MyVacancies";
+import ErrorPage from "./pages/error/ErrorPage";
 
 function App() {
   const { handleSetUserId, setIsLoading } = useAuthContext();
@@ -54,6 +55,7 @@ function App() {
           </Route>
         </Route>
         <Route path="/" element={<Navigate to="/ka/home" />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </ThemeProvider>
   );

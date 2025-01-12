@@ -47,6 +47,22 @@ export const getVacancies = async () => {
     throw err;
   }
 };
+export const getFilteredVacancies = async (searchText: string) => {
+  try {
+    const { data, error } = await supabase
+      .from("vacancies")
+      .select("*")
+      .ilike("title", `%${searchText}%`)
+      .throwOnError();
+    if (error) {
+      throw new Error(`filtered vacancies fetch failed: ${error.message}`);
+    }
+    return data;
+  } catch (err) {
+    console.error("Error during fetching filtered vacancies:", err);
+    throw err;
+  }
+};
 
 export const getSingleVacancy = async (id: string) => {
   try {
