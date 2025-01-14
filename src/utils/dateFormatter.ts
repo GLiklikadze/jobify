@@ -5,19 +5,19 @@ import "dayjs/locale/ka";
 dayjs.extend(relativeTime);
 
 export const getFormattedDate = (date: string) => {
-  dayjs.locale("ka", {
-    relativeTime: {
-      future: "შემდეგ %s",
-      past: "%sს წინ",
-      s: "წამები",
-      m: "1 წუთი",
-      mm: "%d წუთი",
-      h: "1 საათი",
-      hh: "%d საათი",
-      d: "1 დღე",
-      dd: "%d დღე",
-    },
-  });
+  // dayjs.locale("ka", {
+  //   relativeTime: {
+  //     future: "შემდეგ %s",
+  //     past: "%sს წინ",
+  //     s: "წამები",
+  //     m: "1 წუთი",
+  //     mm: "%d წუთი",
+  //     h: "1 საათი",
+  //     hh: "%d საათი",
+  //     d: "1 დღე",
+  //     dd: "%d დღე",
+  //   },
+  // });
   const dateNow = dayjs();
   const givenDate = dayjs(date);
 

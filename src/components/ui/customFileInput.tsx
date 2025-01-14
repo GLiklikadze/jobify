@@ -18,13 +18,13 @@ const CustomFileInput = React.forwardRef<
   };
 
   return (
-    <div className="flex max-h-9 w-full rounded-sm border">
+    <div className="flex max-h-9 w-full rounded-lg border">
       <div
         onClick={handleClick}
         className="focus-within:border-blue flex flex-grow cursor-pointer items-center gap-2 rounded-l-md bg-transparent pr-3 text-sm focus-within:border focus-within:ring-2 hover:border-gray-400"
       >
         <Button className="h-full min-w-32">
-          <Upload /> Image
+          <Upload /> Upload
         </Button>
         <input
           type={type}
@@ -33,7 +33,7 @@ const CustomFileInput = React.forwardRef<
           {...props}
         />
         <div className="w-full truncate text-center text-gray-500">
-          {file ? file?.name : "Please Upload file"}
+          {file ? file?.name : "Please Upload Logo"}
         </div>
       </div>
     </div>

@@ -15,7 +15,6 @@ const SingleVacancy = () => {
   };
   const { data: singleVacancy } = useGetSingleVacancy(vac_id ?? "");
   const handleEmailClick = () => {
-    const email = "example@example.com";
     const subject =
       singleVacancy?.title +
       "/" +
@@ -23,8 +22,11 @@ const SingleVacancy = () => {
       "/" +
       singleVacancy?.location;
 
-    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+    window.location.href = `mailto:${singleVacancy?.contactEmail}?subject=${encodeURIComponent(subject)}`;
   };
+  // const list = singleVacancy?.description?.split("\n");
+  // const renderedList = list?.map((description) => <li>{description}</li>);
+
   return (
     <div className="container mx-auto max-w-7xl p-4">
       <Button
@@ -40,11 +42,11 @@ const SingleVacancy = () => {
         {/* Main Content */}
         <div className="space-y-6">
           <div className="flex items-start gap-4">
-            <div className="rounded-lg bg-blue-100 p-4">
+            <div className="h-24 w-28 overflow-hidden rounded-lg bg-blue-100">
               <img
-                src="/placeholder.svg?height=64&width=64"
+                src={`https://gimdvoaobxziodrpnvkh.supabase.co/storage/v1/object/public/${singleVacancy?.profiles?.logo_url}`}
                 alt="logo"
-                className="h-16 w-16"
+                className="h-full w-full object-cover"
               />
             </div>
             <div className="flex-1">
@@ -65,7 +67,7 @@ const SingleVacancy = () => {
             <section>
               <h2 className="mb-3 text-lg font-semibold">Job Description</h2>
               <div className="space-y-4 text-muted-foreground">
-                <p>{singleVacancy?.description}</p>
+                <p>xxx</p>
               </div>
             </section>
 

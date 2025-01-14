@@ -22,37 +22,39 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import new_vacancy_svg from "@/assets/new-vacancy-svg.svg";
+import { useGetSingleVacancy } from "@/react-query/query/vacancies/vacanciesQuery";
+import { useParams } from "react-router-dom";
+const createVacanciesFormDefaultValues = {
+  title: "",
+  companyName: "",
+  location: "",
+  jobType: "",
+  salaryMin: "",
+  salaryMax: "",
+  contactEmail: "",
+  requirements: "",
+  description: "",
+  benefits: "",
+  qualifications: "",
+  responsibilities: "",
+};
 
-const AddVacanciesPage = () => {
-  const createVacanciesFormDefaultValues = {
-    title: "",
-    companyName: "",
-    location: "",
-    jobType: "",
-    salaryMin: "",
-    salaryMax: "",
-    contactEmail: "",
-    requirements: "",
-    description: "",
-    benefits: "",
-    qualifications: "",
-    responsibilities: "",
-  };
-  type createVacancies = {
-    title: string | null;
-    companyName: string | null;
-    location: string | null;
-    jobType: string | null;
-    salaryMin: string | null;
-    salaryMax: string | null;
-    description: string | null;
-    requirements: string | null;
-    contactEmail: string | null;
-    qualifications: string | null;
-    benefits: string | null;
-    responsibilities: string | null;
-  };
-
+type createVacancies = {
+  title: string | null;
+  companyName: string | null;
+  location: string | null;
+  jobType: string | null;
+  salaryMin: string | null;
+  salaryMax: string | null;
+  description: string | null;
+  requirements: string | null;
+  contactEmail: string | null;
+  qualifications: string | null;
+  benefits: string | null;
+  responsibilities: string | null;
+};
+const EditVacanciesPage = () => {
+  const { id } = useParams();
   // const {
   //   control,
   //   handleSubmit,
@@ -62,11 +64,13 @@ const AddVacanciesPage = () => {
   //   defaultValues: createVacanciesFormDefaultValues,
   // });
 
+  const { createVacanciesMutate } = useCreateVacancies();
+  const { data: singleVacancy } = useGetSingleVacancy(id ?? "");
+
   const form = useForm({
     // resolver: zodResolver(formSchema),
-    defaultValues: createVacanciesFormDefaultValues,
+    defaultValues: singleVacancy ?? createVacanciesFormDefaultValues,
   });
-  const { createVacanciesMutate } = useCreateVacancies();
 
   const onSubmit = (formValues: createVacancies) => {
     createVacanciesMutate({ formValues });
@@ -77,9 +81,7 @@ const AddVacanciesPage = () => {
       <Card>
         <CardHeader className="flex flex-row items-center gap-4">
           <img src={new_vacancy_svg} className="h-20 w-16" />
-          <CardTitle className="text-2xl text-primary">
-            Create New Job Posting
-          </CardTitle>
+          <CardTitle className="text-2xl text-primary">Edit Vacancy</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -342,4 +344,4 @@ const AddVacanciesPage = () => {
   );
 };
 
-export default AddVacanciesPage;
+export default EditVacanciesPage;

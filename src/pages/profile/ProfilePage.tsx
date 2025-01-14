@@ -5,7 +5,6 @@ import { Label } from "@/components/ui/label";
 import { useAuthContext } from "@/context/hooks/useAuthContext";
 import { UserRoundPen } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { TabsList, Tabs, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useTranslation } from "react-i18next";
 import { Controller, useForm } from "react-hook-form";
 import { ProfileFormValues } from "./ProfilePage.types";
@@ -46,8 +45,6 @@ const ProfilePage = () => {
   const { t } = useTranslation();
   const { data: receivedProfileData } = useProfileInfo(user?.id);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-  const company_name_ka = watch("company_name_ka");
   const company_name = watch("company_name");
   const address = watch("address");
   const logo_url = receivedProfileData?.logo_url;
@@ -97,11 +94,11 @@ const ProfilePage = () => {
         <div className="mb-4 flex justify-between gap-7 p-4">
           <div className="flex items-center gap-14">
             <Label className="mb-2 w-24">{t("profile-page.photo-label")}</Label>
-            <div className="flex h-20 w-20 flex-col rounded-lg bg-slate-500 p-1">
+            <div className="flex h-20 w-20 flex-col overflow-hidden rounded-lg bg-slate-500">
               {logo_url && (
                 <img
                   src={`https://gimdvoaobxziodrpnvkh.supabase.co/storage/v1/object/public/${logo_url}`}
-                  className="rounded-lg"
+                  className="h-full w-full overflow-hidden object-cover"
                   alt="logo-pic"
                 />
               )}
@@ -118,131 +115,71 @@ const ProfilePage = () => {
           </Button>
         </div>
         <div className="space-y-9 px-4 pb-8 pt-1">
-          <Tabs defaultValue="geo" className="mx-auto">
-            <TabsList className="light:bg-neutral-200 border-1 mx-auto mb-8 grid h-9 max-w-64 grid-cols-2 items-center justify-center rounded-lg p-1 text-muted-foreground">
-              <TabsTrigger value="geo">{t("profile-page.tab-geo")}</TabsTrigger>
-              <TabsTrigger value="eng">{t("profile-page.tab-eng")}</TabsTrigger>
-            </TabsList>
-            <TabsContent value="geo">
-              <div className="flex min-h-9 flex-row items-center gap-14">
-                <Label htmlFor="nameKa" className="w-24">
-                  {t("profile-page.full-name-label")}
-                </Label>
-                {!toggleEdit ? (
-                  <p className="font-semibold text-green-600">
-                    {company_name_ka}
-                  </p>
-                ) : (
-                  <Controller
-                    name="company_name_ka"
-                    control={control}
-                    rules={{
-                      required: t("profile-page.full-name-ka-required-error"),
-                      minLength: {
-                        value: 3,
-                        message: t("profile-page.full-name-ka-minLength-error"),
-                      },
-                      maxLength: {
-                        value: 25,
-                        message: t("profile-page.full-name-ka-maxLength-error"),
-                      },
-                    }}
-                    render={({ field: { onChange, value, onBlur } }) => {
-                      return (
-                        <>
-                          <Input
-                            type="text"
-                            id="nameKa"
-                            className={`max-w-56 ${errors.company_name_ka && "border-red-500"}`}
-                            value={value}
-                            onChange={onChange}
-                            onBlur={onBlur}
-                          />
-                        </>
-                      );
-                    }}
-                  />
-                )}
-              </div>
-              {errors.company_name_ka && (
-                <div className="mr-10 mt-2 text-right text-red-700">
-                  {errors?.company_name_ka.message}
-                </div>
-              )}
-            </TabsContent>
-            <TabsContent value="eng">
-              <div className="flex min-h-9 flex-row items-center gap-14">
-                <Label htmlFor="name" className="w-24">
-                  {/* {t("profile-page.full-name-label")} */}
-                  Company Name
-                </Label>
-                {!toggleEdit ? (
-                  <p className="font-semibold text-green-600">{company_name}</p>
-                ) : (
-                  <Controller
-                    name="company_name"
-                    control={control}
-                    rules={{
-                      required: t("profile-page.full-name-en-required-error"),
-                      minLength: {
-                        value: 3,
-                        message: t("profile-page.full-name-en-minLength-error"),
-                      },
-                      maxLength: {
-                        value: 25,
-                        message: t("profile-page.full-name-en-maxLength-error"),
-                      },
-                    }}
-                    render={({ field: { onChange, value, onBlur } }) => {
-                      return (
-                        <Input
-                          type="text"
-                          id="name"
-                          className={`max-w-56 ${errors.company_name && "border-red-500"}`}
-                          value={value}
-                          onChange={onChange}
-                          onBlur={onBlur}
-                        />
-                      );
-                    }}
-                  />
-                )}
-              </div>
-            </TabsContent>
-            {errors.company_name && (
-              <div className="mr-10 mt-2 text-right text-red-700">
-                {errors?.company_name.message}
-              </div>
-            )}
-          </Tabs>
-          <div className="flex min-h-10 flex-row items-start gap-14 overflow-hidden">
-            <Label htmlFor="logo_file" className="w-24">
-              {t("profile-page.avatar-url-label")}
+          <div className="flex w-full justify-center">
+            <div>
+              <Controller
+                control={control}
+                name="logo_file"
+                render={({ field: { onChange } }) => {
+                  return (
+                    <CustomFileInput
+                      id="logo_file"
+                      type="file"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        onChange(file);
+                      }}
+                      ref={fileInputRef}
+                    />
+                  );
+                }}
+              />
+            </div>
+          </div>
+          <div className="flex min-h-9 flex-row items-center gap-14">
+            <Label htmlFor="name" className="w-24">
+              {/* {t("profile-page.full-name-label")} */}
+              Company Name
             </Label>
             {!toggleEdit ? (
-              <p className="w-60 overflow-hidden text-ellipsis whitespace-nowrap font-semibold text-green-600"></p>
+              <p className="font-semibold text-green-600">{company_name}</p>
             ) : (
-              <div className="grid gap-4">
-                <Controller
-                  control={control}
-                  name="logo_file"
-                  render={({ field: { onChange } }) => {
-                    return (
-                      <CustomFileInput
-                        id="logo_file"
-                        type="file"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          onChange(file);
-                        }}
-                        ref={fileInputRef}
-                      />
-                    );
-                  }}
-                />
-              </div>
+              <Controller
+                name="company_name"
+                control={control}
+                rules={{
+                  required: t("profile-page.full-name-en-required-error"),
+                  minLength: {
+                    value: 3,
+                    message: t("profile-page.full-name-en-minLength-error"),
+                  },
+                  maxLength: {
+                    value: 25,
+                    message: t("profile-page.full-name-en-maxLength-error"),
+                  },
+                }}
+                render={({ field: { onChange, value, onBlur } }) => {
+                  return (
+                    <Input
+                      type="text"
+                      id="name"
+                      className={`max-w-56 ${errors.company_name && "border-red-500"}`}
+                      value={value}
+                      onChange={onChange}
+                      onBlur={onBlur}
+                    />
+                  );
+                }}
+              />
             )}
           </div>
+
+          {errors.company_name && (
+            <div className="mr-10 mt-2 text-right text-red-700">
+              {errors?.company_name.message}
+            </div>
+          )}
+
           <div className="flex min-h-9 flex-row items-start gap-14">
             <Label htmlFor="phoneNumber" className="mt-2 w-24">
               {t("profile-page.phone-number-label")}
@@ -290,7 +227,6 @@ const ProfilePage = () => {
           </div>
           <div className="flex min-h-9 flex-row items-start gap-14">
             <Label htmlFor="address" className="mt-2 w-24">
-              {/* {t("profile-page.phone-number-label")} */}
               მისამართი
             </Label>
             {!toggleEdit ? (
@@ -315,19 +251,11 @@ const ProfilePage = () => {
                   }}
                   render={({ field: { value, onChange } }) => {
                     return (
-                      // <Input
-                      //   type="text"
-                      //   id="phoneNumber"
-                      //   className={`max-w-56 ${errors.address && "border-red-500"}`}
-                      //   value={value}
-                      //   onChange={onChange}
-                      //   onBlur={onBlur}
-                      // />
                       <Select
                         value={value}
-                        onValueChange={(val) => onChange(val)} // Update form state
+                        onValueChange={(val) => onChange(val)}
                       >
-                        <SelectTrigger className="w-[180px]">
+                        <SelectTrigger className="max-w-56">
                           <SelectValue placeholder="Theme" />
                         </SelectTrigger>
                         <SelectContent>

@@ -9,6 +9,7 @@ import { useSearchParams } from "react-router-dom";
 import qs from "qs";
 import { useEffect } from "react";
 import { useDebounce } from "@uidotdev/usehooks";
+import vacancy_illustration from "@/assets/search-vacancy-illustration.svg";
 
 const searchDefaultValues = {
   searchText: "",
@@ -56,19 +57,22 @@ const VacanciesPage = () => {
   }, [isSuccess, debouncedText, setSearchParams]);
   return (
     <div className="container mt-4 space-y-1">
-      <div className="mx-auto mb-8 flex max-w-96 flex-row items-center gap-4">
-        <Label>Search Title</Label>
-        <Controller
-          control={control}
-          name="searchText"
-          render={({ field }) => (
-            <Input type="text" placeholder="Front End Developer" {...field} />
-          )}
-        />
-        <Button variant="outline" onClick={handleSubmit(onSubmit)}>
-          <Search />
-          Search
-        </Button>
+      <div className="mx-auto flex max-w-4xl flex-row justify-start">
+        <div className="mx-auto mb-8 flex h-20 max-w-xl flex-row items-center gap-4 rounded-md border-2 p-4">
+          <Label>Search Title</Label>
+          <Controller
+            control={control}
+            name="searchText"
+            render={({ field }) => (
+              <Input type="text" placeholder="Front End Developer" {...field} />
+            )}
+          />
+          <Button variant="outline" onClick={handleSubmit(onSubmit)}>
+            <Search />
+            Search
+          </Button>
+        </div>
+        <img src={vacancy_illustration} className="h-28 w-28" />
       </div>
       <VacancyList vacanciesList={vacanciesList ?? []} />
     </div>

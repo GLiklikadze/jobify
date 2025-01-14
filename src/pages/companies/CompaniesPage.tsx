@@ -7,15 +7,19 @@ const CompaniesPage = () => {
   return (
     <CompanyBox>
       {profileList?.map((company) => (
-        <div key={company?.id}>
-          <img
-            src={`https://gimdvoaobxziodrpnvkh.supabase.co/storage/v1/object/public/${company?.logo_url}`}
-            className="w-24 rounded-lg"
-            alt="logo-pic"
-          />
-          <p>{company?.company_name}</p>
-          <p>{company?.address}</p>
-          <p>{company?.phone_number}</p>
+        <div className="flex flex-row gap-4" key={company?.id}>
+          <div className="h-24 w-28 overflow-hidden rounded-lg bg-blue-100">
+            <img
+              src={`https://gimdvoaobxziodrpnvkh.supabase.co/storage/v1/object/public/${company?.logo_url}`}
+              alt="logo"
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <div>
+            <p>{company?.company_name}</p>
+            <p>{company?.address}</p>
+            <p>{company?.phone_number}</p>
+          </div>
         </div>
       ))}
     </CompanyBox>

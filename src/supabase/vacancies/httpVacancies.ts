@@ -51,7 +51,7 @@ export const getFilteredVacancies = async (searchText: string) => {
   try {
     const { data, error } = await supabase
       .from("vacancies")
-      .select("*")
+      .select(`*, profiles(*)`)
       .ilike("title", `%${searchText}%`)
       .throwOnError();
     if (error) {
@@ -68,7 +68,7 @@ export const getSingleVacancy = async (id: string) => {
   try {
     const { data, error } = await supabase
       .from("vacancies")
-      .select("*")
+      .select(`*, profiles(*)`)
       .eq("id", id)
       .single()
       .throwOnError();
