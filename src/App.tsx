@@ -17,6 +17,7 @@ import HomePage from "./pages/home/HomePage";
 import MyVacancies from "./pages/my-vacancies.tsx/MyVacancies";
 import ErrorPage from "./pages/error/ErrorPage";
 import EditVacanciesPage from "./pages/my-vacancies.tsx/views/EditVacancies";
+import AboutPage from "./pages/about/AboutPage";
 
 function App() {
   const { handleSetUserId, setIsLoading } = useAuthContext();
@@ -42,6 +43,7 @@ function App() {
       <Routes>
         <Route path="/:lang" element={<RootLayout />}>
           <Route path="home" element={<HomePage />} />
+          <Route path="about" element={<AboutPage />} />
           <Route path="vacancies" element={<VacanciesPage />} />
           <Route path="vacancies/:vac_id" element={<SingleVacancy />} />
           <Route path="my-vacancies" element={<MyVacancies />} />

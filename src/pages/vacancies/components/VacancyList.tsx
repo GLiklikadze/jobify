@@ -55,7 +55,9 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
     id: number,
   ) => {
     event.stopPropagation();
-    const currentVacancy = vacanciesList[id];
+    const currentVacancy = vacanciesList.find(
+      (announcement) => announcement?.id === id,
+    );
     const subject =
       currentVacancy?.title +
       "/" +
@@ -64,11 +66,12 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
       currentVacancy?.location;
 
     window.location.href = `mailto:${currentVacancy?.contactEmail}?subject=${encodeURIComponent(subject)}`;
+    console.log(currentVacancy?.contactEmail, subject);
   };
   return vacanciesList?.map((announcement) => (
     <VacancyBox key={announcement?.id}>
       <div
-        className="flex h-[6rem] cursor-pointer flex-row space-x-8"
+        className="flex h-[10rem] cursor-pointer flex-row space-x-8 sm:h-[6rem]"
         onClick={() => handleClick(announcement.id)}
       >
         <div className="flex w-28 items-center justify-center rounded-full border-2 p-1">
@@ -89,30 +92,28 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
             <div className="flex flex-row items-center gap-2 text-sm">
               <Building2 size="1rem" className="text-primary" />
               <span>{announcement?.companyName}</span>
-              <p className="space-x-1 text-xs">
-                <span className="1rem font-semibold text-primary">₾</span>
-                <span>
-                  {announcement?.salaryMin} - {announcement?.salaryMax}
-                </span>
-              </p>
             </div>
 
             <div className="flex flex-row items-center space-x-2">
               <h1 className="font-bold">{announcement?.title} </h1>
-
-              {/* <Heart className="text-primary hover:fill-primary" size="1.2rem" /> */}
             </div>
-            <p className="flex items-center space-x-1 text-xs">
+            <p className="flex flex-col items-center space-x-1 text-xs sm:flex-row">
               <MapPin className="inline-flex text-primary" size="1rem" />
               <span> საქართველო, {announcement?.location}</span>
               <Clock4 size="1rem" className="text-primary" />
               <span>{announcement?.jobType}</span>
+              <span className="space-x-1 text-xs">
+                <span className="text-[1rem] font-normal text-primary">₾</span>
+                <span>
+                  {announcement?.salaryMin} - {announcement?.salaryMax}
+                </span>
+              </span>
             </p>
           </div>
           <div className="flex flex-col justify-between">
             <Button
               variant="default"
-              className="text-xs"
+              className="hidden text-xs md:flex"
               onClick={(event) => handleEmailClick(event, announcement?.id)}
             >
               <FileSpreadsheet />

@@ -22,9 +22,12 @@ const HomePage = () => {
             deserve today!
           </p>
         </div>
-        <img src={illustration} className="w-96" />
+        <img
+          src={illustration}
+          className="h-24 w-32 md:h-48 md:w-40 lg:h-[25rem] lg:w-96"
+        />
       </div>
-      <div className="mx-auto flex max-w-5xl flex-row gap-12">
+      <div className="mx-auto flex max-w-5xl flex-col gap-12 md:flex-row">
         <div className="flex h-24 w-52 flex-row items-center justify-around rounded-sm border-2 border-secondary p-1">
           <div className="flex h-14 w-16 items-center justify-center rounded-sm bg-blue-100">
             <BriefcaseBusiness className="flex text-primary" />

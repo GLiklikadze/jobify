@@ -20,7 +20,6 @@ type searchObjType = {
 };
 const VacanciesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams(searchDefaultValues);
-  console.log(searchParams);
 
   const parsedQueryParams = qs.parse(searchParams.toString()) as searchObjType;
 
@@ -30,7 +29,6 @@ const VacanciesPage = () => {
   const searchText = watch("searchText");
   const debouncedText = useDebounce(searchText, 600);
 
-  console.log(111);
   const {
     data: vacanciesList,
     refetch: refetchFilteredList,

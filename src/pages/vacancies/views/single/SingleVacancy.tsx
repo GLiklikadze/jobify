@@ -7,11 +7,11 @@ import { useGetSingleVacancy } from "@/react-query/query/vacancies/vacanciesQuer
 import { getFormattedDate } from "@/utils/dateFormatter";
 
 const SingleVacancy = () => {
-  const { lang, vac_id } = useParams();
+  const { vac_id } = useParams();
   console.log(vac_id, "single");
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/${lang}/vacancies`);
+    navigate(-1);
   };
   const { data: singleVacancy } = useGetSingleVacancy(vac_id ?? "");
   const handleEmailClick = () => {
@@ -23,6 +23,12 @@ const SingleVacancy = () => {
       singleVacancy?.location;
 
     window.location.href = `mailto:${singleVacancy?.contactEmail}?subject=${encodeURIComponent(subject)}`;
+  };
+  const handleCopyUrl = () => {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).catch((err) => {
+      console.error("Failed to copy: ", err);
+    });
   };
   // const list = singleVacancy?.description?.split("\n");
   // const renderedList = list?.map((description) => <li>{description}</li>);
@@ -52,7 +58,7 @@ const SingleVacancy = () => {
             <div className="flex-1">
               <div className="mb-2 flex items-center gap-3">
                 <h1 className="text-2xl font-bold">{singleVacancy?.title}</h1>
-                <Badge variant="secondary">{singleVacancy?.jobType}</Badge>
+                <Badge variant="default">{singleVacancy?.jobType}</Badge>
               </div>
               <p className="text-muted-foreground">
                 at {singleVacancy?.companyName}
@@ -118,7 +124,7 @@ const SingleVacancy = () => {
             <h2 className="mb-4 font-semibold">Job Overview</h2>
             <div className="space-y-4">
               <div className="flex items-center gap-3 text-sm">
-                <Calendar className="h-5 w-5 text-muted-foreground" />
+                <Calendar className="h-5 w-5 text-primary" />
                 <div>
                   <p className="text-muted-foreground">Job Posted</p>
                   <p>{getFormattedDate(singleVacancy?.created_at ?? "")}</p>
@@ -132,7 +138,7 @@ const SingleVacancy = () => {
                 </div>
               </div> */}
               <div className="flex items-center gap-3 text-sm">
-                <MapPin className="h-5 w-5 text-muted-foreground" />
+                <MapPin className="h-5 w-5 text-primary" />
                 <div>
                   <p className="text-muted-foreground">Georgia</p>
                   <p>{singleVacancy?.location}</p>
@@ -152,7 +158,13 @@ const SingleVacancy = () => {
               <div>
                 <h2 className="mb-2 font-semibold">Share this job:</h2>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="icon" name="copu">
+                  <Button
+                    variant="outline"
+                    className="active:bg-primary"
+                    size="icon"
+                    name="copy"
+                    onClick={handleCopyUrl}
+                  >
                     <Copy className="h-4 w-4" />
                   </Button>
                 </div>

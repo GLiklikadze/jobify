@@ -1,5 +1,13 @@
-import { createVacancies } from "@/supabase/vacancies/httpVacancies";
-import { useMutation } from "@tanstack/react-query";
+import {
+  createVacancies,
+  deleteVacancy,
+  EditVacancy,
+} from "@/supabase/vacancies/httpVacancies";
+import {
+  InvalidateQueryFilters,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 export const useCreateVacancies = () => {
   const {
@@ -19,4 +27,31 @@ export const useCreateVacancies = () => {
     VacanciesCreateError,
     isPending,
   };
+};
+export const useEditVacancies = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["Edit-vacancy"],
+    mutationFn: EditVacancy,
+    onSuccess: () => {
+      queryClient.invalidateQueries([
+        "get-vacancies",
+        "get-filtered-vacancies",
+      ] as InvalidateQueryFilters);
+    },
+  });
+};
+
+export const useDeleteVacancy = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["delete-vacancy"],
+    mutationFn: deleteVacancy,
+    onSuccess: () => {
+      queryClient.invalidateQueries([
+        "get-vacancies",
+        "get-filtered-vacancies",
+      ] as InvalidateQueryFilters);
+    },
+  });
 };

@@ -10,18 +10,24 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
+import { useDeleteVacancy } from "@/react-query/mutation/vacancies/vacanciesMutation";
 
 const MyVacancies = () => {
   const { data: vacanciesList } = useGetVacanciesList();
   const navigate = useNavigate();
   const { lang } = useParams();
-  // const handleClick = (vac_id: number) => {
-  //   navigate(`${vac_id}`);
-  // };
+  const { mutate: mutateVacancyDelete } = useDeleteVacancy();
 
+  const handleClickView = (vac_id: number) => {
+    navigate(`/${lang}/vacancies/${vac_id}`);
+  };
+  const handleDeleteClick = (id: number) => {
+    mutateVacancyDelete(id);
+  };
   const handleEditClick = (id: number) => {
     navigate(`/${lang}/edit-vacancies/${id}`);
   };
+
   return (
     <>
       <Card className="mx-auto max-w-4xl space-y-9 px-4 pb-9 pt-6">
@@ -55,7 +61,10 @@ const MyVacancies = () => {
                 <TableCell>{announcement?.location}</TableCell>
                 <TableCell className="mt-2 flex justify-center">
                   <div className="flex flex-row items-center gap-2">
-                    <div className="flex w-9 justify-center rounded-md border-2 p-1 hover:bg-blue-200">
+                    <div
+                      className="flex w-9 justify-center rounded-md border-2 p-1 hover:bg-blue-200"
+                      onClick={() => handleClickView(announcement?.id)}
+                    >
                       <Eye className="h-4 w-5 text-green-500" />
                     </div>
                     <div
@@ -64,7 +73,10 @@ const MyVacancies = () => {
                     >
                       <Pencil className="h-4 w-5 text-primary" />
                     </div>
-                    <div className="flex w-9 justify-center rounded-md border-2 p-1 hover:bg-blue-200">
+                    <div
+                      className="flex w-9 justify-center rounded-md border-2 p-1 hover:bg-blue-200"
+                      onClick={() => handleDeleteClick(announcement?.id)}
+                    >
                       <Trash2 className="h-4 w-5 text-red-600" />
                     </div>
                   </div>

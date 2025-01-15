@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button/button";
 import { Input } from "@/components/ui/input";
-import { useCreateVacancies } from "@/react-query/mutation/vacancies/vacanciesMutation";
+import { useEditVacancies } from "@/react-query/mutation/vacancies/vacanciesMutation";
 import { useForm } from "react-hook-form";
 // import job_hunt from "@/assets/undraw_job-hunt_5umi.svg";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -23,8 +23,9 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import new_vacancy_svg from "@/assets/new-vacancy-svg.svg";
 import { useGetSingleVacancy } from "@/react-query/query/vacancies/vacanciesQuery";
-import { useParams } from "react-router-dom";
-const createVacanciesFormDefaultValues = {
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+const EditVacanciesFormDefaultValues = {
   title: "",
   companyName: "",
   location: "",
@@ -39,7 +40,7 @@ const createVacanciesFormDefaultValues = {
   responsibilities: "",
 };
 
-type createVacancies = {
+type EditVacancies = {
   title: string | null;
   companyName: string | null;
   location: string | null;
@@ -55,25 +56,37 @@ type createVacancies = {
 };
 const EditVacanciesPage = () => {
   const { id } = useParams();
-  // const {
-  //   control,
-  //   handleSubmit,
-  //   reset,
-  //   formState: { errors },
-  // } = useForm<createVacancies>({
-  //   defaultValues: createVacanciesFormDefaultValues,
-  // });
+  const navigate = useNavigate();
+  const { mutate: mutateEditVacancies } = useEditVacancies();
 
-  const { createVacanciesMutate } = useCreateVacancies();
-  const { data: singleVacancy } = useGetSingleVacancy(id ?? "");
+  const { data: singleVacancy, isSuccess: isGetVacancySuccess } =
+    useGetSingleVacancy(id ?? "");
 
   const form = useForm({
     // resolver: zodResolver(formSchema),
-    defaultValues: singleVacancy ?? createVacanciesFormDefaultValues,
+    defaultValues: EditVacanciesFormDefaultValues,
   });
-
-  const onSubmit = (formValues: createVacancies) => {
-    createVacanciesMutate({ formValues });
+  useEffect(() => {
+    if (isGetVacancySuccess && singleVacancy) {
+      form.reset({
+        title: singleVacancy.title ?? "",
+        companyName: singleVacancy.companyName ?? "",
+        location: singleVacancy.location ?? "",
+        jobType: singleVacancy.jobType ?? "",
+        salaryMin: singleVacancy.salaryMin ?? "",
+        salaryMax: singleVacancy.salaryMax ?? "",
+        contactEmail: singleVacancy.contactEmail ?? "",
+        requirements: singleVacancy.requirements ?? "",
+        description: singleVacancy.description ?? "",
+        benefits: singleVacancy.benefits ?? "",
+        qualifications: singleVacancy.qualifications ?? "",
+        responsibilities: singleVacancy.responsibilities ?? "",
+      });
+    }
+  }, [isGetVacancySuccess, singleVacancy, form]);
+  const onSubmit = (formValues: EditVacancies) => {
+    mutateEditVacancies({ formValues: formValues, id: id ?? "" });
+    navigate(-1);
   };
 
   return (
@@ -334,7 +347,7 @@ const EditVacanciesPage = () => {
                 </div>
               </div>
               <Button type="submit" className="w-full">
-                Create Job Posting
+                Edit Job Posting
               </Button>
             </form>
           </Form>

@@ -25,5 +25,8 @@ export const useGetSingleVacancy = (id: string) => {
   return useQuery({
     queryKey: ["single-vacancy", id],
     queryFn: () => getSingleVacancy(id),
+    enabled: !!id,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 5 * 60 * 1000,
   });
 };

@@ -81,3 +81,52 @@ export const getSingleVacancy = async (id: string) => {
     throw err;
   }
 };
+export const EditVacancy = async ({
+  formValues,
+  id,
+}: {
+  formValues: createVacancies;
+  id: string;
+}) => {
+  try {
+    const { data, error } = await supabase
+      .from("vacancies")
+      .update({
+        title: formValues?.title,
+        companyName: formValues?.companyName,
+        location: formValues?.location,
+        jobType: formValues?.jobType,
+        salaryMin: formValues?.salaryMin,
+        salaryMax: formValues?.salaryMin,
+        description: formValues?.description,
+        requirements: formValues?.requirements,
+        contactEmail: formValues?.contactEmail,
+        qualifications: formValues?.qualifications,
+        benefits: formValues?.benefits,
+        responsibilities: formValues?.responsibilities,
+      })
+      .eq("id", id)
+      .throwOnError();
+    if (error) {
+      throw new Error(`Blog update failed: ${error.message}`);
+    }
+    return data;
+  } catch (err) {
+    console.error("Error during update vacancy:", err);
+    throw err;
+  }
+};
+
+export const deleteVacancy = async (id: number) => {
+  try {
+    const { data } = await supabase
+      .from("vacancies")
+      .delete()
+      .eq("id", id)
+      .throwOnError();
+    return data;
+  } catch (err) {
+    console.error("Error deletng vacancy", err);
+    throw err;
+  }
+};
