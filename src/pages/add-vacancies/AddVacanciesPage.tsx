@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import new_vacancy_svg from "@/assets/new-vacancy-svg.svg";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AddVacanciesPage = () => {
   const createVacanciesFormDefaultValues = {
@@ -52,7 +53,8 @@ const AddVacanciesPage = () => {
     benefits: string | null;
     responsibilities: string | null;
   };
-
+  const navigate = useNavigate();
+  const { lang } = useParams();
   // const {
   //   control,
   //   handleSubmit,
@@ -70,6 +72,7 @@ const AddVacanciesPage = () => {
 
   const onSubmit = (formValues: createVacancies) => {
     createVacanciesMutate({ formValues });
+    navigate(`/${lang}/my-vacancies`);
   };
 
   return (

@@ -13,8 +13,9 @@ import { useNavigate } from "react-router-dom";
 
 type profileResponse = {
   company_name: string | null;
-  company_name_ka: string | null;
+  full_name: string | null;
   logo_url: string | null;
+  avatar_url: string | null;
   address: string | null;
   id: string;
   phone_number: string | null;
@@ -71,14 +72,14 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
   return vacanciesList?.map((announcement) => (
     <VacancyBox key={announcement?.id}>
       <div
-        className="flex h-[10rem] cursor-pointer flex-row space-x-8 sm:h-[6rem]"
+        className="flex h-[10rem] cursor-pointer flex-row space-x-8 sm:h-[5.1rem]"
         onClick={() => handleClick(announcement.id)}
       >
         <div className="flex w-28 items-center justify-center rounded-full border-2 p-1">
           {announcement?.profiles?.logo_url ? (
             <img
               src={`https://gimdvoaobxziodrpnvkh.supabase.co/storage/v1/object/public/${announcement?.profiles?.logo_url}`}
-              className="h-full w-full overflow-hidden rounded-full border-2 object-cover"
+              className="h-full w-full overflow-hidden rounded-full object-cover"
             />
           ) : (
             <Briefcase
@@ -88,7 +89,7 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
           )}
         </div>
         <div className="ml-4 flex w-full justify-between">
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col space-y-2">
             <div className="flex flex-row items-center gap-2 text-sm">
               <Building2 size="1rem" className="text-primary" />
               <span>{announcement?.companyName}</span>

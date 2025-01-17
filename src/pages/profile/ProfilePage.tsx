@@ -22,7 +22,6 @@ import { CustomFileInput } from "@/components/ui/customFileInput";
 
 const initialPayload = {
   company_name: "",
-  company_name_ka: "",
   logo_file: null,
   phone_number: "",
   address: "",
@@ -50,14 +49,11 @@ const ProfilePage = () => {
   const logo_url = receivedProfileData?.logo_url;
   const phone_number = watch("phone_number");
 
-  // const fileInputRef = useRef<HTMLInputElement | null>(null);
-
   useEffect(() => {
     if (receivedProfileData) {
       reset((prev) => ({
         ...prev,
         company_name: receivedProfileData?.company_name ?? "",
-        company_name_ka: receivedProfileData?.company_name_ka ?? "",
         phone_number: receivedProfileData?.phone_number ?? "",
         address: receivedProfileData?.address ?? "",
       }));
@@ -76,6 +72,7 @@ const ProfilePage = () => {
   };
 
   const onSubmit = (fieldValues: ProfileFormValues) => {
+    console.log(fieldValues);
     reset();
     handleToggleEdit();
     editProfileData({ ...fieldValues, id: user?.id as string });

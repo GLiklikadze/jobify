@@ -5,10 +5,10 @@ import { Calendar, MapPin, Copy, CircleChevronLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge/badge";
 import { useGetSingleVacancy } from "@/react-query/query/vacancies/vacanciesQuery";
 import { getFormattedDate } from "@/utils/dateFormatter";
+import listMaker from "./utils/listMaker";
 
 const SingleVacancy = () => {
   const { vac_id } = useParams();
-  console.log(vac_id, "single");
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(-1);
@@ -30,8 +30,6 @@ const SingleVacancy = () => {
       console.error("Failed to copy: ", err);
     });
   };
-  // const list = singleVacancy?.description?.split("\n");
-  // const renderedList = list?.map((description) => <li>{description}</li>);
 
   return (
     <div className="container mx-auto max-w-7xl p-4">
@@ -58,7 +56,9 @@ const SingleVacancy = () => {
             <div className="flex-1">
               <div className="mb-2 flex items-center gap-3">
                 <h1 className="text-2xl font-bold">{singleVacancy?.title}</h1>
-                <Badge variant="default">{singleVacancy?.jobType}</Badge>
+                <Badge variant="default" className="whitespace-nowrap">
+                  {singleVacancy?.jobType}
+                </Badge>
               </div>
               <p className="text-muted-foreground">
                 at {singleVacancy?.companyName}
@@ -80,39 +80,25 @@ const SingleVacancy = () => {
             <section>
               <h2 className="mb-3 text-lg font-semibold">Requirements</h2>
               <ul className="list-inside list-disc space-y-2 text-muted-foreground">
-                {singleVacancy?.requirements}
-                {/* <li>
-                  Good troubleshooting and analytical skills combined with the
-                  desire to tackle challenges head-on
-                </li>
-                <li>
-                  3+ years of experience in back-end development working either
-                  with medium smaller projects
-                </li>
-                <li>
-                  Experience with HTML, JavaScript, CSS, PHP, Symphony and/or
-                  Laravel
-                </li>
-                <li>
-                  Working regularly with APIs and Web Services (REST, GraphQL,
-                  SOAP, etc)
-                </li> */}
+                {listMaker(singleVacancy?.requirements ?? "")}
               </ul>
             </section>
             <section>
               <h2 className="mb-3 text-lg font-semibold">Benefits</h2>
               <ul className="list-inside list-disc space-y-2 text-muted-foreground">
-                <li>
-                  Early finish on Fridays for our end of week catch up (4:30
-                  finish, and drink of your choice from the bar!)
-                </li>
-                <li>
-                  28 days holiday (including bank holidays) rising by 1 day per
-                  year to 33 plus an additional day off on your birthday
-                </li>
-                <li>Generous annual bonus</li>
-                <li>Healthcare package</li>
-                <li>Free breakfast on Mondays and free snacks in the office</li>
+                {listMaker(singleVacancy?.benefits ?? "")}
+              </ul>
+            </section>
+            <section>
+              <h2 className="mb-3 text-lg font-semibold">Qualifications</h2>
+              <ul className="list-inside list-disc space-y-2 text-muted-foreground">
+                {listMaker(singleVacancy?.qualifications ?? "")}
+              </ul>
+            </section>
+            <section>
+              <h2 className="mb-3 text-lg font-semibold">Responsibilities</h2>
+              <ul className="list-inside list-disc space-y-2 text-muted-foreground">
+                {listMaker(singleVacancy?.responsibilities ?? "")}
               </ul>
             </section>
           </div>

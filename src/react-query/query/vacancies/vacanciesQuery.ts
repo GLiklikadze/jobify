@@ -1,5 +1,6 @@
 import {
   getFilteredVacancies,
+  getMyVacancies,
   getSingleVacancy,
   getVacancies,
 } from "@/supabase/vacancies/httpVacancies";
@@ -9,6 +10,13 @@ export const useGetVacanciesList = () => {
   return useQuery({
     queryKey: ["get-vacancies"],
     queryFn: getVacancies,
+  });
+};
+
+export const useGetMyVacanciesList = (user_id: string) => {
+  return useQuery({
+    queryKey: ["get-vacancies", user_id],
+    queryFn: () => getMyVacancies(user_id),
   });
 };
 

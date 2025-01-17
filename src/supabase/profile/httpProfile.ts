@@ -21,7 +21,6 @@ export const fillProfileInfo = async (payload: profilePayload) => {
     }
     const upsertData = {
       company_name: payload?.company_name,
-      company_name_ka: payload?.company_name_ka,
       phone_number: payload?.phone_number,
       address: payload?.address,
       id: payload?.id,
@@ -44,7 +43,27 @@ export const fillProfileInfo = async (payload: profilePayload) => {
 
 export const getProfileList = async () => {
   try {
-    const { data, error } = await supabase.from("profiles").select("*");
+    const { data, error } = await supabase
+      .from("profiles")
+      .select(`*, vacancies(*)`)
+      .throwOnError();
+    if (error) {
+      throw new Error(error.message);
+    }
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.error("Error during get profile list:", err);
+    throw err;
+  }
+};
+export const getFilteredProfileList = async (searchText: string) => {
+  try {
+    const { data, error } = await supabase
+      .from("profiles")
+      .select(`*, vacancies(*)`)
+      .ilike("company_name", `%${searchText}%`)
+      .throwOnError();
     if (error) {
       throw new Error(error.message);
     }

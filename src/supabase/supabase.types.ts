@@ -12,8 +12,10 @@ export type Database = {
       profiles: {
         Row: {
           address: string | null
+          avatar_url: string | null
           company_name: string | null
-          company_name_ka: string | null
+          fav_list: string[] | null
+          full_name: string | null
           id: string
           logo_url: string | null
           phone_number: string | null
@@ -22,8 +24,10 @@ export type Database = {
         }
         Insert: {
           address?: string | null
+          avatar_url?: string | null
           company_name?: string | null
-          company_name_ka?: string | null
+          fav_list?: string[] | null
+          full_name?: string | null
           id: string
           logo_url?: string | null
           phone_number?: string | null
@@ -32,8 +36,10 @@ export type Database = {
         }
         Update: {
           address?: string | null
+          avatar_url?: string | null
           company_name?: string | null
-          company_name_ka?: string | null
+          fav_list?: string[] | null
+          full_name?: string | null
           id?: string
           logo_url?: string | null
           phone_number?: string | null
@@ -51,7 +57,6 @@ export type Database = {
           description: string | null
           id: number
           jobType: string | null
-          liked: boolean | null
           location: string | null
           qualifications: string | null
           requirements: string | null
@@ -69,7 +74,6 @@ export type Database = {
           description?: string | null
           id?: number
           jobType?: string | null
-          liked?: boolean | null
           location?: string | null
           qualifications?: string | null
           requirements?: string | null
@@ -87,7 +91,6 @@ export type Database = {
           description?: string | null
           id?: number
           jobType?: string | null
-          liked?: boolean | null
           location?: string | null
           qualifications?: string | null
           requirements?: string | null

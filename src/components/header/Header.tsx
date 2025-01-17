@@ -43,8 +43,8 @@ const Header: React.FC = () => {
 
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) => {
     return isActive
-      ? "font-bold text-sm text-orange-600"
-      : "font-bold text-primary text-sm hover:text-primary";
+      ? "font-semibold text-sm text-orange-600"
+      : "font-semibold text-primary text-sm hover:text-primary";
   };
   const navigate = useNavigate();
   const { mutate: mutateLogout } = useLogOut();
@@ -104,36 +104,44 @@ const Header: React.FC = () => {
                 <SheetDescription></SheetDescription>
               </nav>
               <hr />
-              <ProfileBox />
-              <div className="space-y-4">
-                <Link
-                  className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
-                  to="profile"
-                >
-                  <UserRoundPenIcon />
-                  Profile Info
-                </Link>
-                <Link
-                  className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
-                  to={user ? "add-vacancies" : "login"}
-                >
-                  <PlusSquareIcon /> Add Vacancy
-                </Link>
-                <Link
-                  className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
-                  to="my-vacancies"
-                >
-                  <ListOrderedIcon />
-                  My Vacancies
-                </Link>
-                <div
-                  className="justify-left flex cursor-pointer items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
-                  onClick={() => mutateLogout()}
-                >
-                  <LogOut className="text-orange-700" />
-                  Log Out
+              {user?.id ? (
+                <div className="space-y-4">
+                  <ProfileBox />
+                  <Link
+                    className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
+                    to="profile"
+                  >
+                    <UserRoundPenIcon />
+                    Profile Info
+                  </Link>
+                  <Link
+                    className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
+                    to={user ? "add-vacancies" : "login"}
+                  >
+                    <PlusSquareIcon /> Add Vacancy
+                  </Link>
+                  <Link
+                    className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
+                    to="my-vacancies"
+                  >
+                    <ListOrderedIcon />
+                    My Vacancies
+                  </Link>
+                  <div
+                    className="justify-left flex cursor-pointer items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
+                    onClick={() => mutateLogout()}
+                  >
+                    <LogOut className="text-orange-700" />
+                    Log Out
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div>
+                  <Link to="login" className="flex w-full justify-center">
+                    <Button className="w-2/3">Log In</Button>
+                  </Link>
+                </div>
+              )}
             </SheetContent>
           </Sheet>
         </div>
@@ -151,7 +159,7 @@ const Header: React.FC = () => {
         </nav>
         <div className="hidden items-center space-x-6 lg:flex">
           <Link to={user ? "add-vacancies" : "login"}>
-            <Button className="text-xs">
+            <Button className="p-4 text-[0.7rem]">
               <PlusSquareIcon /> Add Vacancy
             </Button>
           </Link>
@@ -206,10 +214,9 @@ const Header: React.FC = () => {
             </DropdownMenu>
           ) : (
             <Link to="login">
-              <Button>Log In</Button>
+              <Button className="text-xs">Log In</Button>
             </Link>
           )}
-
           <div className="space-x-1">
             <LanguageSwitcher />
             <ModeToggle />

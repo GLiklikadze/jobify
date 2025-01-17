@@ -18,6 +18,7 @@ import MyVacancies from "./pages/my-vacancies.tsx/MyVacancies";
 import ErrorPage from "./pages/error/ErrorPage";
 import EditVacanciesPage from "./pages/my-vacancies.tsx/views/EditVacancies";
 import AboutPage from "./pages/about/AboutPage";
+import CompaniesVacancies from "./pages/companies/views/CompaniesVacancies";
 
 function App() {
   const { handleSetUserId, setIsLoading } = useAuthContext();
@@ -50,6 +51,10 @@ function App() {
           <Route path="add-vacancies" element={<AddVacanciesPage />} />
           <Route path="edit-vacancies/:id" element={<EditVacanciesPage />} />
           <Route path="companies" element={<CompaniesPage />} />
+          <Route
+            path="companies/:company_id"
+            element={<CompaniesVacancies />}
+          />
           <Route element={<IsAuthGuard />}>
             <Route path="register" element={<RegisterPage />} />
             <Route path="login" element={<LoginPage />} />

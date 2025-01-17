@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 import { useTranslation } from "react-i18next";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button/button";
 import { AlertDestructive } from "@/components/error/errorAlert";
@@ -35,7 +35,7 @@ const LoginPage = () => {
     mutate(fieldValues);
   };
   const { t } = useTranslation();
-
+  const { lang } = useParams();
   const cardContent = (
     <>
       <CardHeader>
@@ -145,7 +145,7 @@ const LoginPage = () => {
         )}
         <div className="mt-4 text-center text-sm">
           {t("login-page.sing-up-label")}{" "}
-          <Link to="/register" className="text-primary underline">
+          <Link to={`/${lang}/register`} className="text-primary underline">
             {t("login-page.sing-up-link")}
           </Link>
         </div>

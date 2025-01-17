@@ -1,7 +1,8 @@
 export type profileResponse = {
   company_name: string | null;
-  company_name_ka: string | null;
+  full_name: string | null;
   logo_url: string | null;
+  avatar_url: string | null;
   address: string | null;
   id: string;
   phone_number: string | null;
