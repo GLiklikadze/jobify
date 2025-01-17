@@ -31,7 +31,6 @@ type Vacancy = {
   description: string | null;
   id: number;
   jobType: string | null;
-  liked: boolean | null;
   location: string | null;
   qualifications: string | null;
   requirements: string | null;
@@ -40,8 +39,9 @@ type Vacancy = {
   salaryMin: string | null;
   title: string | null;
   user_id: string | null;
-  profiles: profileResponse | null;
+  profiles?: profileResponse | null;
 };
+
 type VacancyListProps = {
   vacanciesList: Vacancy[];
 };
@@ -69,6 +69,9 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
     window.location.href = `mailto:${currentVacancy?.contactEmail}?subject=${encodeURIComponent(subject)}`;
     console.log(currentVacancy?.contactEmail, subject);
   };
+  if (!vacanciesList) {
+    return <p>Loading...</p>;
+  }
   return vacanciesList?.map((announcement) => (
     <VacancyBox key={announcement?.id}>
       <div

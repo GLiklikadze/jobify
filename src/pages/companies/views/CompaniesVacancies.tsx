@@ -6,8 +6,7 @@ const CompaniesVacancies = () => {
   const { company_id } = useParams();
   const { data: vacanciesList } = useGetMyVacanciesList(company_id ?? "");
 
-  return <VacancyList vacanciesList={vacanciesList} />;
-  return <h1>{company_id}</h1>;
+  return <VacancyList vacanciesList={vacanciesList ?? []} />;
 };
 
 export default CompaniesVacancies;

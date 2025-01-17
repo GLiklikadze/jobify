@@ -74,7 +74,7 @@ const CompaniesPage = () => {
         </div>
         {/* <img src={vacancy_illustration} className="h-28 w-28" /> */}
       </div>
-      <CompaniesList filteredProfiles={filteredProfiles} />
+      <CompaniesList filteredProfiles={filteredProfiles ?? []} />
     </div>
   );
 };

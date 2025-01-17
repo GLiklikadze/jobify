@@ -24,7 +24,6 @@ type Vacancy = {
   description: string | null;
   id: number;
   jobType: string | null;
-  liked: boolean | null;
   location: string | null;
   qualifications: string | null;
   requirements: string | null;
