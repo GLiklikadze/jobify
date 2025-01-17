@@ -64,12 +64,16 @@ export const getMyVacancies = async (user_id: string) => {
   }
 };
 
-export const getFilteredVacancies = async (searchText: string) => {
+export const getFilteredVacancies = async (
+  debouncedVacancyText: string,
+  debouncedCompanyText: string,
+) => {
   try {
     const { data, error } = await supabase
       .from("vacancies")
       .select(`*, profiles(*)`)
-      .ilike("title", `%${searchText}%`)
+      .ilike("title", `%${debouncedVacancyText}%`)
+      .ilike("companyName", `%${debouncedCompanyText}%`)
       .throwOnError();
     if (error) {
       throw new Error(`filtered vacancies fetch failed: ${error.message}`);

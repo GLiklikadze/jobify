@@ -20,15 +20,26 @@ export const useGetMyVacanciesList = (user_id: string) => {
   });
 };
 
-export const useGetFilteredVacanciesList = (searchText?: string) => {
+export const useGetFilteredVacanciesList = (
+  debouncedVacancyText: string,
+  debouncedCompanyText: string,
+) => {
   return useQuery({
-    queryKey: ["get-filtered-vacancies", searchText],
-    queryFn: () => getFilteredVacancies(searchText ?? ""),
+    queryKey: [
+      "get-filtered-vacancies",
+      debouncedVacancyText,
+      debouncedCompanyText,
+    ],
+    queryFn: () =>
+      getFilteredVacancies(
+        debouncedVacancyText ?? "",
+        debouncedCompanyText ?? "",
+      ),
     staleTime: 5 * 60 * 1000,
     gcTime: 5 * 60 * 1000,
   });
 };
-
+console.log(11);
 export const useGetSingleVacancy = (id: string) => {
   return useQuery({
     queryKey: ["single-vacancy", id],

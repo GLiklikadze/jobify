@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 import { useTranslation } from "react-i18next";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button/button";
 import { AlertDestructive } from "@/components/error/errorAlert";
@@ -16,11 +16,11 @@ import { RegisterFormValues } from "./RegisterPage.types";
 import { useRegister } from "@/react-query/mutation/auth/authMutation";
 
 const initialRegisterObj = {
-  // full_name: "",
   email: "",
   password: "",
 };
 const RegisterPage = () => {
+  const { lang } = useParams();
   const {
     control,
     handleSubmit,
@@ -39,8 +39,8 @@ const RegisterPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex px-4 my-24">
-      <Card className="mx-auto w-[30rem] max-h-96">
+    <div className="my-24 flex px-4">
+      <Card className="mx-auto max-h-96 w-[30rem]">
         <CardHeader>
           <CardTitle className="mx-auto text-2xl font-bold">
             {t("register-page.register-header")}
@@ -150,7 +150,7 @@ const RegisterPage = () => {
           )}
           <div className="mt-4 text-center text-sm">
             {t("register-page.sign-up-message")}
-            <Link to="/login" className="text-primary underline">
+            <Link to={`/${lang}/login`} className="text-primary underline">
               {t("register-page.log-in-link")}
             </Link>
           </div>

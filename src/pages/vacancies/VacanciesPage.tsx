@@ -1,7 +1,6 @@
 import { Input } from "@/components/ui/input";
 import VacancyList from "./components/VacancyList";
-import { Button } from "@/components/ui/button/button";
-import { Search } from "lucide-react";
+import { Briefcase, Building2, Search } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { useGetFilteredVacanciesList } from "@/react-query/query/vacancies/vacanciesQuery";
 import { Label } from "@/components/ui/label";
@@ -11,38 +10,44 @@ import { useEffect } from "react";
 import { useDebounce } from "@uidotdev/usehooks";
 import vacancy_illustration from "@/assets/search-vacancy-illustration.svg";
 
+// const searchDefaultValues = {
+//   searchText: "",
+// };
 const searchDefaultValues = {
-  searchText: "",
+  searchVacancy: "",
+  searchCompany: "",
 };
 
 type searchObjType = {
-  searchText: string;
+  searchVacancy: string;
+  searchCompany: string;
 };
 const VacanciesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams(searchDefaultValues);
 
   const parsedQueryParams = qs.parse(searchParams.toString()) as searchObjType;
 
-  const { control, handleSubmit, watch } = useForm({
+  const { control, watch } = useForm({
     defaultValues: parsedQueryParams,
   });
-  const searchText = watch("searchText");
-  const debouncedText = useDebounce(searchText, 600);
+  const searchVacancy = watch("searchVacancy");
+  const searchCompany = watch("searchCompany");
+  const debouncedVacancyText = useDebounce(searchVacancy, 600);
+  const debouncedCompanyText = useDebounce(searchCompany, 600);
 
-  const {
-    data: vacanciesList,
-    refetch: refetchFilteredList,
-    isSuccess,
-  } = useGetFilteredVacanciesList(debouncedText);
+  const { data: vacanciesList, isSuccess } = useGetFilteredVacanciesList(
+    debouncedVacancyText,
+    debouncedCompanyText,
+  );
 
-  const onSubmit = () => {
-    refetchFilteredList();
-  };
   useEffect(() => {
     if (isSuccess) {
       setSearchParams(
         qs.stringify(
-          { searchText: debouncedText },
+          {
+            searchVacancy: debouncedVacancyText,
+            searchCompany: debouncedCompanyText,
+          },
           {
             skipNulls: true,
             filter: (_, value) => {
@@ -52,27 +57,54 @@ const VacanciesPage = () => {
         ),
       );
     }
-  }, [isSuccess, debouncedText, setSearchParams]);
+  }, [isSuccess, debouncedVacancyText, debouncedCompanyText, setSearchParams]);
   return (
     <div className="container mt-4 space-y-1">
-      <div className="mx-auto flex max-w-4xl flex-row justify-start">
-        <div className="mx-auto mb-8 flex h-20 max-w-xl flex-row items-center gap-4 rounded-md border-2 p-4">
-          <Label>Search Title</Label>
-          <Controller
-            control={control}
-            name="searchText"
-            render={({ field }) => (
-              <Input type="text" placeholder="Front End Developer" {...field} />
-            )}
-          />
-          <Button variant="outline" onClick={handleSubmit(onSubmit)}>
-            <Search />
-            Search
-          </Button>
+      <div className="mx-auto flex max-w-4xl flex-col-reverse justify-start md:flex-row">
+        <div className="mx-auto mb-14 flex max-w-xl flex-col items-center gap-4 rounded-md border-2 border-primary p-4 md:mx-0 md:mb-8 md:h-20 md:flex-row">
+          <div className="flex items-center gap-2">
+            <Label htmlFor="searchVacancy">
+              <Briefcase className="text-orange-700" />
+            </Label>
+            <Controller
+              control={control}
+              name="searchVacancy"
+              render={({ field }) => (
+                <Input
+                  id="searchVacancy"
+                  type="text"
+                  placeholder="Front End Developer"
+                  className="h-10"
+                  {...field}
+                />
+              )}
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <Label htmlFor="searchCompany">
+              <Building2 className="text-orange-700" />
+            </Label>
+            <Controller
+              control={control}
+              name="searchCompany"
+              render={({ field }) => (
+                <Input
+                  type="text"
+                  placeholder="Facebook"
+                  {...field}
+                  className="border-bottom-2 h-10"
+                />
+              )}
+            />
+          </div>
+
+          <Search className="text-primary" />
         </div>
-        <img src={vacancy_illustration} className="h-28 w-28" />
+        <img src={vacancy_illustration} className="mx-auto h-28 w-28" />
       </div>
-      <VacancyList vacanciesList={vacanciesList ?? []} />
+      <div className="mx-6 space-y-2 sm:mx-0">
+        <VacancyList vacanciesList={vacanciesList ?? []} />
+      </div>
     </div>
   );
 };
