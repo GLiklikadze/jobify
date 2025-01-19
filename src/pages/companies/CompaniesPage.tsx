@@ -1,14 +1,15 @@
 import { useFilteredProfileList } from "@/react-query/query/profile/profileQuery";
-import { Search } from "lucide-react";
+import { BriefcaseIcon, Search } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button/button";
 import { useSearchParams } from "react-router-dom";
 import qs from "qs";
 import { useEffect } from "react";
 import { useDebounce } from "@uidotdev/usehooks";
 import CompaniesList from "./components/CompaniesList";
+import agreement_illustration from "@/assets/agreement.svg";
+import project_team from "@/assets/project-team.svg";
 
 const searchDefaultValues = {
   searchText: "",
@@ -22,21 +23,15 @@ const CompaniesPage = () => {
 
   const parsedQueryParams = qs.parse(searchParams.toString()) as searchObjType;
 
-  const { control, handleSubmit, watch } = useForm({
+  const { control, watch } = useForm({
     defaultValues: parsedQueryParams,
   });
   const searchText = watch("searchText");
   const debouncedText = useDebounce(searchText, 600);
 
-  const {
-    data: filteredProfiles,
-    isSuccess,
-    refetch: refetchFilteredList,
-  } = useFilteredProfileList(debouncedText);
+  const { data: filteredProfiles, isSuccess } =
+    useFilteredProfileList(debouncedText);
 
-  const onSubmit = () => {
-    refetchFilteredList();
-  };
   useEffect(() => {
     if (isSuccess) {
       setSearchParams(
@@ -54,12 +49,13 @@ const CompaniesPage = () => {
   }, [isSuccess, debouncedText, setSearchParams]);
   return (
     <div className="xl:px-60">
-      <div>
-        <h1>Search Companies</h1>
-      </div>
-      <div className="mx-auto flex max-w-4xl flex-row justify-start">
+      <div></div>
+      <div className="mx-auto mb-12 flex max-w-4xl flex-col items-center justify-between gap-2 md:mb-4 md:flex-row">
+        <img src={agreement_illustration} className="h-32 w-36" />
         <div className="mx-auto mb-8 flex h-20 max-w-xl flex-row items-center gap-4 rounded-md border-2 p-4">
-          <Label>Company</Label>
+          <Label>
+            <BriefcaseIcon className="text-orange-700" />
+          </Label>
           <Controller
             control={control}
             name="searchText"
@@ -67,12 +63,10 @@ const CompaniesPage = () => {
               <Input type="text" placeholder="Facebook" {...field} />
             )}
           />
-          <Button variant="outline" onClick={handleSubmit(onSubmit)}>
-            <Search />
-            Search
-          </Button>
+
+          <Search size="2rem" className="text-primary" />
         </div>
-        {/* <img src={vacancy_illustration} className="h-28 w-28" /> */}
+        <img src={project_team} className="-mb-14 h-32 w-36" />
       </div>
       <CompaniesList filteredProfiles={filteredProfiles ?? []} />
     </div>

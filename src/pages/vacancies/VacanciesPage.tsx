@@ -100,7 +100,7 @@ const VacanciesPage = () => {
             />
           </div>
 
-          <Search className="text-primary" />
+          <Search className="hidden text-primary md:flex" />
         </div>
         <img src={data_proccesing} className="mx-auto h-28 w-28" />
       </div>
