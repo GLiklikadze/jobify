@@ -9,12 +9,44 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      favorites: {
+        Row: {
+          id: number
+          user_id: string | null
+          vacancy_id: number | null
+        }
+        Insert: {
+          id?: number
+          user_id?: string | null
+          vacancy_id?: number | null
+        }
+        Update: {
+          id?: number
+          user_id?: string | null
+          vacancy_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "favorites_profile_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "favorites_vacancy_id_fkey"
+            columns: ["vacancy_id"]
+            isOneToOne: false
+            referencedRelation: "vacancies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           address: string | null
           avatar_url: string | null
           company_name: string | null
-          fav_list: string[] | null
           full_name: string | null
           id: string
           logo_url: string | null
@@ -26,7 +58,6 @@ export type Database = {
           address?: string | null
           avatar_url?: string | null
           company_name?: string | null
-          fav_list?: string[] | null
           full_name?: string | null
           id: string
           logo_url?: string | null
@@ -38,7 +69,6 @@ export type Database = {
           address?: string | null
           avatar_url?: string | null
           company_name?: string | null
-          fav_list?: string[] | null
           full_name?: string | null
           id?: string
           logo_url?: string | null

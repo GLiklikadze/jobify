@@ -13,6 +13,7 @@ import {
   LogOut,
   Menu,
   PlusSquareIcon,
+  StarsIcon,
   UserRound,
   UserRoundPenIcon,
 } from "lucide-react";
@@ -167,9 +168,9 @@ const Header: React.FC = () => {
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <div className="border-foregraund flex cursor-pointer flex-row items-center space-x-2 rounded-3xl border-2 bg-secondary px-2 py-1">
+                <div className="border-foregraund flex cursor-pointer flex-row items-center space-x-2 rounded-xl border-2 bg-secondary px-2 py-1">
                   {profileInfo?.logo_url ? (
-                    <div className="h-8 w-8 rounded-full">
+                    <div className="h-7 rounded-full">
                       <img
                         src={`https://gimdvoaobxziodrpnvkh.supabase.co/storage/v1/object/public/${profileInfo?.logo_url}`}
                         className="h-full w-full overflow-hidden rounded-full border-2 object-cover"
@@ -188,7 +189,7 @@ const Header: React.FC = () => {
               <DropdownMenuContent align="end" className="w-44 bg-secondary">
                 <DropdownMenuItem
                   key="profile"
-                  className="justify-left flex items-center text-xs font-bold text-primary"
+                  className="justify-left flex items-center text-xs font-bold text-primary focus:text-orange-600"
                   onClick={() => navigate("profile")}
                 >
                   <UserRoundPenIcon />
@@ -196,15 +197,23 @@ const Header: React.FC = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   key="announcements"
-                  className="justify-left flex items-center text-xs font-bold text-primary"
+                  className="justify-left flex items-center text-xs font-bold text-primary focus:text-orange-600"
                   onClick={() => navigate("my-vacancies")}
                 >
                   <ListOrderedIcon />
                   My Vacancies
                 </DropdownMenuItem>
                 <DropdownMenuItem
+                  key="favorites"
+                  className="justify-left flex items-center text-xs font-bold text-primary focus:text-orange-600"
+                  onClick={() => navigate("favorites")}
+                >
+                  <StarsIcon />
+                  Favorites List
+                </DropdownMenuItem>
+                <DropdownMenuItem
                   key="log-out"
-                  className="justify-left flex items-center text-xs font-bold text-primary"
+                  className="justify-left flex items-center text-xs font-bold text-primary focus:text-orange-600"
                   onClick={() => mutateLogout()}
                 >
                   <LogOut className="text-orange-700" />

@@ -39,7 +39,7 @@ export const useGetFilteredVacanciesList = (
     gcTime: 5 * 60 * 1000,
   });
 };
-console.log(11);
+
 export const useGetSingleVacancy = (id: string) => {
   return useQuery({
     queryKey: ["single-vacancy", id],

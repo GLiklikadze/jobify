@@ -19,6 +19,7 @@ import ErrorPage from "./pages/error/ErrorPage";
 import EditVacanciesPage from "./pages/my-vacancies.tsx/views/EditVacancies";
 import AboutPage from "./pages/about/AboutPage";
 import CompaniesVacancies from "./pages/companies/views/CompaniesVacancies";
+import FavoritesPage from "./pages/favorites/FavoritesPage";
 
 function App() {
   const { handleSetUserId, setIsLoading } = useAuthContext();
@@ -48,6 +49,7 @@ function App() {
           <Route path="vacancies" element={<VacanciesPage />} />
           <Route path="vacancies/:vac_id" element={<SingleVacancy />} />
           <Route path="my-vacancies" element={<MyVacancies />} />
+          <Route path="favorites" element={<FavoritesPage />} />
           <Route path="add-vacancies" element={<AddVacanciesPage />} />
           <Route path="edit-vacancies/:id" element={<EditVacanciesPage />} />
           <Route path="companies" element={<CompaniesPage />} />

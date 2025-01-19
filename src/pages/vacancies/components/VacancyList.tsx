@@ -5,11 +5,18 @@ import {
   Clock4,
   FileSpreadsheet,
   MapPin,
+  Star,
 } from "lucide-react";
 import { VacancyBox } from "./VacancyBox";
 import { Button } from "@/components/ui/button/button";
 import { getFormattedDate } from "@/utils/dateFormatter";
 import { useNavigate } from "react-router-dom";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "@/supabase/favorites/httpFavorites";
+import { useAuthContext } from "@/context/hooks/useAuthContext";
+import { MouseEvent } from "react";
 
 type profileResponse = {
   company_name: string | null;
@@ -23,7 +30,7 @@ type profileResponse = {
   username: string | null;
 };
 
-type Vacancy = {
+export type VacancyType = {
   benefits: string | null;
   companyName: string | null;
   contactEmail: string | null;
@@ -40,13 +47,17 @@ type Vacancy = {
   title: string | null;
   user_id: string | null;
   profiles?: profileResponse | null;
+  favorites?:
+    | { id: number | null; user_id: string | null; vacancy_id: number | null }[]
+    | boolean[];
 };
 
 type VacancyListProps = {
-  vacanciesList: Vacancy[];
+  vacanciesList: VacancyType[];
 };
 
 const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
+  const { user } = useAuthContext();
   const navigate = useNavigate();
   const handleClick = (vac_id: number) => {
     navigate(`${vac_id}`);
@@ -69,20 +80,38 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
     window.location.href = `mailto:${currentVacancy?.contactEmail}?subject=${encodeURIComponent(subject)}`;
     console.log(currentVacancy?.contactEmail, subject);
   };
+  const starClassName = "text-orange-500 fill-orange-500";
+  const handleFavoriteClick = (
+    e: MouseEvent,
+    vac_id: number,
+    user_id: string,
+  ) => {
+    e.stopPropagation();
+    addToFavorites(vac_id, user_id);
+  };
+  const handleFavoriteDelClick = (
+    e: MouseEvent,
+    vac_id: number,
+    user_id: string,
+  ) => {
+    e.stopPropagation();
+    removeFromFavorites(vac_id, user_id);
+  };
+
   if (!vacanciesList) {
     return <p>Loading...</p>;
   }
-  return vacanciesList?.map((announcement) => (
-    <VacancyBox key={announcement?.id}>
+  return vacanciesList?.map((vacancy) => (
+    <VacancyBox key={vacancy?.id}>
       <div
-        className="flex h-[8.4rem] cursor-pointer flex-row gap-8 overflow-hidden sm:h-[5.1rem]"
-        onClick={() => handleClick(announcement.id)}
+        className="flex h-[8.4rem] cursor-pointer flex-row gap-2 overflow-hidden sm:h-[5.1rem] sm:gap-8"
+        onClick={() => handleClick(vacancy.id)}
       >
-        <div className="flex h-20 w-28 items-center justify-center overflow-hidden rounded-full border-2">
-          {announcement?.profiles?.logo_url ? (
+        <div className="flex items-center justify-center overflow-hidden rounded-full">
+          {vacancy?.profiles?.logo_url ? (
             <img
-              src={`https://gimdvoaobxziodrpnvkh.supabase.co/storage/v1/object/public/${announcement?.profiles?.logo_url}`}
-              className="h-full w-full overflow-hidden rounded-full object-cover"
+              src={`https://gimdvoaobxziodrpnvkh.supabase.co/storage/v1/object/public/${vacancy?.profiles?.logo_url}`}
+              className="h-20 w-28 overflow-hidden rounded-full object-cover"
             />
           ) : (
             <Briefcase
@@ -95,27 +124,42 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
           <div className="flex flex-col space-y-2">
             <div className="flex flex-row items-center gap-2 text-sm">
               <Building2 size="1rem" className="text-primary" />
-              <span>{announcement?.companyName}</span>
+              <span>{vacancy?.companyName || "Unknown"}</span>
             </div>
 
             <div className="flex flex-row items-center space-x-2">
-              <h2 className="text-sm font-bold">{announcement?.title} </h2>
+              <h2 className="text-sm font-bold">{vacancy?.title} </h2>
+              <button
+                onClick={(e) =>
+                  vacancy?.favorites?.[0]
+                    ? handleFavoriteDelClick(e, vacancy?.id, user?.id ?? "")
+                    : handleFavoriteClick(e, vacancy?.id, user?.id ?? "")
+                }
+                type="button"
+              >
+                <Star
+                  size="0.9rem"
+                  className={
+                    vacancy?.favorites?.[0] ? starClassName : "text-orange-400"
+                  }
+                />
+              </button>
             </div>
             <div className="flex flex-col items-start gap-1 text-xs sm:flex-row">
               <p className="flex space-x-1">
                 <MapPin className="inline-flex text-primary" size="1rem" />
-                <span> საქართველო, {announcement?.location}</span>
+                <span> საქართველო, {vacancy?.location}</span>
               </p>
               <p className="flex space-x-2">
                 <Clock4 size="1rem" className="inline-flex text-primary" />
-                <span>{announcement?.jobType}</span>
+                <span>{vacancy?.jobType}</span>
               </p>
               <p className="flex space-x-2 text-xs">
                 <span className="ml-[0.1rem] text-[1rem] font-normal text-primary">
                   ₾
                 </span>
                 <span>
-                  {announcement?.salaryMin} - {announcement?.salaryMax}
+                  {vacancy?.salaryMin} - {vacancy?.salaryMax}
                 </span>
               </p>
             </div>
@@ -124,7 +168,7 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
             <Button
               variant="default"
               className="hidden text-xs md:flex"
-              onClick={(event) => handleEmailClick(event, announcement?.id)}
+              onClick={(event) => handleEmailClick(event, vacancy?.id)}
             >
               <FileSpreadsheet />
               გაგზავნა
@@ -133,7 +177,7 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
               <span className="text-primary">
                 <CalendarDays size="1rem" />
               </span>
-              <span>{getFormattedDate(announcement?.created_at)}</span>
+              <span>{getFormattedDate(vacancy?.created_at)}</span>
             </p>
           </div>
         </div>
