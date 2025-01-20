@@ -32,7 +32,7 @@ const SingleVacancy = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-7xl p-4">
+    <div className="container mx-auto max-w-6xl p-8">
       <Button
         variant="outline"
         className="mb-4 text-primary"
@@ -45,26 +45,31 @@ const SingleVacancy = () => {
       <div className="grid gap-6 md:grid-cols-[1fr_300px]">
         {/* Main Content */}
         <div className="space-y-6">
-          <div className="flex items-start gap-4">
-            <div className="h-24 w-28 overflow-hidden rounded-lg bg-blue-100">
-              <img
-                src={`https://gimdvoaobxziodrpnvkh.supabase.co/storage/v1/object/public/${singleVacancy?.profiles?.logo_url}`}
-                alt="logo"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="flex-1">
-              <div className="mb-2 flex items-center gap-3">
-                <h1 className="text-2xl font-bold">{singleVacancy?.title}</h1>
-                <Badge variant="default" className="whitespace-nowrap">
-                  {singleVacancy?.jobType}
-                </Badge>
+          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row">
+            <div className="flex flex-row gap-4">
+              <div className="h-24 w-28 overflow-hidden rounded-lg bg-blue-100">
+                <img
+                  src={`https://gimdvoaobxziodrpnvkh.supabase.co/storage/v1/object/public/${singleVacancy?.profiles?.logo_url}`}
+                  alt="logo"
+                  className="h-full w-full object-cover"
+                />
               </div>
-              <p className="text-muted-foreground">
-                at {singleVacancy?.companyName}
-              </p>
+              <div className="flex-1">
+                <div className="mb-2 flex items-center gap-3">
+                  <h1 className="text-2xl font-bold">{singleVacancy?.title}</h1>
+                  <Badge variant="default" className="whitespace-nowrap">
+                    {singleVacancy?.jobType}
+                  </Badge>
+                </div>
+                <p className="text-muted-foreground">
+                  at {singleVacancy?.companyName}
+                </p>
+              </div>
             </div>
-            <Button className="bg-primary" onClick={handleEmailClick}>
+            <Button
+              className="mx-auto w-60 bg-primary sm:mx-0 sm:w-36"
+              onClick={handleEmailClick}
+            >
               Apply Now <span className="ml-2">→</span>
             </Button>
           </div>

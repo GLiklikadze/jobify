@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input";
 import VacancyList from "./components/VacancyList";
-import { Briefcase, Building2, Search } from "lucide-react";
+import { Briefcase, Building2 } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { useGetFilteredVacanciesList } from "@/react-query/query/vacancies/vacanciesQuery";
 import { Label } from "@/components/ui/label";
@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useDebounce } from "@uidotdev/usehooks";
 import vacancy_illustration from "@/assets/search-vacancy-illustration.svg";
 import data_proccesing from "@/assets/data-processing_z2q6.svg";
+import search_illustration from "@/assets/search_vimp.svg";
 
 // const searchDefaultValues = {
 //   searchText: "",
@@ -63,7 +64,7 @@ const VacanciesPage = () => {
     <div className="mx-8 mt-4 space-y-1">
       <div className="mx-auto flex max-w-4xl flex-col-reverse justify-start gap-2 md:flex-row">
         <img src={vacancy_illustration} className="mx-auto h-28 w-28" />
-        <div className="mx-auto flex max-w-xl flex-col items-center gap-4 rounded-md border-2 border-primary p-4 md:mx-0 md:mb-8 md:h-20 md:flex-row">
+        <div className="mx-auto flex max-w-xl flex-col items-center gap-4 rounded-md border-2 border-primary p-4 md:mx-0 md:mb-8 md:h-24 md:flex-row">
           <div className="flex items-center gap-2">
             <Label htmlFor="searchVacancy">
               <Briefcase className="text-orange-700" />
@@ -100,7 +101,9 @@ const VacanciesPage = () => {
             />
           </div>
 
-          <Search className="hidden text-primary md:flex" />
+          {/* <Search className="hidden text-primary md:flex" /> */}
+
+          <img src={search_illustration} className="mx-auto h-10 w-14" />
         </div>
         <img src={data_proccesing} className="mx-auto h-28 w-28" />
       </div>

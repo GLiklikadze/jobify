@@ -48,11 +48,10 @@ const CompaniesPage = () => {
     }
   }, [isSuccess, debouncedText, setSearchParams]);
   return (
-    <div className="xl:px-60">
-      <div></div>
+    <div className="mx-10 xl:mx-60">
       <div className="mx-auto mb-12 flex max-w-4xl flex-col items-center justify-between gap-2 md:mb-4 md:flex-row">
         <img src={agreement_illustration} className="h-32 w-36" />
-        <div className="mx-auto mb-8 flex h-20 max-w-xl flex-row items-center gap-4 rounded-md border-2 p-4">
+        <div className="mx-auto flex h-24 max-w-xl flex-row items-center gap-4 rounded-md border-2 border-primary p-4 lg:w-96">
           <Label>
             <BriefcaseIcon className="text-orange-700" />
           </Label>

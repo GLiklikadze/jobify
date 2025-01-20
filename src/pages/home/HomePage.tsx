@@ -6,9 +6,9 @@ const HomePage = () => {
   const { data: vacanciesList } = useGetVacanciesList();
   const { data: profilesList } = useProfileList();
   return (
-    <div className="container mt-4 space-y-1">
-      <div className="w-7xl mx-auto flex flex-row justify-center gap-28 p-4">
-        <div className="space-y-8">
+    <div className="mx-10 mt-4 space-y-1 xl:mx-60">
+      <div className="w-7xl mx-auto flex flex-col justify-center gap-28 p-4 md:flex-row">
+        <div className="mx-auto space-y-8">
           <h1 className="text-4xl">
             Find a job that suits <br /> your interest & skills.
           </h1>
@@ -24,12 +24,12 @@ const HomePage = () => {
         </div>
         <img
           src={illustration}
-          className="h-24 w-32 md:h-48 md:w-40 lg:h-[25rem] lg:w-96"
+          className="mx-auto h-48 w-60 lg:h-[25rem] lg:w-[26rem]"
         />
       </div>
-      <div className="mx-auto flex max-w-5xl flex-col gap-12 md:flex-row">
-        <div className="flex h-24 w-52 flex-row items-center justify-around rounded-sm border-2 border-secondary p-1">
-          <div className="flex h-14 w-16 items-center justify-center rounded-sm bg-blue-100">
+      <div className="mx-auto flex max-w-5xl flex-col items-center gap-12 md:flex-row">
+        <div className="flex h-28 w-60 flex-row items-center justify-around rounded-sm border-2 border-secondary p-1">
+          <div className="flex h-16 w-20 items-center justify-center rounded-sm bg-blue-100">
             <BriefcaseBusiness className="flex text-primary" />
           </div>
           <div>
@@ -40,8 +40,8 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="flex h-24 w-52 flex-row items-center justify-evenly gap-2 rounded-sm border-2 border-secondary p-1">
-          <div className="flex h-14 w-16 items-center justify-center rounded-sm bg-blue-100">
+        <div className="flex h-28 w-60 flex-row items-center justify-evenly gap-2 rounded-sm border-2 border-secondary p-1">
+          <div className="flex h-16 w-20 items-center justify-center rounded-sm bg-blue-100">
             <Building2 className="flex text-primary" />
           </div>
           <div>
@@ -51,8 +51,8 @@ const HomePage = () => {
             <p className="font-semibold text-gray-500">Company</p>
           </div>
         </div>
-        <div className="flex h-24 w-52 flex-row items-center justify-evenly gap-2 rounded-sm border-2 border-secondary p-1">
-          <div className="flex h-14 w-16 items-center justify-center rounded-sm bg-blue-100">
+        <div className="flex h-28 w-60 flex-row items-center justify-evenly gap-2 rounded-sm border-2 border-secondary p-1">
+          <div className="flex h-16 w-20 items-center justify-center rounded-sm bg-blue-100">
             <HandshakeIcon className="flex text-primary" />
           </div>
           <div>

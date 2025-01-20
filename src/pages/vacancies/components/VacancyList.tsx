@@ -11,12 +11,12 @@ import { VacancyBox } from "./VacancyBox";
 import { Button } from "@/components/ui/button/button";
 import { getFormattedDate } from "@/utils/dateFormatter";
 import { useNavigate } from "react-router-dom";
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from "@/supabase/favorites/httpFavorites";
 import { useAuthContext } from "@/context/hooks/useAuthContext";
 import { MouseEvent } from "react";
+import {
+  useAddFavoriteList,
+  useDeleteFavorite,
+} from "@/react-query/mutation/favorites/favoritesMutation";
 
 type profileResponse = {
   company_name: string | null;
@@ -81,21 +81,23 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
     console.log(currentVacancy?.contactEmail, subject);
   };
   const starClassName = "text-orange-500 fill-orange-500";
+  const { mutate: addToFavListMutate } = useAddFavoriteList();
+  const { mutate: deleteFromFavoritesMutate } = useDeleteFavorite();
   const handleFavoriteClick = (
     e: MouseEvent,
-    vac_id: number,
-    user_id: string,
+    vacancyId: number,
+    profileId: string,
   ) => {
     e.stopPropagation();
-    addToFavorites(vac_id, user_id);
+    addToFavListMutate({ vacancyId, profileId });
   };
   const handleFavoriteDelClick = (
     e: MouseEvent,
-    vac_id: number,
-    user_id: string,
+    vacancyId: number,
+    profileId: string,
   ) => {
     e.stopPropagation();
-    removeFromFavorites(vac_id, user_id);
+    deleteFromFavoritesMutate({ vacancyId, profileId });
   };
 
   if (!vacanciesList) {
@@ -173,7 +175,7 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
               <FileSpreadsheet />
               გაგზავნა
             </Button>
-            <p className="flex gap-1 text-xs">
+            <p className="flex gap-1 text-[0.7rem]">
               <span className="text-primary">
                 <CalendarDays size="1rem" />
               </span>

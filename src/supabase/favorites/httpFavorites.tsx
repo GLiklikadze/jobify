@@ -19,7 +19,15 @@ export const getFavoriteVacancies = async (user_id: string) => {
   }
 };
 
-export const addToFavorites = async (vacancyId: number, profileId: string) => {
+type FavoriteHttpProps = {
+  vacancyId: number;
+  profileId: string;
+};
+
+export const addToFavorites = async ({
+  vacancyId,
+  profileId,
+}: FavoriteHttpProps) => {
   const { data, error } = await supabase
     .from("favorites")
     .insert([{ user_id: profileId, vacancy_id: vacancyId }]);
@@ -33,10 +41,10 @@ export const addToFavorites = async (vacancyId: number, profileId: string) => {
   return data;
 };
 
-export async function removeFromFavorites(
-  vacancyId: number,
-  profileId: string,
-) {
+export async function removeFromFavorites({
+  vacancyId,
+  profileId,
+}: FavoriteHttpProps) {
   const { data, error } = await supabase
     .from("favorites")
     .delete()
