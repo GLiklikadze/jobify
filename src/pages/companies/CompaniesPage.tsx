@@ -8,8 +8,8 @@ import qs from "qs";
 import { useEffect } from "react";
 import { useDebounce } from "@uidotdev/usehooks";
 import CompaniesList from "./components/CompaniesList";
-import agreement_illustration from "@/assets/agreement.svg";
-import project_team from "@/assets/project-team.svg";
+import agreement_illustration from "@/assets/voting_3ygx.svg";
+import project_team from "@/assets/agreement.svg";
 
 const searchDefaultValues = {
   searchText: "",
@@ -65,7 +65,7 @@ const CompaniesPage = () => {
 
           <Search size="2rem" className="text-primary" />
         </div>
-        <img src={project_team} className="-mb-14 h-32 w-36" />
+        <img src={project_team} className="h-32 w-36" />
       </div>
       <CompaniesList filteredProfiles={filteredProfiles ?? []} />
     </div>

@@ -4,15 +4,13 @@ import { useEditVacancies } from "@/react-query/mutation/vacancies/vacanciesMuta
 import { useForm } from "react-hook-form";
 // import job_hunt from "@/assets/undraw_job-hunt_5umi.svg";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form/Form";
+import { FormControl } from "@/components/ui/form/FormComponents";
+import { FormDescription } from "@/components/ui/form/FormComponents";
+import { FormField } from "@/components/ui/form/FormField";
+import { FormItem } from "@/components/ui/form/FormComponents";
+import { FormLabel } from "@/components/ui/form/FormComponents";
+import { FormMessage } from "@/components/ui/form/FormComponents";
 import {
   Select,
   SelectContent,
@@ -41,18 +39,18 @@ const EditVacanciesFormDefaultValues = {
 };
 
 type EditVacancies = {
-  title: string | null;
-  companyName: string | null;
-  location: string | null;
-  jobType: string | null;
-  salaryMin: string | null;
-  salaryMax: string | null;
-  description: string | null;
-  requirements: string | null;
-  contactEmail: string | null;
-  qualifications: string | null;
-  benefits: string | null;
-  responsibilities: string | null;
+  title: string;
+  companyName: string;
+  location: string;
+  jobType: string;
+  salaryMin: string;
+  salaryMax: string;
+  description: string;
+  requirements: string;
+  contactEmail: string;
+  qualifications: string;
+  benefits: string;
+  responsibilities: string;
 };
 const EditVacanciesPage = () => {
   const { id } = useParams();
@@ -62,7 +60,7 @@ const EditVacanciesPage = () => {
   const { data: singleVacancy, isSuccess: isGetVacancySuccess } =
     useGetSingleVacancy(id ?? "");
 
-  const form = useForm({
+  const form = useForm<EditVacancies>({
     // resolver: zodResolver(formSchema),
     defaultValues: EditVacanciesFormDefaultValues,
   });

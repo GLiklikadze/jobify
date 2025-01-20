@@ -2,17 +2,15 @@ import { Button } from "@/components/ui/button/button";
 import { Input } from "@/components/ui/input";
 import { useCreateVacancies } from "@/react-query/mutation/vacancies/vacanciesMutation";
 import { useForm } from "react-hook-form";
-// import job_hunt from "@/assets/undraw_job-hunt_5umi.svg";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form/Form";
+import { FormControl } from "@/components/ui/form/FormComponents";
+import { FormDescription } from "@/components/ui/form/FormComponents";
+import { FormField } from "@/components/ui/form/FormField";
+import { FormItem } from "@/components/ui/form/FormComponents";
+import { FormLabel } from "@/components/ui/form/FormComponents";
+import { FormMessage } from "@/components/ui/form/FormComponents";
+
 import {
   Select,
   SelectContent,

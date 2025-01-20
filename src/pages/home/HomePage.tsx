@@ -29,8 +29,10 @@ const HomePage = () => {
       </div>
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-12 md:flex-row">
         <div className="flex h-28 w-60 flex-row items-center justify-around rounded-sm border-2 border-secondary p-1">
-          <div className="flex h-16 w-20 items-center justify-center rounded-sm bg-blue-100">
-            <BriefcaseBusiness className="flex text-primary" />
+          <div className="rounded-sm border-8 border-blue-200">
+            <div className="flex h-16 w-20 items-center justify-center bg-blue-100">
+              <BriefcaseBusiness className="flex text-primary" />
+            </div>
           </div>
           <div>
             <p className="text-center font-bold text-primary">
@@ -41,8 +43,10 @@ const HomePage = () => {
         </div>
 
         <div className="flex h-28 w-60 flex-row items-center justify-evenly gap-2 rounded-sm border-2 border-secondary p-1">
-          <div className="flex h-16 w-20 items-center justify-center rounded-sm bg-blue-100">
-            <Building2 className="flex text-primary" />
+          <div className="rounded-sm border-8 border-blue-200">
+            <div className="flex h-16 w-20 items-center justify-center bg-blue-100">
+              <Building2 className="flex text-primary" />
+            </div>
           </div>
           <div>
             <p className="text-center font-bold text-primary">
@@ -52,8 +56,10 @@ const HomePage = () => {
           </div>
         </div>
         <div className="flex h-28 w-60 flex-row items-center justify-evenly gap-2 rounded-sm border-2 border-secondary p-1">
-          <div className="flex h-16 w-20 items-center justify-center rounded-sm bg-blue-100">
-            <HandshakeIcon className="flex text-primary" />
+          <div className="rounded-sm border-8 border-blue-200">
+            <div className="flex h-16 w-20 items-center justify-center bg-blue-100">
+              <HandshakeIcon className="flex text-primary" />
+            </div>
           </div>
           <div>
             <p className="text-center font-bold text-primary">0</p>
