@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button/button";
 import { Card } from "@/components/ui/card";
 import { Calendar, MapPin, Copy, CircleChevronLeft } from "lucide-react";
@@ -8,7 +8,7 @@ import { getFormattedDate } from "@/utils/dateFormatter";
 import listMaker from "./utils/listMaker";
 
 const SingleVacancy = () => {
-  const { vac_id } = useParams();
+  const { lang, vac_id } = useParams();
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(-1);
@@ -32,7 +32,7 @@ const SingleVacancy = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-6xl p-8">
+    <div className="container mx-auto max-w-6xl space-y-6 p-8">
       <Button
         variant="outline"
         className="mb-4 text-primary"
@@ -62,7 +62,13 @@ const SingleVacancy = () => {
                   </Badge>
                 </div>
                 <p className="text-muted-foreground">
-                  at {singleVacancy?.companyName}
+                  at{" "}
+                  <Link
+                    to={`/${lang}/companies/${singleVacancy?.user_id}`}
+                    className="text-primary"
+                  >
+                    {singleVacancy?.companyName}
+                  </Link>
                 </p>
               </div>
             </div>
@@ -110,8 +116,8 @@ const SingleVacancy = () => {
         </div>
 
         {/* Sidebar */}
-        <div className="space-y-6">
-          <Card className="p-4">
+        <div className="mx-auto flex flex-col gap-8 sm:flex-row md:flex-col">
+          <Card className="h-48 w-56 p-4">
             <h2 className="mb-4 font-semibold">Job Overview</h2>
             <div className="space-y-4">
               <div className="flex items-center gap-3 text-sm">
@@ -138,7 +144,7 @@ const SingleVacancy = () => {
             </div>
           </Card>
 
-          <Card className="p-4">
+          <Card className="h-48 w-56 p-4">
             <div className="space-y-4">
               <div>
                 <h2 className="mb-2 font-semibold">Salary (USD)</h2>

@@ -44,14 +44,14 @@ const Header: React.FC = () => {
 
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) => {
     return isActive
-      ? "font-semibold text-sm text-orange-600"
-      : "font-semibold text-primary text-sm hover:text-primary";
+      ? "font-bold text-sm text-orange-600"
+      : "font-bold text-primary text-sm hover:text-primary";
   };
   const navigate = useNavigate();
   const { mutate: mutateLogout } = useLogOut();
   const { data: profileInfo } = useProfileInfo(user?.id ?? "");
   return (
-    <header className="z-50 h-20 rounded-b-xl border-b-2 border-primary bg-gray-50 dark:bg-gray-800">
+    <header className="dark: z-50 h-20 rounded-b-xl border-b-2 border-primary bg-gray-100 dark:bg-blue-900 dark:bg-opacity-30">
       <div className="mx-auto flex items-center justify-between px-4 py-4">
         <Link to="/">
           <div className="flex flex-row items-center space-x-2 rounded-2xl px-6 py-2 text-orange-700">

@@ -12,6 +12,18 @@ import {
 import { Card } from "@/components/ui/card";
 import { useDeleteVacancy } from "@/react-query/mutation/vacancies/vacanciesMutation";
 import { useAuthContext } from "@/context/hooks/useAuthContext";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import delete_illustration from "@/assets/delete_illustration.svg";
 
 const MyVacancies = () => {
   const { user } = useAuthContext();
@@ -77,12 +89,43 @@ const MyVacancies = () => {
                     >
                       <Pencil className="h-4 w-5 text-primary" />
                     </div>
-                    <div
+                    {/* <div
                       className="flex w-9 justify-center rounded-md border-2 p-1 hover:bg-blue-200"
                       onClick={() => handleDeleteClick(announcement?.id)}
                     >
                       <Trash2 className="h-4 w-5 text-red-600" />
-                    </div>
+                    </div> */}
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <div className="flex w-9 justify-center rounded-md border-2 p-1 hover:bg-blue-200">
+                          <Trash2 className="h-4 w-5 text-red-600" />
+                        </div>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent className="pt-2">
+                        <AlertDialogHeader>
+                          <AlertDialogTitle className="flex flex-row items-center justify-between">
+                            Are you sure?
+                            <img
+                              src={delete_illustration}
+                              className="m-0 h-16 w-20 p-0"
+                            />
+                          </AlertDialogTitle>
+
+                          <AlertDialogDescription>
+                            This will permanently delete your vacancy and remove
+                            your data from our servers.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={() => handleDeleteClick(announcement?.id)}
+                          >
+                            Continue
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </div>
                 </TableCell>
               </TableRow>

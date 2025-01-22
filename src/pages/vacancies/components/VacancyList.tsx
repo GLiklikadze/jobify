@@ -2,7 +2,6 @@ import {
   Briefcase,
   Building2,
   CalendarDays,
-  Clock4,
   FileSpreadsheet,
   MapPin,
   Star,
@@ -10,13 +9,14 @@ import {
 import { VacancyBox } from "./VacancyBox";
 import { Button } from "@/components/ui/button/button";
 import { getFormattedDate } from "@/utils/dateFormatter";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuthContext } from "@/context/hooks/useAuthContext";
 import { MouseEvent } from "react";
 import {
   useAddFavoriteList,
   useDeleteFavorite,
 } from "@/react-query/mutation/favorites/favoritesMutation";
+import { Badge } from "@/components/ui/badge/badge";
 
 type profileResponse = {
   company_name: string | null;
@@ -58,10 +58,12 @@ type VacancyListProps = {
 
 const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
   const { user } = useAuthContext();
+  const { lang } = useParams();
   const navigate = useNavigate();
   const handleClick = (vac_id: number) => {
-    navigate(`${vac_id}`);
+    navigate(`/${lang}/vacancies/${vac_id}`);
   };
+
   const handleEmailClick = (
     event: React.MouseEvent<HTMLButtonElement>,
     id: number,
@@ -131,6 +133,9 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
 
             <div className="flex flex-row items-center space-x-2">
               <h2 className="text-sm font-bold">{vacancy?.title} </h2>
+              <Badge variant="sm" className="whitespace-nowrap bg-orange-600">
+                {vacancy?.jobType}
+              </Badge>
               <button
                 onClick={(e) =>
                   vacancy?.favorites?.[0]
@@ -152,10 +157,10 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
                 <MapPin className="inline-flex text-primary" size="1rem" />
                 <span> საქართველო, {vacancy?.location}</span>
               </p>
-              <p className="flex space-x-2">
+              {/* <p className="flex space-x-2">
                 <Clock4 size="1rem" className="inline-flex text-primary" />
                 <span>{vacancy?.jobType}</span>
-              </p>
+              </p> */}
               <p className="flex space-x-2 text-xs">
                 <span className="ml-[0.1rem] text-[1rem] font-normal text-primary">
                   ₾

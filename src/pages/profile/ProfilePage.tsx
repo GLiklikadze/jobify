@@ -83,13 +83,14 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="mx-auto max-w-lg flex-grow px-4 py-8">
+    <div className="mx-auto max-w-md flex-grow px-4 py-8 sm:max-w-lg">
       <Card className="px-4 py-4">
         <CardTitle className="mx-auto mb-2 text-center text-2xl font-bold">
           {t("profile-page.card-title")}
         </CardTitle>
+        <hr />
         <div className="mb-4 flex justify-between gap-7 p-4">
-          <div className="flex items-center gap-14">
+          <div className="flex items-center gap-6 sm:gap-14">
             <Label className="mb-2 w-24">{t("profile-page.photo-label")}</Label>
             <div className="flex h-20 w-20 flex-col overflow-hidden rounded-lg bg-slate-500">
               {logo_url && (
@@ -104,42 +105,55 @@ const ProfilePage = () => {
           <Button
             variant="outline"
             size="icon"
-            className="shadow-s rounded-full border-2 border-green-600"
+            className="shadow-s rounded-full border-2 border-primary"
             onClick={handleToggleEdit}
             title="Edit Information"
           >
-            <UserRoundPen className="h-6 w-8 text-green-600" />
+            <UserRoundPen className="h-6 w-8 text-blue-600" />
           </Button>
         </div>
         <div className="space-y-9 px-4 pb-8 pt-1">
-          <div className="flex w-full justify-center">
-            <div>
-              <Controller
-                control={control}
-                name="logo_file"
-                render={({ field: { onChange } }) => {
-                  return (
-                    <CustomFileInput
-                      id="logo_file"
-                      type="file"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        onChange(file);
-                      }}
-                      ref={fileInputRef}
-                    />
-                  );
-                }}
-              />
+          {toggleEdit ? (
+            <div className="flex w-full justify-center">
+              <div>
+                <Controller
+                  control={control}
+                  name="logo_file"
+                  render={({ field: { onChange } }) => {
+                    return (
+                      <CustomFileInput
+                        id="logo_file"
+                        type="file"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          onChange(file);
+                        }}
+                        ref={fileInputRef}
+                      />
+                    );
+                  }}
+                />
+              </div>
             </div>
-          </div>
-          <div className="flex min-h-9 flex-row items-center gap-14">
-            <Label htmlFor="name" className="w-24">
+          ) : (
+            <>
+              <div className="flex flex-row items-center gap-6 sm:gap-10">
+                <Label className="mb-2 w-24">Email</Label>
+                <p className="max-w-60 overflow-hidden text-sm font-bold text-primary">
+                  {user?.email}
+                </p>
+              </div>
+              <hr className="m-0 p-0" />
+            </>
+          )}
+
+          <div className="flex min-h-9 flex-row items-center gap-10 sm:gap-14">
+            <Label htmlFor="name" className="min-w-20">
               {/* {t("profile-page.full-name-label")} */}
-              Company Name
+              Name
             </Label>
             {!toggleEdit ? (
-              <p className="font-semibold text-green-600">{company_name}</p>
+              <p className="font-semibold text-primary">{company_name}</p>
             ) : (
               <Controller
                 name="company_name"
@@ -160,7 +174,7 @@ const ProfilePage = () => {
                     <Input
                       type="text"
                       id="name"
-                      className={`max-w-56 ${errors.company_name && "border-red-500"}`}
+                      className={`w-40 sm:w-56 ${errors.company_name && "border-red-500"}`}
                       value={value}
                       onChange={onChange}
                       onBlur={onBlur}
@@ -177,12 +191,12 @@ const ProfilePage = () => {
             </div>
           )}
 
-          <div className="flex min-h-9 flex-row items-start gap-14">
-            <Label htmlFor="phoneNumber" className="mt-2 w-24">
+          <div className="flex min-h-9 flex-row items-start gap-10 sm:gap-14">
+            <Label htmlFor="phoneNumber" className="mt-2 w-20">
               {t("profile-page.phone-number-label")}
             </Label>
             {!toggleEdit ? (
-              <p className="max-w-60 overflow-hidden font-semibold text-green-600">
+              <p className="max-w-60 overflow-hidden font-semibold text-primary">
                 {phone_number}
               </p>
             ) : (
@@ -206,7 +220,7 @@ const ProfilePage = () => {
                       <Input
                         type="tel"
                         id="phoneNumber"
-                        className={`max-w-56 ${errors.phone_number && "border-red-500"}`}
+                        className={`w-40 sm:w-56 ${errors.phone_number && "border-red-500"}`}
                         value={value}
                         onChange={onChange}
                         onBlur={onBlur}
@@ -222,12 +236,12 @@ const ProfilePage = () => {
               </div>
             )}
           </div>
-          <div className="flex min-h-9 flex-row items-start gap-14">
-            <Label htmlFor="address" className="mt-2 w-24">
+          <div className="flex min-h-9 flex-row items-start gap-10 sm:gap-14">
+            <Label htmlFor="address" className="mt-2 w-20">
               მისამართი
             </Label>
             {!toggleEdit ? (
-              <p className="max-w-60 overflow-hidden font-semibold text-green-600">
+              <p className="max-w-60 overflow-hidden font-semibold text-primary">
                 {address}
               </p>
             ) : (
@@ -252,7 +266,7 @@ const ProfilePage = () => {
                         value={value}
                         onValueChange={(val) => onChange(val)}
                       >
-                        <SelectTrigger className="max-w-56">
+                        <SelectTrigger className="w-40 sm:w-56">
                           <SelectValue placeholder="Theme" />
                         </SelectTrigger>
                         <SelectContent>

@@ -17,6 +17,9 @@ export const useGetMyVacanciesList = (user_id: string) => {
   return useQuery({
     queryKey: ["get-vacancies", user_id],
     queryFn: () => getMyVacancies(user_id),
+    enabled: !!user_id,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 5 * 60 * 1000,
   });
 };
 

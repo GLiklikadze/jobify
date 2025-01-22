@@ -8,6 +8,10 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        ka: ["Noto Sans Georgian", "Arial", "sans-serif"],
+        en: ["Roboto", "Arial", "sans-serif"],
+      },
       colors: {
         customGray: "hsl(0, 0%, 50%)",
         background: "hsl(var(--background))",

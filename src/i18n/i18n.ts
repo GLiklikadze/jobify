@@ -12,6 +12,8 @@ import LoginPageEn from "@/i18n/en/pages/LoginPageEn.json";
 import LoginPageKa from "@/i18n/ka/pages/LoginPageKa.json";
 import ProfilePageEn from "@/i18n/en/pages/ProfilePageEn.json";
 import ProfilePageKa from "@/i18n/ka/pages/ProfilePageKa.json";
+import HomePageEn from "@/i18n/en/pages/HomePageEn.json";
+import HomePageKa from "@/i18n/ka/pages/HomePageKa.json";
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -22,6 +24,7 @@ i18n.use(initReactI18next).init({
         "register-page": RegisterPageKa,
         "login-page": LoginPageKa,
         "profile-page": ProfilePageKa,
+        "home-page": HomePageKa,
       },
     },
     en: {
@@ -31,6 +34,7 @@ i18n.use(initReactI18next).init({
         "register-page": RegisterPageEn,
         "login-page": LoginPageEn,
         "profile-page": ProfilePageEn,
+        "home-page": HomePageEn,
       },
     },
   },

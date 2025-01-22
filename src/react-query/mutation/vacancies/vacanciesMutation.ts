@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-query";
 
 export const useCreateVacancies = () => {
+  const queryClient = useQueryClient();
   const {
     isSuccess: createdSuccess,
     mutate: createVacanciesMutate,
@@ -19,6 +20,12 @@ export const useCreateVacancies = () => {
   } = useMutation({
     mutationKey: ["create-vacancy"],
     mutationFn: createVacancies,
+    onSuccess: () => {
+      queryClient.invalidateQueries([
+        "get-vacancies",
+        "get-filtered-vacancies",
+      ] as InvalidateQueryFilters);
+    },
   });
   return {
     createdSuccess,

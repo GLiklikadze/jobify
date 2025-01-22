@@ -20,6 +20,7 @@ import EditVacanciesPage from "./pages/my-vacancies.tsx/views/EditVacancies";
 import AboutPage from "./pages/about/AboutPage";
 import CompaniesVacancies from "./pages/companies/views/CompaniesVacancies";
 import FavoritesPage from "./pages/favorites/FavoritesPage";
+import { useTranslation } from "react-i18next";
 
 function App() {
   const { handleSetUserId, setIsLoading } = useAuthContext();
@@ -39,6 +40,19 @@ function App() {
 
     return () => subscription.unsubscribe();
   }, [handleSetUserId, setIsLoading]);
+
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    // Dynamically add a class to the body based on the current language
+    if (i18n.language === "ka") {
+      document.body.classList.add("font-geo");
+      document.body.classList.remove("font-eng");
+    } else {
+      document.body.classList.add("font-eng");
+      document.body.classList.remove("font-geo");
+    }
+  }, [i18n.language]);
 
   return (
     <ThemeProvider defaultTheme="system">
