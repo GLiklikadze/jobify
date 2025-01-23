@@ -14,6 +14,8 @@ import { AlertDestructive } from "@/components/error/errorAlert";
 import { Controller, useForm } from "react-hook-form";
 import { RegisterFormValues } from "./RegisterPage.types";
 import { useRegister } from "@/react-query/mutation/auth/authMutation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginFormSchema } from "../login/schema";
 
 const initialRegisterObj = {
   email: "",
@@ -27,6 +29,7 @@ const RegisterPage = () => {
     formState: { errors },
   } = useForm<RegisterFormValues>({
     defaultValues: initialRegisterObj,
+    resolver: zodResolver(LoginFormSchema),
     mode: "onBlur",
   });
 
@@ -39,8 +42,8 @@ const RegisterPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="my-24 flex px-4">
-      <Card className="mx-auto max-h-96 w-[30rem]">
+    <div className="flex h-[70vh] w-full items-center justify-center px-4">
+      <Card className="mx-auto min-h-96 w-[30rem]">
         <CardHeader>
           <CardTitle className="mx-auto text-2xl font-bold">
             {t("register-page.register-header")}
@@ -59,13 +62,6 @@ const RegisterPage = () => {
               <Controller
                 name="email"
                 control={control}
-                rules={{
-                  required: "email-required-error",
-                  pattern: {
-                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                    message: "email-invalid-pattern",
-                  },
-                }}
                 render={({ field: { value, onChange, onBlur } }) => {
                   return (
                     <Input

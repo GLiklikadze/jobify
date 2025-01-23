@@ -14,6 +14,8 @@ import { AlertDestructive } from "@/components/error/errorAlert";
 import { Controller, useForm } from "react-hook-form";
 import { LoginFormValues } from "./LoginPage.types";
 import { useLogin } from "@/react-query/mutation/auth/authMutation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginFormSchema } from "./schema";
 
 const initialLoginObj = {
   email: "",
@@ -26,6 +28,7 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm<LoginFormValues>({
     defaultValues: initialLoginObj,
+    resolver: zodResolver(LoginFormSchema),
     mode: "onBlur",
   });
   const { mutate, isError, error } = useLogin();
@@ -46,7 +49,6 @@ const LoginPage = () => {
           {t("login-page.login-message")}
         </CardDescription>
       </CardHeader>
-
       <CardContent>
         <div className="grid gap-4">
           <div className="grid gap-2">
@@ -54,23 +56,14 @@ const LoginPage = () => {
             <Controller
               name="email"
               control={control}
-              rules={{
-                required: "email-required-error",
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                  message: "email-invalid-pattern",
-                },
-              }}
-              render={({ field: { onChange, value, onBlur } }) => {
+              render={({ field }) => {
                 return (
                   <Input
                     id="email"
-                    value={value}
-                    onChange={onChange}
                     className={errors.email && "border-red-500"}
-                    onBlur={onBlur}
                     type="email"
                     placeholder="m@example.com"
+                    {...field}
                   />
                 );
               }}
@@ -83,10 +76,7 @@ const LoginPage = () => {
           </div>
           <div className="grid gap-2">
             <div className="flex items-center">
-              <Label htmlFor="password">
-                {" "}
-                {t("login-page.password-label")}
-              </Label>
+              <Label htmlFor="password">{t("login-page.password-label")}</Label>
               <Link
                 to=""
                 className="ml-auto inline-block text-sm text-primary underline"
@@ -97,26 +87,13 @@ const LoginPage = () => {
             <Controller
               name="password"
               control={control}
-              rules={{
-                required: "password-required-error",
-                minLength: {
-                  value: 5,
-                  message: "password-minLength-error",
-                },
-                maxLength: {
-                  value: 25,
-                  message: "password-maxLength-error",
-                },
-              }}
-              render={({ field: { onChange, value, onBlur } }) => {
+              render={({ field }) => {
                 return (
                   <Input
                     id="password"
                     type="password"
                     className={errors.password && "border-red-500"}
-                    onChange={onChange}
-                    value={value}
-                    onBlur={onBlur}
+                    {...field}
                   />
                 );
               }}
@@ -152,9 +129,8 @@ const LoginPage = () => {
       </CardContent>
     </>
   );
-
   return (
-    <div className="flex h-screen w-full items-center justify-center px-4">
+    <div className="flex h-[70vh] w-full items-center justify-center px-4">
       <Card className="mx-auto w-[30rem]">{cardContent}</Card>
     </div>
   );
