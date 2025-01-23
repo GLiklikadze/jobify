@@ -84,8 +84,8 @@ const ProfilePage = () => {
 
   return (
     <div className="mx-auto max-w-md flex-grow px-4 py-8 sm:max-w-lg">
-      <Card className="px-4 py-4">
-        <CardTitle className="mx-auto mb-2 text-center text-2xl font-bold">
+      <Card className="mt-0 px-1 pb-4 pt-0 sm:px-4">
+        <CardTitle className="mx-auto p-6 text-center text-xl font-bold">
           {t("profile-page.card-title")}
         </CardTitle>
         <hr />
@@ -112,7 +112,7 @@ const ProfilePage = () => {
             <UserRoundPen className="h-6 w-8 text-blue-600" />
           </Button>
         </div>
-        <div className="space-y-9 px-4 pb-8 pt-1">
+        <div className="space-y-7 px-4 pb-8 pt-1">
           {toggleEdit ? (
             <div className="flex w-full justify-center">
               <div>
@@ -137,9 +137,9 @@ const ProfilePage = () => {
             </div>
           ) : (
             <>
-              <div className="flex flex-row items-center gap-6 sm:gap-10">
+              <div className="flex flex-row items-center gap-6 sm:gap-12">
                 <Label className="mb-2 w-24">Email</Label>
-                <p className="max-w-60 overflow-hidden text-sm font-bold text-primary">
+                <p className="max-w-60 overflow-hidden text-xs font-bold text-primary sm:text-sm">
                   {user?.email}
                 </p>
               </div>
@@ -147,10 +147,9 @@ const ProfilePage = () => {
             </>
           )}
 
-          <div className="flex min-h-9 flex-row items-center gap-10 sm:gap-14">
+          <div className="flex min-h-9 flex-row items-center gap-10 sm:gap-16">
             <Label htmlFor="name" className="min-w-20">
-              {/* {t("profile-page.full-name-label")} */}
-              Name
+              {t("profile-page.full-name-label")}
             </Label>
             {!toggleEdit ? (
               <p className="font-semibold text-primary">{company_name}</p>
@@ -191,7 +190,7 @@ const ProfilePage = () => {
             </div>
           )}
 
-          <div className="flex min-h-9 flex-row items-start gap-10 sm:gap-14">
+          <div className="flex min-h-9 flex-row items-start gap-10 sm:gap-16">
             <Label htmlFor="phoneNumber" className="mt-2 w-20">
               {t("profile-page.phone-number-label")}
             </Label>
@@ -212,7 +211,7 @@ const ProfilePage = () => {
                     },
                     maxLength: {
                       value: 14,
-                      message: t("profile-page.phone-number-maxLength-error"),
+                      message: t("profile-page.phone-number-minLength-error"),
                     },
                   }}
                   render={({ field: { value, onChange, onBlur } }) => {
@@ -236,7 +235,7 @@ const ProfilePage = () => {
               </div>
             )}
           </div>
-          <div className="flex min-h-9 flex-row items-start gap-10 sm:gap-14">
+          <div className="flex min-h-9 flex-row items-start gap-10 sm:gap-16">
             <Label htmlFor="address" className="mt-2 w-20">
               მისამართი
             </Label>
@@ -267,12 +266,12 @@ const ProfilePage = () => {
                         onValueChange={(val) => onChange(val)}
                       >
                         <SelectTrigger className="w-40 sm:w-56">
-                          <SelectValue placeholder="Theme" />
+                          <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="tbilisi">Tbilisi</SelectItem>
-                          <SelectItem value="kutaisi">Kutaisi</SelectItem>
-                          <SelectItem value="batumi">Batumi</SelectItem>
+                          <SelectItem value="თბილისი">თბილისი</SelectItem>
+                          <SelectItem value="ქუთაისი">ქუთაისი</SelectItem>
+                          <SelectItem value="ბათუმი">ბათუმი</SelectItem>
                         </SelectContent>
                       </Select>
                     );

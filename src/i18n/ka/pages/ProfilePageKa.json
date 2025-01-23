@@ -3,7 +3,7 @@
   "photo-label": "პროფილის ფოტო",
   "tab-geo": "ქართ",
   "tab-eng": "ინგ",
-  "full-name-label": "სახელი, გვარი",
+  "full-name-label": "სახელი",
   "avatar-url-label": "ავატარის ბმული",
   "phone-number-label": "მობილური",
   "edit-button": "რედაქტირება",
@@ -17,5 +17,6 @@
   "avatar-required-error": "ავატარის ბმული სავალდებულოა",
   "phone-number-required-error": "ტელეფონის ნომერი სავალდებულოა",
   "phone-number-minLength-error": "ტელეფონის ნომერი უნდა იყოს მინიმუმ 6 სიმბოლო",
-  "phone-number-maxLength-error": "ტელეფონის ნომერი უნდა იყოს მაქსიმუმ 14 სიმბოლო"
+  "phone-number-maxLength-error": "ტელეფონის ნომერი უნდა იყოს მაქსიმუმ 14 სიმბოლო",
+  "address-required-error": "მისამართი სავალდებულოა"
 }
