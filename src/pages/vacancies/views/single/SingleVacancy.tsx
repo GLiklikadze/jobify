@@ -143,7 +143,6 @@ const SingleVacancy = () => {
               </div>
             </div>
           </Card>
-
           <Card className="h-48 w-56 p-4">
             <div className="space-y-4">
               <div>

@@ -100,9 +100,6 @@ const VacanciesPage = () => {
               )}
             />
           </div>
-
-          {/* <Search className="hidden text-primary md:flex" /> */}
-
           <img src={search_illustration} className="mx-auto h-10 w-14" />
         </div>
         <img src={data_proccesing} className="mx-auto h-28 w-28" />

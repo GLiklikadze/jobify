@@ -1,5 +1,5 @@
 import { useFilteredProfileList } from "@/react-query/query/profile/profileQuery";
-import { BriefcaseIcon, Search } from "lucide-react";
+import { BriefcaseIcon } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
@@ -10,6 +10,7 @@ import { useDebounce } from "@uidotdev/usehooks";
 import CompaniesList from "./components/CompaniesList";
 import agreement_illustration from "@/assets/voting_3ygx.svg";
 import project_team from "@/assets/agreement.svg";
+import search_illustration from "@/assets/search_vimp.svg";
 
 const searchDefaultValues = {
   searchText: "",
@@ -63,7 +64,7 @@ const CompaniesPage = () => {
             )}
           />
 
-          <Search size="2rem" className="text-primary" />
+          <img src={search_illustration} className="mx-auto h-10 w-14" />
         </div>
         <img src={project_team} className="h-32 w-36" />
       </div>

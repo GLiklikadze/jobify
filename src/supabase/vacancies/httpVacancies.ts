@@ -4,8 +4,8 @@ type createVacancies = {
   companyName: string | null;
   location: string | null;
   jobType: string | null;
-  salaryMin: string | null;
-  salaryMax: string | null;
+  salaryMin: number | null;
+  salaryMax: number | null;
   description: string | null;
   requirements: string | null;
   contactEmail: string | null;

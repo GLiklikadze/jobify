@@ -24,21 +24,32 @@ const HomePage = () => {
 
   return (
     <div className="mx-10 mt-4 space-y-10 xl:mx-60">
-      <div className="mx-auto flex max-w-5xl flex-col justify-center gap-28 px-8 py-4 md:flex-row">
-        <div className="mx-auto space-y-16">
-          <h1 className="text-pretty text-2xl font-semibold text-orange-700">
-            {t("home-page.homepage-heading")}
-          </h1>
-          <p className="text-sm font-medium text-primary">
-            {t("home-page.homepage-description")}
-          </p>
+      <section className="mx-auto max-w-6xl rounded-lg bg-blue-500 bg-opacity-15 py-12 md:py-24 lg:py-32">
+        <div className="mx-8 flex flex-col items-center gap-8 sm:mx-20 sm:flex-row">
+          <div className="space-y-6">
+            <div className="flex items-center gap-4">
+              <BriefcaseBusiness className="text-orange-700 sm:h-12 sm:w-12" />
+              <h2 className="text-xl font-bold text-primary sm:text-3xl">
+                Jobify
+              </h2>
+            </div>
+            <p className="max-w-96 text-xs text-orange-700 sm:text-lg">
+              {t("home-page.homepage-heading")}
+            </p>
+            <p className="text-foregraund max-w-96 text-justify text-[0.5rem] sm:text-xs">
+              {t("home-page.homepage-description")}
+            </p>
+          </div>
+          <img
+            src={illustration}
+            width="400"
+            height="300"
+            alt="Acme Software"
+            className="mx-auto aspect-video overflow-hidden rounded-xl object-cover opacity-85"
+          />
         </div>
-        <img
-          src={illustration}
-          className="mx-auto h-48 w-60 lg:h-[25rem] lg:w-[26rem]"
-        />
-      </div>
-      <div className="mx-auto flex max-w-5xl flex-col flex-wrap items-center justify-center gap-12 sm:flex-row">
+      </section>
+      <section className="mx-auto flex max-w-5xl flex-col flex-wrap items-center justify-center gap-12 sm:flex-row">
         {!isVacancyListError && (
           <InfoBox
             boxNumber={vacanciesListLength ?? ""}
@@ -67,9 +78,9 @@ const HomePage = () => {
         >
           <Target size="2rem" className="flex text-primary" />
         </InfoBox>
-      </div>
+      </section>
 
-      <section className="mx-auto w-full max-w-6xl rounded-md bg-blue-300 bg-opacity-30 px-4 pb-16 pt-12 dark:bg-blue-900 dark:bg-opacity-35">
+      <section className="mx-auto w-full max-w-6xl rounded-md bg-blue-500 bg-opacity-15 px-4 pb-16 pt-12">
         <h2 className="mb-12 text-center text-2xl font-bold text-primary">
           How Jobify Works
         </h2>

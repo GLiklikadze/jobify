@@ -42,8 +42,8 @@ export type VacancyType = {
   qualifications: string | null;
   requirements: string | null;
   responsibilities: string | null;
-  salaryMax: string | null;
-  salaryMin: string | null;
+  salaryMax: number | null;
+  salaryMin: number | null;
   title: string | null;
   user_id: string | null;
   profiles?: profileResponse | null;

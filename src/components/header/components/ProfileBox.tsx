@@ -4,8 +4,13 @@ import { UserRound } from "lucide-react";
 
 const ProfileBox = () => {
   const { user } = useAuthContext();
-  const { data: profileInfo } = useProfileInfo(user?.id ?? "");
+  const {
+    data: profileInfo,
+    isLoading,
+    isError,
+  } = useProfileInfo(user?.id ?? "");
 
+  const companyName = !isLoading && !isError && profileInfo?.company_name;
   return (
     <div className="border-foregraund flex h-12 max-w-56 cursor-pointer flex-row items-center space-x-2 rounded-2xl border-2 bg-secondary px-2 py-1">
       {profileInfo?.logo_url ? (
@@ -20,8 +25,7 @@ const ProfileBox = () => {
       )}
       <div className="text-xs text-primary">
         <div className="font-bold dark:text-primary-foreground">
-          {" "}
-          {profileInfo?.company_name}
+          {companyName}
         </div>
         <div className="font-semibold">{user?.email}</div>
       </div>
