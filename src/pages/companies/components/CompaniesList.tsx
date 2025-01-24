@@ -42,7 +42,7 @@ const CompaniesList: React.FC<CompaniesListProps> = ({ filteredProfiles }) => {
               </div>
               <p className="flex flex-row gap-2">
                 <Briefcase size="1.2rem" className="text-orange-700" />
-                <span className="font-extrabold text-primary">
+                <span className="font-bold text-primary">
                   {company?.vacancies?.length}
                 </span>
               </p>

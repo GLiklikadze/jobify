@@ -26,17 +26,27 @@ export const useGetMyVacanciesList = (user_id: string) => {
 export const useGetFilteredVacanciesList = (
   debouncedVacancyText: string,
   debouncedCompanyText: string,
+  isAscSorted: boolean,
+  searchAddress: string,
+  searchCategory: string,
 ) => {
+  console.log("query", isAscSorted);
   return useQuery({
     queryKey: [
       "get-filtered-vacancies",
       debouncedVacancyText,
       debouncedCompanyText,
+      isAscSorted,
+      searchAddress,
+      searchCategory,
     ],
     queryFn: () =>
       getFilteredVacancies(
         debouncedVacancyText ?? "",
         debouncedCompanyText ?? "",
+        isAscSorted,
+        searchAddress,
+        searchCategory,
       ),
     staleTime: 5 * 60 * 1000,
     gcTime: 5 * 60 * 1000,

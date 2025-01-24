@@ -1,4 +1,5 @@
 import { supabase } from "../supabaseClient";
+import { FavoriteHttpProps } from "./httpFavorites.types";
 
 export const getFavoriteVacancies = async (user_id: string) => {
   try {
@@ -17,11 +18,6 @@ export const getFavoriteVacancies = async (user_id: string) => {
     console.error("Error fetching favorite vacancies:", error);
     return null;
   }
-};
-
-type FavoriteHttpProps = {
-  vacancyId: number;
-  profileId: string;
 };
 
 export const addToFavorites = async ({

@@ -7,11 +7,12 @@ const FavoritesPage = () => {
   const { data: favoriteVacanciesList } = useFavoriteList(user?.id ?? "");
   console.log(favoriteVacanciesList);
   return (
-    <div className="mx-auto space-y-8 px-4">
-      <div className="mx-auto">
-        <h1 className="text-center text-2xl font-bold text-primary">
-          Favorites List
-        </h1>
+    <div className="mx-auto space-y-4 px-4">
+      <div className="mx-auto flex">
+        <h1 className="text-2xl font-bold text-primary">Favorites List</h1>
+        <div className="text-xl text-orange-700">
+          {favoriteVacanciesList?.length}
+        </div>
       </div>
       <VacancyList vacanciesList={favoriteVacanciesList as VacancyType[]} />
     </div>

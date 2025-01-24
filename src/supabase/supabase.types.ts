@@ -81,6 +81,7 @@ export type Database = {
       vacancies: {
         Row: {
           benefits: string | null
+          category: string | null
           companyName: string | null
           contactEmail: string | null
           created_at: string
@@ -98,6 +99,7 @@ export type Database = {
         }
         Insert: {
           benefits?: string | null
+          category?: string | null
           companyName?: string | null
           contactEmail?: string | null
           created_at?: string
@@ -115,6 +117,7 @@ export type Database = {
         }
         Update: {
           benefits?: string | null
+          category?: string | null
           companyName?: string | null
           contactEmail?: string | null
           created_at?: string

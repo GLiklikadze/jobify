@@ -28,17 +28,18 @@ const EditVacanciesPage = () => {
     if (isGetVacancySuccess && singleVacancy) {
       form.reset({
         title: singleVacancy.title ?? "",
-        companyName: singleVacancy.companyName ?? "",
+        // companyName: singleVacancy.companyName ?? "",
         location: singleVacancy.location ?? "",
         jobType: singleVacancy.jobType ?? "",
         salaryMin: singleVacancy.salaryMin ?? 0,
         salaryMax: singleVacancy.salaryMax ?? 0,
-        contactEmail: singleVacancy.contactEmail ?? "",
+        // contactEmail: singleVacancy.contactEmail ?? "",
         requirements: singleVacancy.requirements ?? "",
         description: singleVacancy.description ?? "",
         benefits: singleVacancy.benefits ?? "",
         qualifications: singleVacancy.qualifications ?? "",
         responsibilities: singleVacancy.responsibilities ?? "",
+        category: singleVacancy.category ?? "",
       });
     }
   }, [isGetVacancySuccess, singleVacancy, form]);

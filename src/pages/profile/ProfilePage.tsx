@@ -248,22 +248,11 @@ const ProfilePage = () => {
                 <Controller
                   name="address"
                   control={control}
-                  rules={{
-                    required: t("profile-page.phone-number-required-error"),
-                    minLength: {
-                      value: 6,
-                      message: t("profile-page.phone-number-minLength-error"),
-                    },
-                    maxLength: {
-                      value: 14,
-                      message: t("profile-page.phone-number-maxLength-error"),
-                    },
-                  }}
-                  render={({ field: { value, onChange } }) => {
+                  render={({ field }) => {
                     return (
                       <Select
-                        value={value}
-                        onValueChange={(val) => onChange(val)}
+                        {...field}
+                        onValueChange={(val) => field.onChange(val)}
                       >
                         <SelectTrigger className="w-40 sm:w-56">
                           <SelectValue />

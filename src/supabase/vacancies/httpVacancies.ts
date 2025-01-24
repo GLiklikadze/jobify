@@ -1,22 +1,10 @@
 import { supabase } from "../supabaseClient";
-type createVacancies = {
-  title: string | null;
-  companyName: string | null;
-  location: string | null;
-  jobType: string | null;
-  salaryMin: number | null;
-  salaryMax: number | null;
-  description: string | null;
-  requirements: string | null;
-  contactEmail: string | null;
-  qualifications: string | null;
-  benefits: string | null;
-  responsibilities: string | null;
-};
+import { CreateVacanciesType } from "./httpVacancies.types";
+
 export const createVacancies = async ({
   formValues,
 }: {
-  formValues: createVacancies;
+  formValues: CreateVacanciesType;
 }) => {
   console.log(formValues);
   try {
@@ -67,13 +55,20 @@ export const getMyVacancies = async (user_id: string) => {
 export const getFilteredVacancies = async (
   debouncedVacancyText: string,
   debouncedCompanyText: string,
+  isAscSorted: boolean,
+  searchAddress: string,
+  searchCategory: string,
 ) => {
+  console.log(111, searchAddress);
   try {
     const { data, error } = await supabase
       .from("vacancies")
       .select(`*, profiles(*), favorites(*)`)
       .ilike("title", `%${debouncedVacancyText}%`)
       .ilike("companyName", `%${debouncedCompanyText}%`)
+      .ilike("location", `%${searchAddress}%`)
+      .ilike("category", `%${searchCategory}%`)
+      .order("created_at", { ascending: isAscSorted })
       .throwOnError();
     console.log(data);
     if (error) {
@@ -107,7 +102,7 @@ export const EditVacancy = async ({
   formValues,
   id,
 }: {
-  formValues: createVacancies;
+  formValues: CreateVacanciesType;
   id: string;
 }) => {
   try {
@@ -115,14 +110,14 @@ export const EditVacancy = async ({
       .from("vacancies")
       .update({
         title: formValues?.title,
-        companyName: formValues?.companyName,
+        category: formValues?.category,
         location: formValues?.location,
         jobType: formValues?.jobType,
         salaryMin: formValues?.salaryMin,
-        salaryMax: formValues?.salaryMin,
+        salaryMax: formValues?.salaryMax,
         description: formValues?.description,
         requirements: formValues?.requirements,
-        contactEmail: formValues?.contactEmail,
+        // contactEmail: formValues?.contactEmail,
         qualifications: formValues?.qualifications,
         benefits: formValues?.benefits,
         responsibilities: formValues?.responsibilities,

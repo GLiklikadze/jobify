@@ -128,7 +128,7 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
           <div className="flex flex-col space-y-2">
             <div className="flex flex-row items-center gap-2 text-sm">
               <Building2 size="1rem" className="text-primary" />
-              <span>{vacancy?.companyName || "Unknown"}</span>
+              <span>{vacancy?.profiles?.company_name || "Unknown"}</span>
             </div>
 
             <div className="flex flex-row items-center space-x-2">
@@ -155,12 +155,8 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
             <div className="flex flex-col items-start gap-1 text-xs sm:flex-row">
               <p className="flex space-x-1">
                 <MapPin className="inline-flex text-primary" size="1rem" />
-                <span> საქართველო, {vacancy?.location}</span>
+                <span> Georgia, {vacancy?.location}</span>
               </p>
-              {/* <p className="flex space-x-2">
-                <Clock4 size="1rem" className="inline-flex text-primary" />
-                <span>{vacancy?.jobType}</span>
-              </p> */}
               <p className="flex space-x-2 text-xs">
                 <span className="ml-[0.1rem] text-[1rem] font-normal text-primary">
                   ₾

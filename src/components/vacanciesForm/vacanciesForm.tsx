@@ -49,34 +49,43 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
             />
             <FormField
               control={form.control}
-              name="companyName"
-              render={({ field }) => (
+              name="category"
+              render={({ field: { value, onChange } }) => (
                 <FormItem>
-                  <FormLabel>Company Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Facebook"
-                      {...field}
-                      value={field.value ?? ""}
-                    />
-                  </FormControl>
+                  <FormLabel>Category</FormLabel>
+                  <Select
+                    value={value}
+                    onValueChange={(val) => onChange(val === "none" ? "" : val)}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select category" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="none">None</SelectItem>
+                      <SelectItem value="Finance">Finance</SelectItem>
+                      <SelectItem value="Marketing">Marketing</SelectItem>
+                      <SelectItem value="Sales">Sales</SelectItem>
+                      <SelectItem value="IT">IT</SelectItem>
+                      <SelectItem value="Medicine">Medicine</SelectItem>
+                      <SelectItem value="Education">Education</SelectItem>
+                      <SelectItem value="Other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
-
           <div className="grid gap-4 md:grid-cols-2">
             <FormField
               control={form.control}
               name="location"
-              render={({ field }) => (
+              render={({ field: { value, onChange } }) => (
                 <FormItem>
                   <FormLabel>Location</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value ?? ""}
-                  >
+                  <Select value={value} onValueChange={(val) => onChange(val)}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select Location" />
@@ -85,8 +94,8 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
                     <SelectContent>
                       <SelectItem value="Tbilisi">Tbilisi</SelectItem>
                       <SelectItem value="Kutaisi">Kutaisi</SelectItem>
-                      <SelectItem value="batumi">Batumi</SelectItem>
-                      <SelectItem value="remote">Remote Job</SelectItem>
+                      <SelectItem value="Batumi">Batumi</SelectItem>
+                      <SelectItem value="Other">Other</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -96,23 +105,20 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
             <FormField
               control={form.control}
               name="jobType"
-              render={({ field }) => (
+              render={({ field: { value, onChange } }) => (
                 <FormItem>
                   <FormLabel>Employment Type</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value ?? ""}
-                  >
+                  <Select value={value} onValueChange={(val) => onChange(val)}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select employment type" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="full-time">Full-time</SelectItem>
-                      <SelectItem value="part-time">Part-time</SelectItem>
-                      <SelectItem value="contract">Contract</SelectItem>
-                      <SelectItem value="freelance">Freelance</SelectItem>
+                      <SelectItem value="Full-time">Full-time</SelectItem>
+                      <SelectItem value="Part-time">Part-time</SelectItem>
+                      <SelectItem value="Contract">Contract</SelectItem>
+                      <SelectItem value="Freelance">Freelance</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -276,32 +282,6 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
               </FormItem>
             )}
           />
-        </div>
-
-        <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-primary">
-            Additional Information
-          </h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            <FormField
-              control={form.control}
-              name="contactEmail"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Contact Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Contact Email"
-                      type="email"
-                      {...field}
-                      value={field.value ?? ""}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
         </div>
         <Button type="submit" className="w-full">
           Create Job Posting

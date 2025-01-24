@@ -1,11 +1,11 @@
 export const vacanciesFormDefaultValues = {
   title: "",
-  companyName: "",
+  category: "",
   location: "",
   jobType: "",
   salaryMin: 0,
   salaryMax: 0,
-  contactEmail: "",
+  // contactEmail: "",
   requirements: "",
   description: "",
   benefits: "",

@@ -33,10 +33,10 @@ const HomePage = () => {
                 Jobify
               </h2>
             </div>
-            <p className="max-w-96 text-xs text-orange-700 sm:text-lg">
+            <p className="max-w-96 text-xs font-medium text-orange-700 sm:text-lg">
               {t("home-page.homepage-heading")}
             </p>
-            <p className="text-foregraund max-w-96 text-justify text-[0.5rem] sm:text-xs">
+            <p className="text-foregraund max-w-96 text-justify text-[0.5rem] font-medium text-primary sm:text-xs">
               {t("home-page.homepage-description")}
             </p>
           </div>
