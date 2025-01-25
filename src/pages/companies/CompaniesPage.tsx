@@ -49,7 +49,7 @@ const CompaniesPage = () => {
     }
   }, [isSuccess, debouncedText, setSearchParams]);
   return (
-    <div className="mx-10 xl:mx-60">
+    <div className="mx-10 min-h-[30rem] xl:mx-60">
       <div className="mx-auto mb-12 flex max-w-4xl flex-col items-center justify-between gap-2 md:mb-4 md:flex-row">
         <img src={agreement_illustration} className="h-32 w-36" />
         <div className="mx-auto flex h-24 max-w-xl flex-row items-center gap-4 rounded-md border-2 border-primary p-4 lg:w-96">

@@ -137,7 +137,7 @@ const ProfilePage = () => {
             </div>
           ) : (
             <>
-              <div className="flex flex-row items-center gap-6 sm:gap-12">
+              <div className="flex flex-row items-center gap-8 sm:gap-16">
                 <Label className="mb-2 w-24">Email</Label>
                 <p className="max-w-60 overflow-hidden text-xs font-bold text-primary sm:text-sm">
                   {user?.email}
@@ -147,8 +147,8 @@ const ProfilePage = () => {
             </>
           )}
 
-          <div className="flex min-h-9 flex-row items-center gap-10 sm:gap-16">
-            <Label htmlFor="name" className="min-w-20">
+          <div className="bg-red flex min-h-9 flex-row items-center gap-8 sm:gap-16">
+            <Label htmlFor="name" className="w-24">
               {t("profile-page.full-name-label")}
             </Label>
             {!toggleEdit ? (
@@ -190,8 +190,8 @@ const ProfilePage = () => {
             </div>
           )}
 
-          <div className="flex min-h-9 flex-row items-start gap-10 sm:gap-16">
-            <Label htmlFor="phoneNumber" className="mt-2 w-20">
+          <div className="flex min-h-9 flex-row items-start gap-8 sm:gap-16">
+            <Label htmlFor="phoneNumber" className="mt-2 w-24">
               {t("profile-page.phone-number-label")}
             </Label>
             {!toggleEdit ? (
@@ -235,9 +235,9 @@ const ProfilePage = () => {
               </div>
             )}
           </div>
-          <div className="flex min-h-9 flex-row items-start gap-10 sm:gap-16">
-            <Label htmlFor="address" className="mt-2 w-20">
-              მისამართი
+          <div className="flex min-h-9 flex-row items-start gap-8 sm:gap-16">
+            <Label htmlFor="address" className="mt-2 w-24">
+              Location
             </Label>
             {!toggleEdit ? (
               <p className="max-w-60 overflow-hidden font-semibold text-primary">
@@ -248,19 +248,20 @@ const ProfilePage = () => {
                 <Controller
                   name="address"
                   control={control}
-                  render={({ field }) => {
+                  render={({ field: { value, onChange } }) => {
                     return (
                       <Select
-                        {...field}
-                        onValueChange={(val) => field.onChange(val)}
+                        value={value}
+                        onValueChange={(val) => onChange(val)}
                       >
                         <SelectTrigger className="w-40 sm:w-56">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="თბილისი">თბილისი</SelectItem>
-                          <SelectItem value="ქუთაისი">ქუთაისი</SelectItem>
-                          <SelectItem value="ბათუმი">ბათუმი</SelectItem>
+                          <SelectItem value="Tbilisi">Tbilisi</SelectItem>
+                          <SelectItem value="Kutaisi">Kutaisi</SelectItem>
+                          <SelectItem value="Batumi">Batumi</SelectItem>
+                          <SelectItem value="Other">Other</SelectItem>
                         </SelectContent>
                       </Select>
                     );

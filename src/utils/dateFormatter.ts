@@ -18,17 +18,21 @@ export const getFormattedDate = (date: string) => {
   //     dd: "%d დღე",
   //   },
   // });
-  const dateNow = dayjs();
+  // const dateNow = dayjs();
   const givenDate = dayjs(date);
 
-  const hoursdifference = dateNow.diff(givenDate, "hours");
+  // const hoursdifference = dateNow.diff(givenDate, "hours");
 
   if (date) {
-    if (hoursdifference < 24) {
-      return givenDate.from(dateNow);
-    } else {
-      return givenDate.format("DD/MM/YYYY - HH:mm");
-    }
+    return givenDate.format("DD/MM/YYYY - HH:mm");
+  } else {
+    return "Date Not found";
   }
-  return "Date Not found";
 };
+// if (date) {
+//   if (hoursdifference < 24) {
+//     return givenDate.from(dateNow);
+//   } else {
+//     return givenDate.format("DD/MM/YYYY - HH:mm");
+//   }
+// }

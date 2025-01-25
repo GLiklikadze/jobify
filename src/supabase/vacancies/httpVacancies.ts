@@ -59,7 +59,6 @@ export const getFilteredVacancies = async (
   searchAddress: string,
   searchCategory: string,
 ) => {
-  console.log(111, searchAddress);
   try {
     const { data, error } = await supabase
       .from("vacancies")

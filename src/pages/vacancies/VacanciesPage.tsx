@@ -20,6 +20,9 @@ import {
 } from "@/components/ui/select";
 
 import SortButton from "./components/SortButton";
+import { AlertDestructive } from "@/components/error/errorAlert";
+import LoadingSkeletonList from "@/components/loading/LoadingSkeletonList";
+import { searchObjType } from "./VacanciesPage.types";
 
 const searchDefaultValues = {
   searchVacancy: "",
@@ -29,13 +32,6 @@ const searchDefaultValues = {
   category: "",
 };
 
-type searchObjType = {
-  searchVacancy: string;
-  searchCompany: string;
-  sortOrder: "asc" | "desc";
-  address: string;
-  category: string;
-};
 const VacanciesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams(searchDefaultValues);
   const parsedQueryParams = qs.parse(searchParams.toString()) as searchObjType;
@@ -60,7 +56,13 @@ const VacanciesPage = () => {
   const debouncedVacancyText = useDebounce(searchVacancy, 600);
   const debouncedCompanyText = useDebounce(searchCompany, 600);
 
-  const { data: vacanciesList, isSuccess } = useGetFilteredVacanciesList(
+  const {
+    data: vacanciesList,
+    isSuccess,
+    isLoading,
+    isError,
+    error,
+  } = useGetFilteredVacanciesList(
     debouncedVacancyText,
     debouncedCompanyText,
     getSortBoolean(sortOrder),
@@ -105,7 +107,7 @@ const VacanciesPage = () => {
   ]);
 
   return (
-    <div className="mx-8 mt-4 space-y-1">
+    <div className="mx-4 mt-4 space-y-1">
       <div className="mx-auto flex max-w-4xl flex-col-reverse justify-start gap-2 md:flex-row">
         <img src={vacancy_illustration} className="mx-auto h-28 w-28" />
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-4 rounded-md border-2 border-primary p-4 sm:flex-row md:mx-0 md:mb-8 md:h-36">
@@ -226,7 +228,19 @@ const VacanciesPage = () => {
             toggleSortOrder={toggleSortOrder}
           />
         </div>
-        <VacancyList vacanciesList={vacanciesList ?? []} />
+        {!isLoading ? (
+          <VacancyList vacanciesList={vacanciesList ?? []} />
+        ) : (
+          <LoadingSkeletonList />
+        )}
+        {isError && (
+          <div className="mx-auto max-w-md">
+            <AlertDestructive
+              alertTitle="Sorry Could Not Fetch Vacancies"
+              alertDescription={error.message}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

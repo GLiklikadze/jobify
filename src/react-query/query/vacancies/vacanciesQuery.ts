@@ -30,7 +30,6 @@ export const useGetFilteredVacanciesList = (
   searchAddress: string,
   searchCategory: string,
 ) => {
-  console.log("query", isAscSorted);
   return useQuery({
     queryKey: [
       "get-filtered-vacancies",

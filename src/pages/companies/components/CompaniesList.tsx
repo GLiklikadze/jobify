@@ -8,7 +8,7 @@ const CompaniesList: React.FC<CompaniesListProps> = ({ filteredProfiles }) => {
       {filteredProfiles?.map((company: ProfileResponse) => (
         <CompanyBox key={company?.id} company_id={company?.id}>
           <div className="mx-auto flex flex-col gap-4 sm:flex-row">
-            <div className="mx-auto h-24 w-28 overflow-hidden rounded-lg bg-blue-100 sm:mx-0">
+            <div className="mx-auto h-20 w-24 overflow-hidden rounded-lg bg-blue-100 sm:mx-0">
               <img
                 src={`https://gimdvoaobxziodrpnvkh.supabase.co/storage/v1/object/public/${company?.logo_url}`}
                 alt="logo"
@@ -34,18 +34,18 @@ const CompaniesList: React.FC<CompaniesListProps> = ({ filteredProfiles }) => {
               </div>
               <div className="flex flex-row gap-4">
                 <p className="flex flex-row gap-2">
+                  <Briefcase size="1.2rem" className="text-orange-700" />
+                  <span className="font-semibold text-primary">
+                    {company?.vacancies?.length}
+                  </span>
+                </p>
+                <p className="flex flex-row gap-2">
                   <Mail size="1.2rem" className="text-orange-700" />
                   <span className="text-primary">
                     {company?.vacancies?.[0]?.contactEmail}
                   </span>
                 </p>
               </div>
-              <p className="flex flex-row gap-2">
-                <Briefcase size="1.2rem" className="text-orange-700" />
-                <span className="font-bold text-primary">
-                  {company?.vacancies?.length}
-                </span>
-              </p>
             </div>
           </div>
         </CompanyBox>

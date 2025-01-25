@@ -13,6 +13,7 @@ import {
 import InfoBox from "./components/InfoBox";
 import { useTranslation } from "react-i18next";
 import HowWorksBox from "./components/HowWorksBox";
+import { Link, useParams } from "react-router-dom";
 
 const HomePage = () => {
   const { data: vacanciesList, isError: isVacancyListError } =
@@ -21,7 +22,7 @@ const HomePage = () => {
   const vacanciesListLength = vacanciesList?.length;
   const businessProfileListLength = profilesList?.length;
   const { t } = useTranslation();
-
+  const { lang } = useParams();
   return (
     <div className="mx-10 mt-4 space-y-10 xl:mx-60">
       <section className="mx-auto max-w-6xl rounded-lg bg-blue-500 bg-opacity-15 py-12 md:py-24 lg:py-32">
@@ -50,22 +51,22 @@ const HomePage = () => {
         </div>
       </section>
       <section className="mx-auto flex max-w-5xl flex-col flex-wrap items-center justify-center gap-12 sm:flex-row">
-        {!isVacancyListError && (
+        <Link to={`/${lang}/vacancies`}>
           <InfoBox
-            boxNumber={vacanciesListLength ?? ""}
+            boxNumber={(!isVacancyListError && vacanciesListLength) || ""}
             boxName={t("home-page.homePage-job-box-name")}
           >
             <BriefcaseBusiness size="2rem" className="flex text-primary" />
           </InfoBox>
-        )}
-        {!isProfileListError && (
+        </Link>
+        <Link to={`/${lang}/companies`}>
           <InfoBox
-            boxNumber={businessProfileListLength ?? ""}
+            boxNumber={(!isProfileListError && businessProfileListLength) || ""}
             boxName={t("home-page.homePage-company-box-name")}
           >
             <Building2 size="2rem" className="flex text-primary" />
           </InfoBox>
-        )}
+        </Link>
         <InfoBox
           boxNumber="10"
           boxName={t("home-page.homePage-job-staffed-name")}

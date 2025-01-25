@@ -1,7 +1,13 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button/button";
 import { Card } from "@/components/ui/card";
-import { Calendar, MapPin, Copy, CircleChevronLeft } from "lucide-react";
+import {
+  Calendar,
+  MapPin,
+  Copy,
+  CircleChevronLeft,
+  Component,
+} from "lucide-react";
 import { Badge } from "@/components/ui/badge/badge";
 import { useGetSingleVacancy } from "@/react-query/query/vacancies/vacanciesQuery";
 import { getFormattedDate } from "@/utils/dateFormatter";
@@ -32,7 +38,7 @@ const SingleVacancy = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-6xl space-y-6 p-8">
+    <div className="container mx-auto max-w-6xl space-y-6 p-8 text-xs">
       <Button
         variant="outline"
         className="mb-4 text-primary"
@@ -45,7 +51,7 @@ const SingleVacancy = () => {
       <div className="grid gap-6 md:grid-cols-[1fr_300px]">
         {/* Main Content */}
         <div className="space-y-6">
-          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row">
+          <div className="flex flex-col items-start justify-between gap-4 rounded-md border-2 p-6 sm:flex-row">
             <div className="flex flex-row gap-4">
               <div className="h-24 w-28 overflow-hidden rounded-lg bg-blue-100">
                 <img
@@ -54,13 +60,19 @@ const SingleVacancy = () => {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <div className="flex-1">
-                <div className="mb-2 flex items-center gap-3">
-                  <h1 className="text-2xl font-bold">{singleVacancy?.title}</h1>
+              <div className="flex-1 space-y-2">
+                <div className="mb-2 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+                  <h1 className="font-bold md:text-2xl">
+                    {singleVacancy?.title}
+                  </h1>
                   <Badge variant="default" className="whitespace-nowrap">
                     {singleVacancy?.jobType}
                   </Badge>
                 </div>
+                <p className="flex flex-row items-center gap-2">
+                  <Component size="1rem" className="text-primary" />{" "}
+                  {singleVacancy?.category}
+                </p>
                 <p className="text-muted-foreground">
                   at{" "}
                   <Link
@@ -73,7 +85,7 @@ const SingleVacancy = () => {
               </div>
             </div>
             <Button
-              className="mx-auto w-60 bg-primary sm:mx-0 sm:w-36"
+              className="mx-auto w-40 bg-primary text-xs sm:mx-0 sm:w-36"
               onClick={handleEmailClick}
             >
               Apply Now <span className="ml-2">→</span>
@@ -84,7 +96,7 @@ const SingleVacancy = () => {
             <section>
               <h2 className="mb-3 text-lg font-semibold">Job Description</h2>
               <div className="space-y-4 text-muted-foreground">
-                <p>xxx</p>
+                {singleVacancy?.description ?? ""}
               </div>
             </section>
 
@@ -147,7 +159,7 @@ const SingleVacancy = () => {
             <div className="space-y-4">
               <div>
                 <h2 className="mb-2 font-semibold">Salary (USD)</h2>
-                <p className="text-lg text-green-600">
+                <p className="text-base text-green-600 sm:text-lg">
                   {singleVacancy?.salaryMin} - {singleVacancy?.salaryMax} ₾
                 </p>
               </div>

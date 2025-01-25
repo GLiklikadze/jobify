@@ -3,6 +3,10 @@ import { initReactI18next } from "react-i18next";
 
 import HeaderEn from "@/i18n/en/components/HeaderEn.json";
 import HeaderKa from "@/i18n/ka/components/HeaderKa.json";
+import VacancyBoxInfoEn from "@/i18n/en/components/VacancyBoxInfoEn.json";
+import VacancyBoxInfoKa from "@/i18n/ka/components/VacancyBoxInfoKa.json";
+import SortButtonEn from "@/i18n/en/components/SortButtonEn.json";
+import SortButtonKa from "@/i18n/ka/components/SortButtonKa.json";
 
 import modeToggleEn from "@/i18n/en/components/modeToggleEn.json";
 import modeToggleKa from "@/i18n/ka/components/modeToggleKa.json";
@@ -25,6 +29,8 @@ i18n.use(initReactI18next).init({
         "login-page": LoginPageKa,
         "profile-page": ProfilePageKa,
         "home-page": HomePageKa,
+        "vacancy-box-info": VacancyBoxInfoKa,
+        "sort-button": SortButtonKa,
       },
     },
     en: {
@@ -35,6 +41,8 @@ i18n.use(initReactI18next).init({
         "login-page": LoginPageEn,
         "profile-page": ProfilePageEn,
         "home-page": HomePageEn,
+        "vacancy-box-info": VacancyBoxInfoEn,
+        "sort-button": SortButtonEn,
       },
     },
   },

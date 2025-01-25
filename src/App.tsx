@@ -1,26 +1,36 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { ThemeProvider } from "./components/header/components/theme/theme-provider";
-import RootLayout from "./components/layout/RootLayout";
-import VacanciesPage from "./pages/vacancies/VacanciesPage";
-import RegisterPage from "./pages/register/RegisterPage";
-import LoginPage from "./pages/login/LoginPage";
-import { useEffect } from "react";
-import { supabase } from "./supabase/supabaseClient";
+import { ThemeProvider } from "@/components/header/components/theme/theme-provider";
+import { lazy, Suspense, useEffect } from "react";
+import { supabase } from "@/supabase/supabaseClient";
 import { useAuthContext } from "./context/hooks/useAuthContext";
-import IsAuthGuard from "./route-guards/isAuthGuard";
-import ProfilePage from "./pages/profile/ProfilePage";
-import IsUnAuthGuard from "./route-guards/isUnAuthGuard";
-import AddVacanciesPage from "./pages/add-vacancies/AddVacanciesPage";
-import CompaniesPage from "./pages/companies/CompaniesPage";
-import SingleVacancy from "./pages/vacancies/views/single/SingleVacancy";
-import HomePage from "./pages/home/HomePage";
-import MyVacancies from "./pages/my-vacancies.tsx/MyVacancies";
-import ErrorPage from "./pages/error/ErrorPage";
-import EditVacanciesPage from "./pages/my-vacancies.tsx/views/EditVacancies";
-import AboutPage from "./pages/about/AboutPage";
-import CompaniesVacancies from "./pages/companies/views/CompaniesVacancies";
-import FavoritesPage from "./pages/favorites/FavoritesPage";
 import { useTranslation } from "react-i18next";
+import { Spinner } from "./components/loading/LoadingSpinner";
+import RootLayout from "@/components/layout/RootLayout";
+import IsAuthGuard from "@/route-guards/isAuthGuard";
+import IsUnAuthGuard from "@/route-guards/isUnAuthGuard";
+
+const VacanciesPage = lazy(() => import("@/pages/vacancies/VacanciesPage"));
+const RegisterPage = lazy(() => import("@/pages/register/RegisterPage"));
+const LoginPage = lazy(() => import("@/pages/login/LoginPage"));
+const ProfilePage = lazy(() => import("@/pages/profile/ProfilePage"));
+const AddVacanciesPage = lazy(
+  () => import("@/pages/add-vacancies/AddVacanciesPage"),
+);
+const CompaniesPage = lazy(() => import("@/pages/companies/CompaniesPage"));
+const SingleVacancy = lazy(
+  () => import("@/pages/vacancies/views/single/SingleVacancy"),
+);
+const HomePage = lazy(() => import("@/pages/home/HomePage"));
+const MyVacancies = lazy(() => import("@/pages/my-vacancies/MyVacancies"));
+const ErrorPage = lazy(() => import("@/pages/error/ErrorPage"));
+const EditVacanciesPage = lazy(
+  () => import("@/pages/my-vacancies/views/EditVacancies"),
+);
+const AboutPage = lazy(() => import("@/pages/about/AboutPage"));
+const CompaniesVacancies = lazy(
+  () => import("@/pages/companies/views/CompaniesVacancies"),
+);
+const FavoritesPage = lazy(() => import("@/pages/favorites/FavoritesPage"));
 
 function App() {
   const { handleSetUserId, setIsLoading } = useAuthContext();
@@ -44,7 +54,6 @@ function App() {
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    // Dynamically add a class to the body based on the current language
     if (i18n.language === "ka") {
       document.body.classList.add("font-geo");
       document.body.classList.remove("font-eng");
@@ -58,29 +67,124 @@ function App() {
     <ThemeProvider defaultTheme="system">
       <Routes>
         <Route path="/:lang" element={<RootLayout />}>
-          <Route path="home" element={<HomePage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="vacancies" element={<VacanciesPage />} />
-          <Route path="vacancies/:vac_id" element={<SingleVacancy />} />
-          <Route path="my-vacancies" element={<MyVacancies />} />
-          <Route path="favorites" element={<FavoritesPage />} />
-          <Route path="add-vacancies" element={<AddVacanciesPage />} />
-          <Route path="edit-vacancies/:id" element={<EditVacanciesPage />} />
-          <Route path="companies" element={<CompaniesPage />} />
+          <Route
+            path="home"
+            element={
+              <Suspense fallback={<Spinner size="large" />}>
+                <HomePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="about"
+            element={
+              <Suspense fallback={<Spinner size="large" />}>
+                <AboutPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="vacancies"
+            element={
+              <Suspense fallback={<Spinner size="large" />}>
+                <VacanciesPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="vacancies/:vac_id"
+            element={
+              <Suspense fallback={<Spinner size="large" />}>
+                <SingleVacancy />
+              </Suspense>
+            }
+          />
+          <Route
+            path="my-vacancies"
+            element={
+              <Suspense fallback={<Spinner size="large" />}>
+                <MyVacancies />
+              </Suspense>
+            }
+          />
+          <Route
+            path="favorites"
+            element={
+              <Suspense fallback={<Spinner size="large" />}>
+                <FavoritesPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="add-vacancies"
+            element={
+              <Suspense fallback={<Spinner size="large" />}>
+                <AddVacanciesPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="edit-vacancies/:id"
+            element={
+              <Suspense fallback={<Spinner size="large" />}>
+                <EditVacanciesPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="companies"
+            element={
+              <Suspense fallback={<Spinner size="large" />}>
+                <CompaniesPage />
+              </Suspense>
+            }
+          />
           <Route
             path="companies/:company_id"
-            element={<CompaniesVacancies />}
+            element={
+              <Suspense fallback={<Spinner size="large" />}>
+                <CompaniesVacancies />
+              </Suspense>
+            }
           />
           <Route element={<IsAuthGuard />}>
-            <Route path="register" element={<RegisterPage />} />
-            <Route path="login" element={<LoginPage />} />
+            <Route
+              path="register"
+              element={
+                <Suspense fallback={<Spinner size="large" />}>
+                  <RegisterPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <Suspense fallback={<Spinner size="large" />}>
+                  <LoginPage />
+                </Suspense>
+              }
+            />
           </Route>
           <Route element={<IsUnAuthGuard />}>
-            <Route path="profile" element={<ProfilePage />} />
+            <Route
+              path="profile"
+              element={
+                <Suspense fallback={<Spinner size="large" />}>
+                  <ProfilePage />
+                </Suspense>
+              }
+            />
           </Route>
         </Route>
         <Route path="/" element={<Navigate to="/ka/home" />} />
-        <Route path="*" element={<ErrorPage />} />
+        <Route
+          path="*"
+          element={
+            <Suspense fallback={<Spinner size="large" />}>
+              <ErrorPage />
+            </Suspense>
+          }
+        />
       </Routes>
     </ThemeProvider>
   );

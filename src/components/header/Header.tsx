@@ -51,7 +51,7 @@ const Header: React.FC = () => {
   const { mutate: mutateLogout } = useLogOut();
   const { data: profileInfo } = useProfileInfo(user?.id ?? "");
   return (
-    <header className="dark: z-50 h-20 rounded-b-xl border-b-2 border-primary bg-gray-100 dark:bg-blue-900 dark:bg-opacity-30">
+    <header className="fixed z-50 h-20 w-full rounded-b-xl border-b-2 border-primary bg-gray-100 dark:bg-[#162a47]">
       <div className="mx-auto flex items-center justify-between px-4 py-4">
         <Link to="/">
           <div className="flex flex-row items-center space-x-2 rounded-2xl px-6 py-2 text-orange-700">
@@ -120,6 +120,13 @@ const Header: React.FC = () => {
                     to={user ? "add-vacancies" : "login"}
                   >
                     <PlusSquareIcon /> Add Vacancy
+                  </Link>
+                  <Link
+                    to="favorites"
+                    className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
+                  >
+                    <StarsIcon />
+                    Favorites List
                   </Link>
                   <Link
                     className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
