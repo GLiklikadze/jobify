@@ -14,7 +14,7 @@ const VacancyBoxInfo: React.FC<VacancyBoxInfoProps> = ({
     <div className="flex flex-col justify-between">
       <Button
         variant="default"
-        className="hidden text-xs md:flex"
+        className="hidden text-xs font-semibold md:flex"
         onClick={(event) => handleEmailClick(event, vacancyId)}
       >
         <FileSpreadsheet /> {t("vacancy-box-info.send-button")}
