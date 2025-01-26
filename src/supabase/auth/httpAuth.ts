@@ -11,7 +11,6 @@ export const register = async ({ email, password }: httpRegisterProps) => {
     if (error) {
       throw new Error(`Sign-up failed: ${error.message}`);
     }
-    console.log("Sign-up successful:", data);
     return data;
   } catch (err) {
     console.error("Error during registration:", err);

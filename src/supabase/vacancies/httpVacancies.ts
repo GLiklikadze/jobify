@@ -6,7 +6,6 @@ export const createVacancies = async ({
 }: {
   formValues: CreateVacanciesType;
 }) => {
-  console.log(formValues);
   try {
     const { data, error } = await supabase.from("vacancies").insert(formValues);
 

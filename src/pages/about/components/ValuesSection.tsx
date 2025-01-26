@@ -16,15 +16,15 @@ const ValuesSection = () => {
         </AboutPageSectionBox>
         <AboutPageSectionBox
           boxTitle={t("about-page.values-collaboration-heading")}
+          boxDescription={t("about-page.values-collaboration-description")}
+        >
+          <SmileIcon className="h-8 w-8 text-primary" />
+        </AboutPageSectionBox>
+        <AboutPageSectionBox
+          boxTitle={t("about-page.values-customer-focus-heading")}
           boxDescription={t("about-page.values-customer-focus-description")}
         >
           <UsersIcon className="h-8 w-8 text-primary" />
-        </AboutPageSectionBox>
-        <AboutPageSectionBox
-          boxTitle={t("about-page.values-collaboration-heading")}
-          boxDescription={t("about-page.values-customer-focus-description")}
-        >
-          <SmileIcon className="h-8 w-8 text-primary" />
         </AboutPageSectionBox>
       </div>
     </section>
