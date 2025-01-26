@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-
 import { useGetFilteredVacanciesList } from "@/react-query/query/vacancies/vacanciesQuery";
 import VacancyList from "./components/VacancyList";
 import { useSearchParams } from "react-router-dom";
@@ -9,7 +8,6 @@ import { useDebounce } from "@uidotdev/usehooks";
 import vacancy_illustration from "@/assets/search-vacancy-illustration.svg";
 import data_proccesing from "@/assets/data-processing_z2q6.svg";
 import search_illustration from "@/assets/search_vimp.svg";
-
 import SortButton from "./components/SortButton";
 import { AlertDestructive } from "@/components/error/errorAlert";
 import LoadingSkeletonList from "@/components/loading/LoadingSkeletonList";

@@ -10,13 +10,8 @@ import { getFormattedDate } from "@/utils/dateFormatter";
 import { Eye, Pencil, Trash2 } from "lucide-react";
 import AlertDialogComponent from "@/components/alertDialog/AlertDialog";
 import { useTranslation } from "react-i18next";
-import { VacancyType } from "../vacancies/VacanciesPage.types";
 import { useNavigate, useParams } from "react-router-dom";
-
-type MyVacanciesTableProps = {
-  handleDeleteClick: (id: number) => void;
-  vacanciesList: VacancyType[];
-};
+import { MyVacanciesTableProps } from "./MyVacanciesTable.types";
 
 const MyVacanciesTable: React.FC<MyVacanciesTableProps> = ({
   vacanciesList,

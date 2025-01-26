@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { useDeleteVacancy } from "@/react-query/mutation/vacancies/vacanciesMutation";
 import { useAuthContext } from "@/context/hooks/useAuthContext";
 import { t } from "i18next";
-import MyVacanciesTable from "./MyVacanciesTable";
+import MyVacanciesTable from "./components/MyVacanciesTable";
 import { AlertDestructive } from "@/components/error/errorAlert";
 import LoadingSkeletonList from "@/components/loading/LoadingSkeletonList";
 import { toast } from "@/hooks/use-toast";

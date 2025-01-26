@@ -35,7 +35,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
             <FormField
               control={form.control}
               name="title"
-              render={({ field, fieldState: { error } }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel> {t("vacancies-form.title-label")}</FormLabel>
                   <FormControl>
@@ -46,7 +46,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
                     />
                   </FormControl>
                   <FormMessage />
-                  {error?.message}
+                  {/* {error?.message} */}
                 </FormItem>
               )}
             />

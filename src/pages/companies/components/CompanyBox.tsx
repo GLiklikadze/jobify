@@ -1,10 +1,6 @@
 import { Card } from "@/components/ui/card";
-import { PropsWithChildren } from "react";
 import { useNavigate } from "react-router-dom";
-
-type CompanyBoxProps = PropsWithChildren<{
-  company_id: string;
-}>;
+import { CompanyBoxProps } from "./CompanyBox.types";
 
 const CompanyBox: React.FC<CompanyBoxProps> = ({ company_id, children }) => {
   const navigate = useNavigate();
