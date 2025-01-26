@@ -27,6 +27,7 @@ const initialPayload = {
   logo_file: null,
   phone_number: "",
   address: "",
+  userType: "Company",
 };
 const ProfilePage = () => {
   const {
@@ -51,6 +52,7 @@ const ProfilePage = () => {
   const address = watch("address");
   const logo_url = receivedProfileData?.logo_url;
   const phone_number = watch("phone_number");
+  const userType = watch("userType");
 
   useEffect(() => {
     if (receivedProfileData) {
@@ -59,6 +61,7 @@ const ProfilePage = () => {
         company_name: receivedProfileData?.company_name ?? "",
         phone_number: receivedProfileData?.phone_number ?? "",
         address: receivedProfileData?.address ?? "",
+        userType: receivedProfileData?.userType ?? "",
       }));
     }
   }, [receivedProfileData, reset]);
@@ -91,7 +94,9 @@ const ProfilePage = () => {
         <hr />
         <div className="mb-4 flex justify-between gap-7 p-4">
           <div className="flex items-center gap-6 sm:gap-16">
-            <Label className="mb-2 w-24">{t("profile-page.photo-label")}</Label>
+            <Label className="mb-2 w-24 text-xs md:text-sm">
+              {t("profile-page.photo-label")}
+            </Label>
             <div className="flex h-20 w-20 flex-col overflow-hidden rounded-lg bg-slate-500">
               {logo_url && (
                 <img
@@ -140,7 +145,7 @@ const ProfilePage = () => {
           ) : (
             <>
               <div className="flex flex-row items-center gap-8 sm:gap-16">
-                <Label className="mb-2 w-24">
+                <Label className="mb-2 w-24 text-xs md:text-sm">
                   {" "}
                   {t("profile-page.email-label")}
                 </Label>
@@ -158,7 +163,7 @@ const ProfilePage = () => {
           )}
 
           <div className="bg-red flex min-h-9 flex-row items-center gap-8 sm:gap-16">
-            <Label htmlFor="name" className="w-24">
+            <Label htmlFor="name" className="w-24 text-xs md:text-sm">
               {t("profile-page.full-name-label")}
             </Label>
             {!toggleEdit ? (
@@ -190,7 +195,10 @@ const ProfilePage = () => {
           )}
 
           <div className="flex min-h-9 flex-row items-start gap-8 sm:gap-16">
-            <Label htmlFor="phoneNumber" className="mt-2 w-24">
+            <Label
+              htmlFor="phoneNumber"
+              className="mt-2 w-24 text-xs md:text-sm"
+            >
               {t("profile-page.phone-number-label")}
             </Label>
             {!toggleEdit ? (
@@ -224,7 +232,45 @@ const ProfilePage = () => {
             )}
           </div>
           <div className="flex min-h-9 flex-row items-start gap-8 sm:gap-16">
-            <Label htmlFor="address" className="mt-2 w-24">
+            <Label htmlFor="userType" className="mt-2 w-24 text-xs md:text-sm">
+              {t("profile-page.profile-type")}
+            </Label>
+            {!toggleEdit ? (
+              <p className="max-w-60 overflow-hidden font-semibold text-primary">
+                {userType}
+              </p>
+            ) : (
+              <div className="flex w-56 flex-col">
+                <Controller
+                  name="userType"
+                  control={control}
+                  render={({ field: { value, onChange } }) => {
+                    return (
+                      <Select
+                        value={value}
+                        onValueChange={(val) => onChange(val)}
+                      >
+                        <SelectTrigger className="w-40 sm:w-56">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Company">Company</SelectItem>
+                          <SelectItem value="Person">Person</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    );
+                  }}
+                />
+                {errors.address && (
+                  <div className="mt-1 max-w-56 text-right text-xs text-red-700">
+                    {t(`profile-page.${errors?.userType?.message}`)}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+          <div className="flex min-h-9 flex-row items-start gap-8 sm:gap-16">
+            <Label htmlFor="address" className="mt-2 w-24 text-xs md:text-sm">
               {t("profile-page.location-label")}
             </Label>
             {!toggleEdit ? (

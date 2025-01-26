@@ -3,4 +3,5 @@ export type ProfileFormValues = {
   logo_file: File | null;
   phone_number: string;
   address: string;
+  userType: string;
 };

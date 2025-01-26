@@ -53,6 +53,7 @@ export type Database = {
           phone_number: string | null;
           updated_at: string | null;
           username: string | null;
+          userType: string | null;
         };
         Insert: {
           address?: string | null;
@@ -64,6 +65,7 @@ export type Database = {
           phone_number?: string | null;
           updated_at?: string | null;
           username?: string | null;
+          userType?: string | null;
         };
         Update: {
           address?: string | null;
@@ -75,6 +77,7 @@ export type Database = {
           phone_number?: string | null;
           updated_at?: string | null;
           username?: string | null;
+          userType?: string | null;
         };
         Relationships: [];
       };

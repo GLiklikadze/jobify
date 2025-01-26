@@ -24,6 +24,7 @@ import { ModeToggle } from "./theme/mode-toggle";
 import { Link, NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuthContext } from "@/context/hooks/useAuthContext";
+import { useProfileInfo } from "@/react-query/query/profile/profileQuery";
 
 type HeaderResponsiveSheetProps = {
   mutateLogout: () => void;
@@ -43,7 +44,7 @@ const HeaderResponsiveSheet: React.FC<HeaderResponsiveSheetProps> = ({
   };
   const { t } = useTranslation();
   const { user } = useAuthContext();
-
+  const { data: profileInfo } = useProfileInfo(user?.id ?? "");
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
@@ -100,19 +101,23 @@ const HeaderResponsiveSheet: React.FC<HeaderResponsiveSheetProps> = ({
               <UserRoundPenIcon />
               {t("header-comp.my-profile")}
             </Link>
-            <Link
-              className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
-              to={user ? "add-vacancies" : "login"}
-            >
-              <PlusSquareIcon /> {t("header-comp.add-vacancy")}
-            </Link>
-            <Link
-              className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
-              to="my-vacancies"
-            >
-              <ListOrderedIcon />
-              {t("header-comp.my-vacancies")}
-            </Link>
+            {profileInfo?.userType === "Company" && (
+              <>
+                <Link
+                  className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
+                  to={user ? "add-vacancies" : "login"}
+                >
+                  <PlusSquareIcon /> {t("header-comp.add-vacancy")}
+                </Link>
+                <Link
+                  className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
+                  to="my-vacancies"
+                >
+                  <ListOrderedIcon />
+                  {t("header-comp.my-vacancies")}
+                </Link>
+              </>
+            )}
             <Link
               to="favorites"
               className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"

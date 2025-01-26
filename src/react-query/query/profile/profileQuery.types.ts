@@ -1,4 +1,5 @@
 export type profileResponse = {
+  userType: string | null;
   company_name: string | null;
   full_name: string | null;
   logo_url: string | null;
