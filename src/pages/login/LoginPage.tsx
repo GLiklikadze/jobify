@@ -34,7 +34,6 @@ const LoginPage = () => {
   const { mutate, isError, error } = useLogin();
 
   const onSubmit = (fieldValues: LoginFormValues) => {
-    console.log(fieldValues);
     mutate(fieldValues);
   };
   const { t } = useTranslation();

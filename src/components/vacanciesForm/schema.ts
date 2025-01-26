@@ -3,7 +3,7 @@ import { z } from "zod";
 export const addVacancyFormSchema = z
   .object({
     title: z.string().min(3, "Job Title is required"),
-    category: z.string().nonempty("Please select category"),
+    category: z.string().nonempty(),
     location: z.string().nonempty("Please select location"),
     jobType: z.string().nonempty("Please select job type"),
     salaryMin: z.number().min(1, "Salary must be non-negative"),

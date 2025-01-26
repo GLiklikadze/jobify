@@ -19,6 +19,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { CustomFileInput } from "@/components/ui/customFileInput";
+import { ProfileFormSchema } from "./schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const initialPayload = {
   company_name: "",
@@ -36,6 +38,7 @@ const ProfilePage = () => {
     formState: { errors },
   } = useForm<ProfileFormValues>({
     defaultValues: initialPayload,
+    resolver: zodResolver(ProfileFormSchema),
     mode: "onBlur",
   });
   const [toggleEdit, setToggleEdit] = useState(false);
@@ -59,9 +62,7 @@ const ProfilePage = () => {
       }));
     }
   }, [receivedProfileData, reset]);
-
   const { mutate: mutateLogout } = useLogOut();
-
   const { mutate: editProfileData } = useEditProfile(user?.id || "");
 
   const handleToggleEdit = () => {
@@ -72,7 +73,6 @@ const ProfilePage = () => {
   };
 
   const onSubmit = (fieldValues: ProfileFormValues) => {
-    console.log(fieldValues);
     reset();
     handleToggleEdit();
     editProfileData({ ...fieldValues, id: user?.id as string });
@@ -102,6 +102,7 @@ const ProfilePage = () => {
               )}
             </div>
           </div>
+
           <Button
             variant="outline"
             size="icon"
@@ -112,6 +113,7 @@ const ProfilePage = () => {
             <UserRoundPen className="h-6 w-8 text-blue-600" />
           </Button>
         </div>
+
         <div className="space-y-7 px-4 pb-8 pt-1">
           {toggleEdit ? (
             <div className="flex w-full justify-center">
@@ -149,6 +151,11 @@ const ProfilePage = () => {
               <hr className="m-0 p-0" />
             </>
           )}
+          {errors.logo_file && (
+            <div className="mr-10 mt-2 text-right text-xs text-red-700">
+              {t(`profile-page.${errors?.logo_file.message}`)}
+            </div>
+          )}
 
           <div className="bg-red flex min-h-9 flex-row items-center gap-8 sm:gap-16">
             <Label htmlFor="name" className="w-24">
@@ -160,17 +167,6 @@ const ProfilePage = () => {
               <Controller
                 name="company_name"
                 control={control}
-                rules={{
-                  required: t("profile-page.full-name-en-required-error"),
-                  minLength: {
-                    value: 3,
-                    message: t("profile-page.full-name-en-minLength-error"),
-                  },
-                  maxLength: {
-                    value: 25,
-                    message: t("profile-page.full-name-en-maxLength-error"),
-                  },
-                }}
                 render={({ field: { onChange, value, onBlur } }) => {
                   return (
                     <Input
@@ -188,8 +184,8 @@ const ProfilePage = () => {
           </div>
 
           {errors.company_name && (
-            <div className="mr-10 mt-2 text-right text-red-700">
-              {errors?.company_name.message}
+            <div className="mr-10 mt-2 text-right text-xs text-red-700">
+              {t(`profile-page.${errors?.company_name.message}`)}
             </div>
           )}
 
@@ -206,17 +202,6 @@ const ProfilePage = () => {
                 <Controller
                   name="phone_number"
                   control={control}
-                  rules={{
-                    required: t("profile-page.phone-number-required-error"),
-                    minLength: {
-                      value: 6,
-                      message: t("profile-page.phone-number-minLength-error"),
-                    },
-                    maxLength: {
-                      value: 14,
-                      message: t("profile-page.phone-number-minLength-error"),
-                    },
-                  }}
                   render={({ field: { value, onChange, onBlur } }) => {
                     return (
                       <Input
@@ -231,8 +216,8 @@ const ProfilePage = () => {
                   }}
                 />
                 {errors.phone_number && (
-                  <div className="mt-1 max-w-56 text-right text-red-700">
-                    {errors?.phone_number.message}
+                  <div className="mt-1 max-w-60 text-right text-xs text-red-700">
+                    {t(`profile-page.${errors?.phone_number.message}`)}
                   </div>
                 )}
               </div>
@@ -271,8 +256,8 @@ const ProfilePage = () => {
                   }}
                 />
                 {errors.address && (
-                  <div className="mt-1 max-w-56 text-right text-red-700">
-                    {errors?.address.message}
+                  <div className="mt-1 max-w-56 text-right text-xs text-red-700">
+                    {t(`profile-page.${errors?.address.message}`)}
                   </div>
                 )}
               </div>

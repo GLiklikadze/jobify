@@ -76,7 +76,9 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ mutateLogout }) => {
         </DropdownMenu>
       ) : (
         <Link to="login">
-          <Button className="text-xs">{t("header-comp.log-in")}</Button>
+          <Button className="text-xs font-semibold">
+            {t("header-comp.log-in")}
+          </Button>
         </Link>
       )}
       <div className="space-x-1"></div>

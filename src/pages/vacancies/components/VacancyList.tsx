@@ -34,7 +34,6 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
       currentVacancy?.location;
 
     window.location.href = `mailto:${currentVacancy?.contactEmail}?subject=${encodeURIComponent(subject)}`;
-    console.log(currentVacancy?.contactEmail, subject);
   };
 
   const { mutate: addToFavListMutate } = useAddFavoriteList();

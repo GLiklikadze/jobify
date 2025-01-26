@@ -36,7 +36,6 @@ const RegisterPage = () => {
   const { mutate, isPending, isError, error, isSuccess } = useRegister();
 
   const onSubmit = (fieldValues: RegisterFormValues) => {
-    console.log(fieldValues);
     mutate(fieldValues);
   };
   const { t } = useTranslation();

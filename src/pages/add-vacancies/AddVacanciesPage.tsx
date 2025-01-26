@@ -31,7 +31,6 @@ const AddVacanciesPage = () => {
 
   const { user } = useAuthContext();
   const { data: profileInfo } = useProfileInfo(user?.id);
-  console.log(profileInfo);
   const onSubmit = (formValues: CreateVacanciesType) => {
     const extendedFormValues = {
       ...formValues,
@@ -39,7 +38,7 @@ const AddVacanciesPage = () => {
       contactEmail: user?.email ?? "",
     };
     createVacanciesMutate({ formValues: extendedFormValues });
-    console.log("createdSuccess", createdSuccess);
+
     if (createdSuccess) {
       navigate(`/${lang}/my-vacancies`);
     }
