@@ -61,7 +61,7 @@ const ContactSection = () => {
           src={build_something}
           width="600"
           height="400"
-          alt="Acme Software"
+          alt="build something"
           className="mx-auto aspect-video overflow-hidden rounded-xl object-cover opacity-90"
         />
       </div>

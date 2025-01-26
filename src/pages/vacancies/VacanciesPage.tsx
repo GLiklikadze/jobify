@@ -86,14 +86,26 @@ const VacanciesPage = () => {
   return (
     <div className="mx-4 mt-4 space-y-1">
       <div className="mx-auto flex max-w-4xl flex-col-reverse justify-start gap-2 md:flex-row">
-        <img src={vacancy_illustration} className="mx-auto h-28 w-28" />
+        <img
+          src={vacancy_illustration}
+          className="mx-auto h-28 w-28"
+          alt="vacancy_illustration"
+        />
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-4 rounded-md border-2 border-primary p-4 sm:flex-row md:mx-0 md:mb-8 md:h-36">
           <VacanciesSearchForm control={control} />
           <div>
-            <img src={search_illustration} className="mx-auto h-10 w-14" />
+            <img
+              src={search_illustration}
+              className="mx-auto h-10 w-14"
+              alt="search_illustration"
+            />
           </div>
         </div>
-        <img src={data_proccesing} className="mx-auto h-28 w-28" />
+        <img
+          src={data_proccesing}
+          className="mx-auto h-28 w-28"
+          alt="data_proccesing"
+        />
       </div>
       <div className="space-y-2">
         <div className="mx-auto flex max-w-4xl justify-between">
@@ -111,7 +123,7 @@ const VacanciesPage = () => {
             </div>
           )}
         </div>
-        {!isLoading ? (
+        {!isLoading && !isError ? (
           <VacancyList vacanciesList={vacanciesList ?? []} />
         ) : (
           <LoadingSkeletonList />

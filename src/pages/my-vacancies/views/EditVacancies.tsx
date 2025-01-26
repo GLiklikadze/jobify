@@ -54,7 +54,7 @@ const EditVacanciesPage = () => {
     navigate(-1);
     if (!isError) {
       toast({
-        title: "Vacancy Edit Was Successfuly",
+        title: "Vacancy Edit Was Successfull",
       });
     }
     if (isError) {

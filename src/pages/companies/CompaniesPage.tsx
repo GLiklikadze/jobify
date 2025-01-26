@@ -58,7 +58,11 @@ const CompaniesPage = () => {
   return (
     <div className="mx-10 min-h-[30rem] xl:mx-60">
       <div className="mx-auto mb-12 flex max-w-4xl flex-col items-center justify-between gap-2 md:mb-4 md:flex-row">
-        <img src={agreement_illustration} className="h-32 w-36" />
+        <img
+          src={agreement_illustration}
+          className="h-32 w-36"
+          alt="agreement_illustration"
+        />
         <div className="mx-auto flex h-24 max-w-xl flex-row items-center gap-4 rounded-md border-2 border-primary p-4 lg:w-96">
           <Label>
             <BriefcaseIcon className="text-orange-700" />
@@ -70,9 +74,13 @@ const CompaniesPage = () => {
               <Input type="text" placeholder="Facebook" {...field} />
             )}
           />
-          <img src={search_illustration} className="mx-auto h-10 w-14" />
+          <img
+            src={search_illustration}
+            className="mx-auto h-10 w-14"
+            alt="search_illustration"
+          />
         </div>
-        <img src={project_team} className="h-32 w-36" />
+        <img src={project_team} className="h-32 w-36" alt="project_team" />
       </div>
       <div className="mx-auto flex max-w-4xl">
         {(filteredProfiles || !isError || !isLoading) && (
