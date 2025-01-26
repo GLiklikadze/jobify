@@ -16,7 +16,7 @@ export const useEditProfile = (
     mutationOptions,
   }: {
     mutationOptions?: UseMutationOptions<null, PostgrestError, profilePayload>;
-  } = {}
+  } = {},
 ): UseMutationResult<null, PostgrestError, profilePayload> => {
   const queryClient = useQueryClient();
   return useMutation<null, PostgrestError, profilePayload>({

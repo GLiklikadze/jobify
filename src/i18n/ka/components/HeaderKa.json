@@ -2,5 +2,10 @@
   "nav-link-vacancies": "ვაკანსიები",
   "nav-link-companies": "კომპანიები",
   "nav-link-about": "ჩვენს შესახებ",
-  "log-in": "შესვლა"
+  "log-in": "შესვლა",
+  "log-out": "გასვლა",
+  "favorites-list": "ჩემი ფავორიტები",
+  "my-vacancies": "ჩემი ვაკანსიები",
+  "add-vacancy": "ვაკანსიის დამატება",
+  "my-profile": "ჩემი პროფილი"
 }

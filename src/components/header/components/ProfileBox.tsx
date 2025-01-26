@@ -19,7 +19,7 @@ const ProfileBox = React.forwardRef<
     <div
       ref={ref}
       {...props}
-      className="border-foregraund flex h-10 max-w-56 cursor-pointer flex-row items-center space-x-2 rounded-2xl border-2 bg-secondary px-2 py-6 shadow-md dark:border-orange-800"
+      className="border-foregraund flex h-10 max-w-60 cursor-pointer flex-row items-center space-x-2 rounded-2xl border-2 bg-secondary px-2 py-6 shadow-md dark:border-orange-800"
     >
       {profileInfo?.logo_url ? (
         <div className="h-8 w-8 rounded-full">

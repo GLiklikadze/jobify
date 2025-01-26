@@ -15,6 +15,7 @@ import {
 import { useAuthContext } from "@/context/hooks/useAuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button/button";
+import { useTranslation } from "react-i18next";
 
 type ProfileMenuProps = {
   mutateLogout: () => void;
@@ -22,6 +23,7 @@ type ProfileMenuProps = {
 
 const ProfileMenu: React.FC<ProfileMenuProps> = ({ mutateLogout }) => {
   const { user } = useAuthContext();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   return (
     <>
@@ -30,21 +32,21 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ mutateLogout }) => {
           <DropdownMenuTrigger asChild>
             <ProfileBox />
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-44 bg-secondary">
+          <DropdownMenuContent align="end" className="w-48 bg-secondary">
             <DropdownMenuItem
               key="profile"
               className="justify-left flex items-center text-xs font-bold text-primary focus:text-orange-600"
               onClick={() => navigate("profile")}
             >
               <UserRoundPenIcon />
-              Profile Info
+              {t("header-comp.my-profile")}
             </DropdownMenuItem>
             <DropdownMenuItem
               key="add-vacancies"
               className="justify-left flex items-center text-xs font-bold text-primary focus:text-orange-600"
               onClick={() => navigate(user ? "add-vacancies" : "login")}
             >
-              <PlusSquareIcon /> Add Vacancy
+              <PlusSquareIcon /> {t("header-comp.add-vacancy")}
             </DropdownMenuItem>
             <DropdownMenuItem
               key="announcements"
@@ -52,7 +54,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ mutateLogout }) => {
               onClick={() => navigate("my-vacancies")}
             >
               <ListOrderedIcon />
-              My Vacancies
+              {t("header-comp.my-vacancies")}
             </DropdownMenuItem>
             <DropdownMenuItem
               key="favorites"
@@ -60,7 +62,7 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ mutateLogout }) => {
               onClick={() => navigate("favorites")}
             >
               <StarsIcon />
-              Favorites List
+              {t("header-comp.favorites-list")}
             </DropdownMenuItem>
             <DropdownMenuItem
               key="log-out"
@@ -68,13 +70,13 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ mutateLogout }) => {
               onClick={() => mutateLogout()}
             >
               <LogOut className="text-orange-700" />
-              Log Out
+              {t("header-comp.log-out")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
         <Link to="login">
-          <Button className="text-xs">Log In</Button>
+          <Button className="text-xs">{t("header-comp.log-in")}</Button>
         </Link>
       )}
       <div className="space-x-1"></div>

@@ -98,40 +98,40 @@ const HeaderResponsiveSheet: React.FC<HeaderResponsiveSheetProps> = ({
               to="profile"
             >
               <UserRoundPenIcon />
-              Profile Info
+              {t("header-comp.my-profile")}
             </Link>
             <Link
               className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
               to={user ? "add-vacancies" : "login"}
             >
-              <PlusSquareIcon /> Add Vacancy
-            </Link>
-            <Link
-              to="favorites"
-              className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
-            >
-              <StarsIcon />
-              Favorites List
+              <PlusSquareIcon /> {t("header-comp.add-vacancy")}
             </Link>
             <Link
               className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
               to="my-vacancies"
             >
               <ListOrderedIcon />
-              My Vacancies
+              {t("header-comp.my-vacancies")}
+            </Link>
+            <Link
+              to="favorites"
+              className="justify-left flex items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
+            >
+              <StarsIcon />
+              {t("header-comp.favorites-list")}
             </Link>
             <div
               className="justify-left flex cursor-pointer items-center gap-4 text-xs font-bold text-primary hover:text-orange-700"
               onClick={() => mutateLogout()}
             >
               <LogOut className="text-orange-700" />
-              Log Out
+              {t("header-comp.log-out")}
             </div>
           </div>
         ) : (
           <div>
             <Link to="login" className="flex w-full justify-center">
-              <Button className="w-2/3">Log In</Button>
+              <Button className="w-2/3"> {t("header-comp.log-in")}</Button>
             </Link>
           </div>
         )}
