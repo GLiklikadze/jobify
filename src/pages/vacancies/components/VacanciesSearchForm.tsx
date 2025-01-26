@@ -7,10 +7,15 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Briefcase, Building2, Component, MapPin } from "lucide-react";
-import { Controller } from "react-hook-form";
+import { Control, Controller } from "react-hook-form";
 import { Label } from "@/components/ui/label";
+import { searchObjType } from "../VacanciesPage.types";
 
-const VacanciesSearchForm = ({ control }) => {
+const VacanciesSearchForm = ({
+  control,
+}: {
+  control: Control<searchObjType>;
+}) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-4 md:flex-row">
