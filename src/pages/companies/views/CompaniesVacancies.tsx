@@ -16,7 +16,7 @@ const CompaniesVacancies = () => {
   } = useGetMyVacanciesList(company_id ?? "");
   const { t } = useTranslation();
   return (
-    <div className="-mt-8 space-y-10">
+    <div className="-mt-8 space-y-4">
       <div className="bg-gray-40 dark:bg-[#162a47]">
         <div className="mx-auto flex max-w-4xl flex-col items-center justify-between p-4 text-primary sm:flex-row">
           <h1 className="text-lg font-bold">
@@ -31,13 +31,12 @@ const CompaniesVacancies = () => {
         <hr />
       </div>
       <div className="space-y-2 px-4">
-        <VacancyList vacanciesList={vacanciesList ?? []} />
+        {!isLoading ? (
+          <VacancyList vacanciesList={vacanciesList ?? []} />
+        ) : (
+          <LoadingSkeletonList />
+        )}
       </div>
-      {!isLoading ? (
-        <VacancyList vacanciesList={vacanciesList ?? []} />
-      ) : (
-        <LoadingSkeletonList />
-      )}
       {isError && (
         <div className="mx-auto max-w-md">
           <AlertDestructive

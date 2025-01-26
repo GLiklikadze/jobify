@@ -99,38 +99,7 @@ function App() {
               </Suspense>
             }
           />
-          <Route
-            path="my-vacancies"
-            element={
-              <Suspense fallback={<Spinner size="large" />}>
-                <MyVacancies />
-              </Suspense>
-            }
-          />
-          <Route
-            path="favorites"
-            element={
-              <Suspense fallback={<Spinner size="large" />}>
-                <FavoritesPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="add-vacancies"
-            element={
-              <Suspense fallback={<Spinner size="large" />}>
-                <AddVacanciesPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="edit-vacancies/:id"
-            element={
-              <Suspense fallback={<Spinner size="large" />}>
-                <EditVacanciesPage />
-              </Suspense>
-            }
-          />
+
           <Route
             path="companies"
             element={
@@ -171,6 +140,38 @@ function App() {
               element={
                 <Suspense fallback={<Spinner size="large" />}>
                   <ProfilePage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="my-vacancies"
+              element={
+                <Suspense fallback={<Spinner size="large" />}>
+                  <MyVacancies />
+                </Suspense>
+              }
+            />
+            <Route
+              path="favorites"
+              element={
+                <Suspense fallback={<Spinner size="large" />}>
+                  <FavoritesPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="add-vacancies"
+              element={
+                <Suspense fallback={<Spinner size="large" />}>
+                  <AddVacanciesPage />
+                </Suspense>
+              }
+            />
+            <Route
+              path="edit-vacancies/:id"
+              element={
+                <Suspense fallback={<Spinner size="large" />}>
+                  <EditVacanciesPage />
                 </Suspense>
               }
             />

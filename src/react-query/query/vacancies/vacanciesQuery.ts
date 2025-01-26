@@ -15,7 +15,7 @@ export const useGetVacanciesList = () => {
 
 export const useGetMyVacanciesList = (user_id: string) => {
   return useQuery({
-    queryKey: ["get-vacancies", user_id],
+    queryKey: ["get-vacancies-list", user_id],
     queryFn: () => getMyVacancies(user_id),
     enabled: !!user_id,
     staleTime: 5 * 60 * 1000,
