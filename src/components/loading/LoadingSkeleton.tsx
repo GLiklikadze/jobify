@@ -12,15 +12,15 @@ export function SkeletonCard() {
           <div>
             <div className="flex flex-col space-y-2">
               <div className="flex items-center gap-2">
-                <Skeleton className="h-4 w-52 bg-[#2D333B]" />
+                <Skeleton className="sm-w-52 h-4 w-24 bg-[#2D333B]" />
               </div>
 
               <div className="flex items-center gap-2">
-                <Skeleton className="h-4 w-60 bg-[#2D333B]" />
+                <Skeleton className="sm-60 h-4 w-28 bg-[#2D333B]" />
                 <Skeleton className="h-4 w-14 bg-[#2D333B]" />
               </div>
               <div className="flex flex-col gap-2 md:flex-row">
-                <Skeleton className="h-4 w-48 bg-[#2D333B]" />
+                <Skeleton className="h-4 w-24 bg-[#2D333B] sm:w-48" />
                 <Skeleton className="h-4 w-20 bg-[#2D333B]" />
               </div>
             </div>

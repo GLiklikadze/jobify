@@ -11,12 +11,17 @@ import { vacanciesFormDefaultValues as EditVacanciesFormDefaultValues } from "@/
 import { CreateVacanciesType as EditVacancies } from "@/components/vacanciesForm/vacanciesForm.types";
 import VacanciesCreateForm from "@/components/vacanciesForm/vacanciesForm";
 import { useTranslation } from "react-i18next";
+import { toast } from "@/hooks/use-toast";
 
 const EditVacanciesPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { mutate: mutateEditVacancies } = useEditVacancies();
+  const {
+    mutate: mutateEditVacancies,
+    isError,
+    isPending,
+  } = useEditVacancies();
 
   const { data: singleVacancy, isSuccess: isGetVacancySuccess } =
     useGetSingleVacancy(id ?? "");
@@ -47,6 +52,17 @@ const EditVacanciesPage = () => {
   const onSubmit = (formValues: EditVacancies) => {
     mutateEditVacancies({ formValues: formValues, id: id ?? "" });
     navigate(-1);
+    if (!isError) {
+      toast({
+        title: "Vacancy Edit Was Successfuly",
+      });
+    }
+    if (isError) {
+      toast({
+        variant: "destructive",
+        title: "Vacancy Edit has Error",
+      });
+    }
   };
 
   return (
@@ -63,6 +79,7 @@ const EditVacanciesPage = () => {
             onSubmit={onSubmit}
             form={form}
             buttonLabel={t("edit-vacancies-page.button")}
+            isPending={isPending}
           />
         </CardContent>
       </Card>

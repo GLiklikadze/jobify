@@ -1,3 +1,5 @@
+import { AlertDestructive } from "@/components/error/errorAlert";
+import LoadingSkeletonList from "@/components/loading/LoadingSkeletonList";
 import VacancyList from "@/pages/vacancies/components/VacancyList";
 import { useGetMyVacanciesList } from "@/react-query/query/vacancies/vacanciesQuery";
 import { Building2 } from "lucide-react";
@@ -10,6 +12,7 @@ const CompaniesVacancies = () => {
     data: vacanciesList,
     isError,
     isLoading,
+    error,
   } = useGetMyVacanciesList(company_id ?? "");
   const { t } = useTranslation();
   return (
@@ -30,6 +33,19 @@ const CompaniesVacancies = () => {
       <div className="space-y-2 px-4">
         <VacancyList vacanciesList={vacanciesList ?? []} />
       </div>
+      {!isLoading ? (
+        <VacancyList vacanciesList={vacanciesList ?? []} />
+      ) : (
+        <LoadingSkeletonList />
+      )}
+      {isError && (
+        <div className="mx-auto max-w-md">
+          <AlertDestructive
+            alertTitle="Sorry Could Not Fetch Vacancies"
+            alertDescription={error.message}
+          />
+        </div>
+      )}
     </div>
   );
 };

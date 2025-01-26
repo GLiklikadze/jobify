@@ -12,6 +12,7 @@ import { AlertDestructive } from "@/components/error/errorAlert";
 import { useProfileInfo } from "@/react-query/query/profile/profileQuery";
 import { useAuthContext } from "@/context/hooks/useAuthContext";
 import { useTranslation } from "react-i18next";
+import { toast } from "@/hooks/use-toast";
 
 const AddVacanciesPage = () => {
   const navigate = useNavigate();
@@ -24,13 +25,14 @@ const AddVacanciesPage = () => {
 
   const {
     createVacanciesMutate,
-    createdSuccess,
     isVacanciesCreateError,
     VacanciesCreateError,
+    isPending,
   } = useCreateVacancies();
 
   const { user } = useAuthContext();
   const { data: profileInfo } = useProfileInfo(user?.id);
+
   const onSubmit = (formValues: CreateVacanciesType) => {
     const extendedFormValues = {
       ...formValues,
@@ -38,9 +40,18 @@ const AddVacanciesPage = () => {
       contactEmail: user?.email ?? "",
     };
     createVacanciesMutate({ formValues: extendedFormValues });
-
-    if (createdSuccess) {
-      navigate(`/${lang}/my-vacancies`);
+    navigate(`/${lang}/my-vacancies`);
+    if (!isVacanciesCreateError) {
+      toast({
+        title: "Vacancy Created Was Successfuly",
+        color: "red",
+      });
+    }
+    if (isVacanciesCreateError) {
+      toast({
+        variant: "destructive",
+        title: "Vacancy Create has Error",
+      });
     }
   };
   const { t } = useTranslation();
@@ -58,6 +69,7 @@ const AddVacanciesPage = () => {
             onSubmit={onSubmit}
             form={form}
             buttonLabel={t("add-vacancies-page.button")}
+            isPending={isPending}
           />
           {isVacanciesCreateError && (
             <div className="mt-4">

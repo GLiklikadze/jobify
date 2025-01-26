@@ -17,6 +17,7 @@ import { searchObjType } from "./VacanciesPage.types";
 import VacanciesSearchForm from "./components/VacanciesSearchForm";
 import { getSortBoolean } from "./utils/getSortBoolean";
 import { searchDefaultValues } from "./components/searchDefaultValues";
+import { List } from "lucide-react";
 
 const VacanciesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams(searchDefaultValues);
@@ -97,11 +98,20 @@ const VacanciesPage = () => {
         <img src={data_proccesing} className="mx-auto h-28 w-28" />
       </div>
       <div className="space-y-2">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto flex max-w-4xl justify-between">
           <SortButton
             isAscSorted={getSortBoolean(sortOrder)}
             toggleSortOrder={toggleSortOrder}
           />
+          {(vacanciesList || !isError || !isLoading) && (
+            <div className="flex flex-row items-center gap-2 rounded-md border-2 bg-secondary px-2 text-primary">
+              {" "}
+              <List size="1rem" />
+              <span className="font-xs text-sm font-semibold">
+                {vacanciesList?.length}
+              </span>
+            </div>
+          )}
         </div>
         {!isLoading ? (
           <VacancyList vacanciesList={vacanciesList ?? []} />

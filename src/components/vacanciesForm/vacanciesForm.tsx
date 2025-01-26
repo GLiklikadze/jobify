@@ -22,6 +22,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
   form,
   onSubmit,
   buttonLabel,
+  isPending,
 }) => {
   return (
     <Form {...form}>
@@ -293,7 +294,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
             )}
           />
         </div>
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" disabled={isPending}>
           {buttonLabel}
         </Button>
       </form>

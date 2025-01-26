@@ -11,6 +11,8 @@ import CompaniesList from "./components/CompaniesList";
 import agreement_illustration from "@/assets/voting_3ygx.svg";
 import project_team from "@/assets/agreement.svg";
 import search_illustration from "@/assets/search_vimp.svg";
+import LoadingSkeletonList from "@/components/loading/LoadingSkeletonList";
+import { AlertDestructive } from "@/components/error/errorAlert";
 
 const searchDefaultValues = {
   searchText: "",
@@ -30,8 +32,13 @@ const CompaniesPage = () => {
   const searchText = watch("searchText");
   const debouncedText = useDebounce(searchText, 600);
 
-  const { data: filteredProfiles, isSuccess } =
-    useFilteredProfileList(debouncedText);
+  const {
+    data: filteredProfiles,
+    isSuccess,
+    isLoading,
+    error,
+    isError,
+  } = useFilteredProfileList(debouncedText);
 
   useEffect(() => {
     if (isSuccess) {
@@ -68,7 +75,20 @@ const CompaniesPage = () => {
         </div>
         <img src={project_team} className="h-32 w-36" />
       </div>
-      <CompaniesList filteredProfiles={filteredProfiles ?? []} />
+
+      {!isLoading ? (
+        <CompaniesList filteredProfiles={filteredProfiles ?? []} />
+      ) : (
+        <LoadingSkeletonList />
+      )}
+      {isError && (
+        <div className="mx-auto max-w-md">
+          <AlertDestructive
+            alertTitle="Sorry Could Not Fetch Companies"
+            alertDescription={error.message}
+          />
+        </div>
+      )}
     </div>
   );
 };

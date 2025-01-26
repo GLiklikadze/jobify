@@ -18,4 +18,5 @@ export type VacanciesCreateFormProps = {
   form: UseFormReturn<CreateVacanciesType>;
   onSubmit: (formValues: CreateVacanciesType) => void;
   buttonLabel: string;
+  isPending: boolean;
 };
