@@ -1,0 +1,12 @@
+{
+  "my-vacancies-heading": "ჩემი ვაკანსიები",
+  "my-vacancies-title": "სათაური",
+  "my-vacancies-jobType": "სამ. ტიპი",
+  "my-vacancies-salary": "ხელფასი ₾",
+  "my-vacancies-date": "თარიღი",
+  "my-vacancies-action": "მოქმედება",
+  "alert-dialog-question": "დარწმუნებული ხართ ?",
+  "alert-dialog-description": "ეს სამუდამოდ წაშლის თქვენს ვაკანსიას და წაშლის თქვენს მონაცემებს ჩვენი სერვერებიდან",
+  "alert-dialog-cancel-btn": "გაუქმება",
+  "alert-dialog-accept": "დიახ"
+}

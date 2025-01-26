@@ -1,0 +1,19 @@
+{
+  "basic-section": "Basic Information",
+  "details-section": "Job Details",
+  "title-label": "Job Title",
+  "category-label": "Category",
+  "location-label": "Location",
+  "employmentType-label": "Employment Type",
+  "minSalary-label": "Min Salary",
+  "maxSalary-label": "Max Salary",
+  "description-label": "Job Description",
+  "qualifications-label": "Qualifications",
+  "qualifications-instruction": "Enter Each Qualification On a New Line",
+  "requirements-label": "Requirements",
+  "requirements-instruction": "Enter Each Requirements On a New Line",
+  "responsibilities-label": "Responsibilities",
+  "responsibilities-instruction": "Enter Each Responsibilities On a New Line",
+  "benefits-label": "Benefits",
+  "benefits-instruction": "Enter each qualification on a new line"
+}

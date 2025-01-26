@@ -1,0 +1,15 @@
+{
+  "login-header": "Log in to Jobify",
+  "login-message": "Enter your credentials to access your account",
+  "email-label": "Email",
+  "password-label": "Password",
+  "login-button": "Login",
+  "forgot-password": "Forgot your password?",
+  "sing-up-label": "Don't have an account?",
+  "sing-up-link": "Sing Up",
+  "email-required-error": "Email is required",
+  "email-invalid-pattern": "Invalid email format",
+  "password-required-error": "Password is required",
+  "password-minLength-error": "Password Min Length is 5 symbol",
+  "password-maxLength-error": "Password Max Length is 25 symbol"
+}

@@ -1,0 +1,21 @@
+{
+  "card-title": "პროფილის ინფორმაცია",
+  "photo-label": "პროფილის ლოგო",
+  "tab-geo": "ქართ",
+  "tab-eng": "ინგ",
+  "full-name-label": "სახელი",
+  "email-label": "ელ-ფოსტა",
+  "location-label": "ლოკაცია",
+  "phone-number-label": "მობილური",
+  "edit-button": "რედაქტირება",
+  "sign-out-button": "გამოსვლა",
+  "profile-name-required-error": "პროფილის სახელი სავალდებულოა",
+  "profile-name-minLength-error": "პროფილის სახელი უნდა იყოს მინუმუმ 3 სიმბოლო",
+  "profile-name-maxLength-error": "პროფილის სახელი უნდა იყოს მაქსიმუმ 25 სიმბოლო",
+  "avatar-required-error": "ავატარის ბმული სავალდებულოა",
+  "phone-number-required-error": "ტელეფონის ნომერი სავალდებულოა",
+  "phone-number-minLength-error": "ტელეფონის ნომერი უნდა იყოს მინიმუმ 6 სიმბოლო",
+  "phone-number-maxLength-error": "ტელეფონის ნომერი უნდა იყოს მაქსიმუმ 14 სიმბოლო",
+  "address-required-error": "მისამართი სავალდებულოა",
+  "logo-invalid-type": "ფაილი არ შეესაბამება მოთხოვნებს (JPEG, PNG, GIF)"
+}
