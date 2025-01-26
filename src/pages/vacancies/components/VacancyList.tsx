@@ -10,9 +10,12 @@ import VacancyBoxImg from "./VacancyBoxImg";
 import VacancyBoxMain from "./VacancyBoxMain";
 import VacancyBoxInfo from "./VacancyBoxInfo";
 import { VacancyListProps } from "../VacanciesPage.types";
+import { useAuthContext } from "@/context/hooks/useAuthContext";
+import { toast } from "@/hooks/use-toast";
 
 const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
   const { lang } = useParams();
+  const { user } = useAuthContext();
   const navigate = useNavigate();
   const handleClick = (vac_id: number) => {
     navigate(`/${lang}/vacancies/${vac_id}`);
@@ -36,16 +39,34 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
     window.location.href = `mailto:${currentVacancy?.contactEmail}?subject=${encodeURIComponent(subject)}`;
   };
 
-  const { mutate: addToFavListMutate } = useAddFavoriteList();
-  const { mutate: deleteFromFavoritesMutate } = useDeleteFavorite();
+  const { mutate: addToFavListMutate, isSuccess: isSuccessAddedInFavorites } =
+    useAddFavoriteList();
+  const {
+    mutate: deleteFromFavoritesMutate,
+    isSuccess: isSuccessRemoveFromFavorites,
+  } = useDeleteFavorite();
+
   const handleFavoriteClick = (
     e: MouseEvent,
     vacancyId: number,
     profileId: string,
   ) => {
     e.stopPropagation();
+    if (!user?.id) {
+      toast({
+        variant: "destructive",
+        title: "Please Log in to Add In Favorites List",
+      });
+      return;
+    }
+    if (user?.id ?? isSuccessAddedInFavorites) {
+      toast({
+        title: `Vacancy ID:${vacancyId} Added In Favorites List`,
+      });
+    }
     addToFavListMutate({ vacancyId, profileId });
   };
+
   const handleFavoriteDelClick = (
     e: MouseEvent,
     vacancyId: number,
@@ -53,11 +74,13 @@ const VacancyList: React.FC<VacancyListProps> = ({ vacanciesList }) => {
   ) => {
     e.stopPropagation();
     deleteFromFavoritesMutate({ vacancyId, profileId });
+    if (isSuccessRemoveFromFavorites) {
+      toast({
+        title: `Vacancy ID:${vacancyId} Removed From Favorites List`,
+      });
+    }
   };
 
-  if (!vacanciesList) {
-    return <p>Loading...</p>;
-  }
   return vacanciesList?.map((vacancy) => (
     <VacancyBox key={vacancy?.id}>
       <div

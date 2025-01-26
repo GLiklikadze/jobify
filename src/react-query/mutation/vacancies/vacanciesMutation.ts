@@ -43,6 +43,7 @@ export const useEditVacancies = () => {
     onSuccess: () => {
       queryClient.invalidateQueries([
         "get-vacancies",
+        "get-vacancies-list",
         "get-filtered-vacancies",
       ] as InvalidateQueryFilters);
     },
@@ -57,6 +58,7 @@ export const useDeleteVacancy = () => {
     onSuccess: () => {
       queryClient.invalidateQueries([
         "get-vacancies",
+        "get-vacancies-list",
         "get-filtered-vacancies",
       ] as InvalidateQueryFilters);
     },

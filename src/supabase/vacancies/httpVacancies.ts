@@ -38,7 +38,7 @@ export const getMyVacancies = async (user_id: string) => {
   try {
     const { data, error } = await supabase
       .from("vacancies")
-      .select(`*, profiles(*)`)
+      .select(`*, profiles(*), favorites(*)`)
       .eq("user_id", user_id)
       .throwOnError();
     if (error) {
