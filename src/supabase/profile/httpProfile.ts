@@ -24,6 +24,7 @@ export const fillProfileInfo = async (payload: profilePayload) => {
       phone_number: payload?.phone_number,
       address: payload?.address,
       id: payload?.id,
+      userType: payload?.userType,
       ...(logoUrl && { logo_url: logoUrl }),
     };
 
@@ -63,6 +64,7 @@ export const getFilteredProfileList = async (searchText: string) => {
       .from("profiles")
       .select(`*, vacancies(*)`)
       .ilike("company_name", `%${searchText}%`)
+      .eq("userType", "Company")
       .throwOnError();
     if (error) {
       throw new Error(error.message);

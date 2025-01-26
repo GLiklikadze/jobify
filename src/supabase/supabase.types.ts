@@ -4,162 +4,165 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[];
+  | Json[]
 
 export type Database = {
   public: {
     Tables: {
       favorites: {
         Row: {
-          id: number;
-          user_id: string | null;
-          vacancy_id: number | null;
-        };
+          id: number
+          user_id: string | null
+          vacancy_id: number | null
+        }
         Insert: {
-          id?: number;
-          user_id?: string | null;
-          vacancy_id?: number | null;
-        };
+          id?: number
+          user_id?: string | null
+          vacancy_id?: number | null
+        }
         Update: {
-          id?: number;
-          user_id?: string | null;
-          vacancy_id?: number | null;
-        };
+          id?: number
+          user_id?: string | null
+          vacancy_id?: number | null
+        }
         Relationships: [
           {
-            foreignKeyName: "favorites_profile_id_fkey";
-            columns: ["user_id"];
-            isOneToOne: false;
-            referencedRelation: "profiles";
-            referencedColumns: ["id"];
+            foreignKeyName: "favorites_profile_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "favorites_vacancy_id_fkey";
-            columns: ["vacancy_id"];
-            isOneToOne: false;
-            referencedRelation: "vacancies";
-            referencedColumns: ["id"];
+            foreignKeyName: "favorites_vacancy_id_fkey"
+            columns: ["vacancy_id"]
+            isOneToOne: false
+            referencedRelation: "vacancies"
+            referencedColumns: ["id"]
           },
-        ];
-      };
+        ]
+      }
       profiles: {
         Row: {
-          address: string | null;
-          avatar_url: string | null;
-          company_name: string | null;
-          full_name: string | null;
-          id: string;
-          logo_url: string | null;
-          phone_number: string | null;
-          updated_at: string | null;
-          username: string | null;
-        };
+          address: string | null
+          avatar_url: string | null
+          company_name: string | null
+          full_name: string | null
+          id: string
+          logo_url: string | null
+          phone_number: string | null
+          updated_at: string | null
+          username: string | null
+          userType: string | null
+        }
         Insert: {
-          address?: string | null;
-          avatar_url?: string | null;
-          company_name?: string | null;
-          full_name?: string | null;
-          id: string;
-          logo_url?: string | null;
-          phone_number?: string | null;
-          updated_at?: string | null;
-          username?: string | null;
-        };
+          address?: string | null
+          avatar_url?: string | null
+          company_name?: string | null
+          full_name?: string | null
+          id: string
+          logo_url?: string | null
+          phone_number?: string | null
+          updated_at?: string | null
+          username?: string | null
+          userType?: string | null
+        }
         Update: {
-          address?: string | null;
-          avatar_url?: string | null;
-          company_name?: string | null;
-          full_name?: string | null;
-          id?: string;
-          logo_url?: string | null;
-          phone_number?: string | null;
-          updated_at?: string | null;
-          username?: string | null;
-        };
-        Relationships: [];
-      };
+          address?: string | null
+          avatar_url?: string | null
+          company_name?: string | null
+          full_name?: string | null
+          id?: string
+          logo_url?: string | null
+          phone_number?: string | null
+          updated_at?: string | null
+          username?: string | null
+          userType?: string | null
+        }
+        Relationships: []
+      }
       vacancies: {
         Row: {
-          benefits: string | null;
-          category: string | null;
-          companyName: string | null;
-          contactEmail: string | null;
-          created_at: string;
-          description: string | null;
-          id: number;
-          jobType: string | null;
-          location: string | null;
-          qualifications: string | null;
-          requirements: string | null;
-          responsibilities: string | null;
-          salaryMax: number | null;
-          salaryMin: number | null;
-          title: string | null;
-          user_id: string | null;
-        };
+          benefits: string | null
+          category: string | null
+          companyName: string | null
+          contactEmail: string | null
+          created_at: string
+          description: string | null
+          id: number
+          jobType: string | null
+          location: string | null
+          qualifications: string | null
+          requirements: string | null
+          responsibilities: string | null
+          salaryMax: number | null
+          salaryMin: number | null
+          title: string | null
+          user_id: string | null
+        }
         Insert: {
-          benefits?: string | null;
-          category?: string | null;
-          companyName?: string | null;
-          contactEmail?: string | null;
-          created_at?: string;
-          description?: string | null;
-          id?: number;
-          jobType?: string | null;
-          location?: string | null;
-          qualifications?: string | null;
-          requirements?: string | null;
-          responsibilities?: string | null;
-          salaryMax?: number | null;
-          salaryMin?: number | null;
-          title?: string | null;
-          user_id?: string | null;
-        };
+          benefits?: string | null
+          category?: string | null
+          companyName?: string | null
+          contactEmail?: string | null
+          created_at?: string
+          description?: string | null
+          id?: number
+          jobType?: string | null
+          location?: string | null
+          qualifications?: string | null
+          requirements?: string | null
+          responsibilities?: string | null
+          salaryMax?: number | null
+          salaryMin?: number | null
+          title?: string | null
+          user_id?: string | null
+        }
         Update: {
-          benefits?: string | null;
-          category?: string | null;
-          companyName?: string | null;
-          contactEmail?: string | null;
-          created_at?: string;
-          description?: string | null;
-          id?: number;
-          jobType?: string | null;
-          location?: string | null;
-          qualifications?: string | null;
-          requirements?: string | null;
-          responsibilities?: string | null;
-          salaryMax?: number | null;
-          salaryMin?: number | null;
-          title?: string | null;
-          user_id?: string | null;
-        };
+          benefits?: string | null
+          category?: string | null
+          companyName?: string | null
+          contactEmail?: string | null
+          created_at?: string
+          description?: string | null
+          id?: number
+          jobType?: string | null
+          location?: string | null
+          qualifications?: string | null
+          requirements?: string | null
+          responsibilities?: string | null
+          salaryMax?: number | null
+          salaryMin?: number | null
+          title?: string | null
+          user_id?: string | null
+        }
         Relationships: [
           {
-            foreignKeyName: "vacancies_user_id_fkey1";
-            columns: ["user_id"];
-            isOneToOne: false;
-            referencedRelation: "profiles";
-            referencedColumns: ["id"];
+            foreignKeyName: "vacancies_user_id_fkey1"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
           },
-        ];
-      };
-    };
+        ]
+      }
+    }
     Views: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     Functions: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     Enums: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     CompositeTypes: {
-      [_ in never]: never;
-    };
-  };
-};
+      [_ in never]: never
+    }
+  }
+}
 
-type PublicSchema = Database[Extract<keyof Database, "public">];
+type PublicSchema = Database[Extract<keyof Database, "public">]
 
 export type Tables<
   PublicTableNameOrOptions extends
@@ -172,7 +175,7 @@ export type Tables<
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R;
+      Row: infer R
     }
     ? R
     : never
@@ -180,11 +183,11 @@ export type Tables<
         PublicSchema["Views"])
     ? (PublicSchema["Tables"] &
         PublicSchema["Views"])[PublicTableNameOrOptions] extends {
-        Row: infer R;
+        Row: infer R
       }
       ? R
       : never
-    : never;
+    : never
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
@@ -195,17 +198,17 @@ export type TablesInsert<
     : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I;
+      Insert: infer I
     }
     ? I
     : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
     ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-        Insert: infer I;
+        Insert: infer I
       }
       ? I
       : never
-    : never;
+    : never
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
@@ -216,17 +219,17 @@ export type TablesUpdate<
     : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U;
+      Update: infer U
     }
     ? U
     : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
     ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-        Update: infer U;
+        Update: infer U
       }
       ? U
       : never
-    : never;
+    : never
 
 export type Enums<
   PublicEnumNameOrOptions extends
@@ -239,14 +242,14 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
-    : never;
+    : never
 
 export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof PublicSchema["CompositeTypes"]
     | { schema: keyof Database },
   CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-    schema: keyof Database;
+    schema: keyof Database
   }
     ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
     : never = never,
@@ -254,4 +257,4 @@ export type CompositeTypes<
   ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
     ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
-    : never;
+    : never

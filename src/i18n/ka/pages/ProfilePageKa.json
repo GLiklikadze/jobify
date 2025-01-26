@@ -17,5 +17,7 @@
   "phone-number-minLength-error": "ტელეფონის ნომერი უნდა იყოს მინიმუმ 6 სიმბოლო",
   "phone-number-maxLength-error": "ტელეფონის ნომერი უნდა იყოს მაქსიმუმ 14 სიმბოლო",
   "address-required-error": "მისამართი სავალდებულოა",
-  "logo-invalid-type": "ფაილი არ შეესაბამება მოთხოვნებს (JPEG, PNG, GIF)"
+  "logo-invalid-type": "ფაილი არ შეესაბამება მოთხოვნებს (JPEG, PNG, GIF)",
+  "profileType-required-error": "პროფილის ტიპი სავალდებულოა",
+  "profile-type": "პროფილის ტიპი"
 }

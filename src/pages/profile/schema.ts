@@ -24,4 +24,5 @@ export const ProfileFormSchema = z.object({
     .max(25, { message: "phone-number-minLength-error" }),
 
   address: z.string().nonempty({ message: "address-required-error" }),
+  userType: z.string().nonempty({ message: "profileType-required-error" }),
 });

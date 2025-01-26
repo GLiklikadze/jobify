@@ -20,5 +20,7 @@
   "address-required-error": "Address is required",
   "address-minLength-error": "Address must be at least 6 digits long",
   "address-maxLength-error": "Address number must be max 14 digits long",
-  "logo-invalid-type": "Invalid File. Must be an image (JPEG, PNG, GIF)"
+  "logo-invalid-type": "Invalid File. Must be an image (JPEG, PNG, GIF)",
+  "profileType-required-error": "Prifile Type is required",
+  "profile-type": "Profile Type"
 }
