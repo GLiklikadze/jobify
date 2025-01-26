@@ -10,10 +10,12 @@ import { addVacancyFormSchema } from "@/components/vacanciesForm/schema";
 import { vacanciesFormDefaultValues as EditVacanciesFormDefaultValues } from "@/components/vacanciesForm/vacanciesFormDefaultValues";
 import { CreateVacanciesType as EditVacancies } from "@/components/vacanciesForm/vacanciesForm.types";
 import VacanciesCreateForm from "@/components/vacanciesForm/vacanciesForm";
+import { useTranslation } from "react-i18next";
 
 const EditVacanciesPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { mutate: mutateEditVacancies } = useEditVacancies();
 
   const { data: singleVacancy, isSuccess: isGetVacancySuccess } =
@@ -28,12 +30,10 @@ const EditVacanciesPage = () => {
     if (isGetVacancySuccess && singleVacancy) {
       form.reset({
         title: singleVacancy.title ?? "",
-        // companyName: singleVacancy.companyName ?? "",
         location: singleVacancy.location ?? "",
         jobType: singleVacancy.jobType ?? "",
         salaryMin: singleVacancy.salaryMin ?? 0,
         salaryMax: singleVacancy.salaryMax ?? 0,
-        // contactEmail: singleVacancy.contactEmail ?? "",
         requirements: singleVacancy.requirements ?? "",
         description: singleVacancy.description ?? "",
         benefits: singleVacancy.benefits ?? "",
@@ -54,10 +54,16 @@ const EditVacanciesPage = () => {
       <Card>
         <CardHeader className="flex flex-row items-center gap-4">
           <img src={new_vacancy_svg} className="h-20 w-16" />
-          <CardTitle className="text-2xl text-primary">Edit Vacancy</CardTitle>
+          <CardTitle className="text-xl text-primary">
+            {t("edit-vacancies-page.heading")}
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <VacanciesCreateForm onSubmit={onSubmit} form={form} />
+          <VacanciesCreateForm
+            onSubmit={onSubmit}
+            form={form}
+            buttonLabel={t("edit-vacancies-page.button")}
+          />
         </CardContent>
       </Card>
     </div>

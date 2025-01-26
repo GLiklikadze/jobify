@@ -1,8 +1,12 @@
 import { useAuthContext } from "@/context/hooks/useAuthContext";
 import { useProfileInfo } from "@/react-query/query/profile/profileQuery";
-import { UserRound } from "lucide-react";
+import { ChevronDown, UserRound } from "lucide-react";
+import React from "react";
 
-const ProfileBox = () => {
+const ProfileBox = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>((props, ref) => {
   const { user } = useAuthContext();
   const {
     data: profileInfo,
@@ -12,7 +16,11 @@ const ProfileBox = () => {
 
   const companyName = !isLoading && !isError && profileInfo?.company_name;
   return (
-    <div className="border-foregraund flex h-12 max-w-56 cursor-pointer flex-row items-center space-x-2 rounded-2xl border-2 bg-secondary px-2 py-1">
+    <div
+      ref={ref}
+      {...props}
+      className="border-foregraund flex h-10 max-w-56 cursor-pointer flex-row items-center space-x-2 rounded-2xl border-2 bg-secondary px-2 py-6 shadow-md dark:border-orange-800"
+    >
       {profileInfo?.logo_url ? (
         <div className="h-8 w-8 rounded-full">
           <img
@@ -29,8 +37,9 @@ const ProfileBox = () => {
         </div>
         <div className="font-semibold">{user?.email}</div>
       </div>
+      <ChevronDown />
     </div>
   );
-};
+});
 
 export default ProfileBox;

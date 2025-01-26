@@ -7,15 +7,18 @@ import {
   Copy,
   CircleChevronLeft,
   Component,
+  Banknote,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge/badge";
 import { useGetSingleVacancy } from "@/react-query/query/vacancies/vacanciesQuery";
 import { getFormattedDate } from "@/utils/dateFormatter";
 import listMaker from "./utils/listMaker";
+import { useTranslation } from "react-i18next";
 
 const SingleVacancy = () => {
   const { lang, vac_id } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const handleClick = () => {
     navigate(-1);
   };
@@ -46,12 +49,12 @@ const SingleVacancy = () => {
       >
         {" "}
         <CircleChevronLeft />
-        Go Back
+        {t("single-vacancy.back-button")}
       </Button>
       <div className="grid gap-6 md:grid-cols-[1fr_300px]">
         {/* Main Content */}
         <div className="space-y-6">
-          <div className="flex flex-col items-start justify-between gap-4 rounded-md border-2 p-6 sm:flex-row">
+          <div className="flex flex-col items-start justify-between gap-4 rounded-md border-2 px-6 py-8 sm:flex-row">
             <div className="flex flex-row gap-4">
               <div className="h-24 w-28 overflow-hidden rounded-lg bg-blue-100">
                 <img
@@ -62,7 +65,7 @@ const SingleVacancy = () => {
               </div>
               <div className="flex-1 space-y-2">
                 <div className="mb-2 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-                  <h1 className="font-bold md:text-2xl">
+                  <h1 className="font-bold md:text-xl">
                     {singleVacancy?.title}
                   </h1>
                   <Badge variant="default" className="whitespace-nowrap">
@@ -74,7 +77,7 @@ const SingleVacancy = () => {
                   {singleVacancy?.category}
                 </p>
                 <p className="text-muted-foreground">
-                  at{" "}
+                  {t("single-vacancy.company-prefix")}{" "}
                   <Link
                     to={`/${lang}/companies/${singleVacancy?.user_id}`}
                     className="text-primary"
@@ -88,40 +91,55 @@ const SingleVacancy = () => {
               className="mx-auto w-40 bg-primary text-xs sm:mx-0 sm:w-36"
               onClick={handleEmailClick}
             >
-              Apply Now <span className="ml-2">→</span>
+              {t("single-vacancy.apply-button")} <span className="ml-2">→</span>
             </Button>
           </div>
 
           <div className="space-y-6">
             <section>
-              <h2 className="mb-3 text-lg font-semibold">Job Description</h2>
+              <h2 className="mb-3 text-lg font-semibold">
+                {" "}
+                {t("single-vacancy.description-label")}
+              </h2>
               <div className="space-y-4 text-muted-foreground">
                 {singleVacancy?.description ?? ""}
               </div>
             </section>
 
             <section>
-              <h2 className="mb-3 text-lg font-semibold">Requirements</h2>
+              <h2 className="mb-3 text-lg font-semibold">
+                {" "}
+                {t("single-vacancy.requirements-label")}
+              </h2>
               <ul className="list-inside list-disc space-y-2 text-muted-foreground">
                 {listMaker(singleVacancy?.requirements ?? "")}
               </ul>
             </section>
             <section>
-              <h2 className="mb-3 text-lg font-semibold">Benefits</h2>
-              <ul className="list-inside list-disc space-y-2 text-muted-foreground">
-                {listMaker(singleVacancy?.benefits ?? "")}
-              </ul>
-            </section>
-            <section>
-              <h2 className="mb-3 text-lg font-semibold">Qualifications</h2>
+              <h2 className="mb-3 text-lg font-semibold">
+                {" "}
+                {t("single-vacancy.qualifications-label")}
+              </h2>
               <ul className="list-inside list-disc space-y-2 text-muted-foreground">
                 {listMaker(singleVacancy?.qualifications ?? "")}
               </ul>
             </section>
             <section>
-              <h2 className="mb-3 text-lg font-semibold">Responsibilities</h2>
+              <h2 className="mb-3 text-lg font-semibold">
+                {" "}
+                {t("single-vacancy.responsibilities-label")}
+              </h2>
               <ul className="list-inside list-disc space-y-2 text-muted-foreground">
                 {listMaker(singleVacancy?.responsibilities ?? "")}
+              </ul>
+            </section>
+            <section>
+              <h2 className="mb-3 text-lg font-semibold">
+                {" "}
+                {t("single-vacancy.benefits-label")}
+              </h2>
+              <ul className="list-inside list-disc space-y-2 text-muted-foreground">
+                {listMaker(singleVacancy?.benefits ?? "")}
               </ul>
             </section>
           </div>
@@ -130,22 +148,21 @@ const SingleVacancy = () => {
         {/* Sidebar */}
         <div className="mx-auto flex flex-col gap-8 sm:flex-row md:flex-col">
           <Card className="h-48 w-56 p-4">
-            <h2 className="mb-4 font-semibold">Job Overview</h2>
+            <h2 className="mb-4 font-semibold">
+              {" "}
+              {t("single-vacancy.overview-label")}
+            </h2>
             <div className="space-y-4">
               <div className="flex items-center gap-3 text-sm">
                 <Calendar className="h-5 w-5 text-primary" />
                 <div>
-                  <p className="text-muted-foreground">Job Posted</p>
+                  <p className="text-muted-foreground">
+                    {" "}
+                    {t("single-vacancy.date-label")}
+                  </p>
                   <p>{getFormattedDate(singleVacancy?.created_at ?? "")}</p>
                 </div>
               </div>
-              {/* <div className="flex items-center gap-3 text-sm">
-                <Clock className="w-5 h-5 text-muted-foreground" />
-                <div>
-                  <p className="text-muted-foreground">Due Date</p>
-                  <p>14 Apr, 2025</p>
-                </div>
-              </div> */}
               <div className="flex items-center gap-3 text-sm">
                 <MapPin className="h-5 w-5 text-primary" />
                 <div>
@@ -157,14 +174,21 @@ const SingleVacancy = () => {
           </Card>
           <Card className="h-48 w-56 p-4">
             <div className="space-y-4">
-              <div>
-                <h2 className="mb-2 font-semibold">Salary (USD)</h2>
-                <p className="text-base text-green-600 sm:text-lg">
-                  {singleVacancy?.salaryMin} - {singleVacancy?.salaryMax} ₾
+              <h2 className="mb-2 font-semibold">
+                {" "}
+                {t("single-vacancy.salary-label")}
+              </h2>
+              <div className="flex flex-row gap-2">
+                <Banknote className="text-primary" />
+                <p className="sm:text-md text-base text-green-600">
+                  {singleVacancy?.salaryMin} - {singleVacancy?.salaryMax}
                 </p>
               </div>
               <div>
-                <h2 className="mb-2 font-semibold">Share this job:</h2>
+                <h2 className="mb-2 font-semibold">
+                  {" "}
+                  {t("single-vacancy.share-label")}
+                </h2>
                 <div className="flex gap-2">
                   <Button
                     variant="outline"
@@ -173,7 +197,7 @@ const SingleVacancy = () => {
                     name="copy"
                     onClick={handleCopyUrl}
                   >
-                    <Copy className="h-4 w-4" />
+                    <Copy className="h-4 w-4 text-primary" />
                   </Button>
                 </div>
               </div>

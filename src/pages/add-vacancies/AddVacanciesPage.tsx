@@ -11,6 +11,7 @@ import { vacanciesFormDefaultValues as createVacanciesFormDefaultValue } from "@
 import { AlertDestructive } from "@/components/error/errorAlert";
 import { useProfileInfo } from "@/react-query/query/profile/profileQuery";
 import { useAuthContext } from "@/context/hooks/useAuthContext";
+import { useTranslation } from "react-i18next";
 
 const AddVacanciesPage = () => {
   const navigate = useNavigate();
@@ -43,17 +44,22 @@ const AddVacanciesPage = () => {
       navigate(`/${lang}/my-vacancies`);
     }
   };
+  const { t } = useTranslation();
   return (
     <div className="container mx-auto max-w-3xl p-4">
       <Card>
         <CardHeader className="flex flex-row items-center gap-4">
           <img src={new_vacancy_svg} className="h-20 w-16" />
-          <CardTitle className="text-2xl text-primary">
-            Create New Job Posting
+          <CardTitle className="text-xl text-primary">
+            {t("add-vacancies-page.heading")}
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <VacanciesCreateForm onSubmit={onSubmit} form={form} />
+          <VacanciesCreateForm
+            onSubmit={onSubmit}
+            form={form}
+            buttonLabel={t("add-vacancies-page.button")}
+          />
           {isVacanciesCreateError && (
             <div className="mt-4">
               <AlertDestructive

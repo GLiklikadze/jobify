@@ -1,6 +1,7 @@
 import VacancyList from "@/pages/vacancies/components/VacancyList";
 import { useGetMyVacanciesList } from "@/react-query/query/vacancies/vacanciesQuery";
 import { Building2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
 const CompaniesVacancies = () => {
@@ -10,12 +11,14 @@ const CompaniesVacancies = () => {
     isError,
     isLoading,
   } = useGetMyVacanciesList(company_id ?? "");
-
+  const { t } = useTranslation();
   return (
     <div className="-mt-8 space-y-10">
-      <div className="bg-gray-40 dark:bg-blue-900 dark:bg-opacity-25">
+      <div className="bg-gray-40 dark:bg-[#162a47]">
         <div className="mx-auto flex max-w-4xl flex-col items-center justify-between p-4 text-primary sm:flex-row">
-          <h1 className="text-2xl font-bold">Company Vacancies</h1>
+          <h1 className="text-lg font-bold">
+            {t("companies-vacancies.heading")}
+          </h1>
           <div className="flex flex-row gap-2 text-sm font-semibold">
             <Building2 size="1.2rem" className="text-orange-700" />
             {!isError && !isLoading && vacanciesList?.[0]?.companyName}

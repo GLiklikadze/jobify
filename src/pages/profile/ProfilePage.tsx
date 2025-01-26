@@ -90,7 +90,7 @@ const ProfilePage = () => {
         </CardTitle>
         <hr />
         <div className="mb-4 flex justify-between gap-7 p-4">
-          <div className="flex items-center gap-6 sm:gap-14">
+          <div className="flex items-center gap-6 sm:gap-16">
             <Label className="mb-2 w-24">{t("profile-page.photo-label")}</Label>
             <div className="flex h-20 w-20 flex-col overflow-hidden rounded-lg bg-slate-500">
               {logo_url && (
@@ -138,7 +138,10 @@ const ProfilePage = () => {
           ) : (
             <>
               <div className="flex flex-row items-center gap-8 sm:gap-16">
-                <Label className="mb-2 w-24">Email</Label>
+                <Label className="mb-2 w-24">
+                  {" "}
+                  {t("profile-page.email-label")}
+                </Label>
                 <p className="max-w-60 overflow-hidden text-xs font-bold text-primary sm:text-sm">
                   {user?.email}
                 </p>
@@ -237,7 +240,7 @@ const ProfilePage = () => {
           </div>
           <div className="flex min-h-9 flex-row items-start gap-8 sm:gap-16">
             <Label htmlFor="address" className="mt-2 w-24">
-              Location
+              {t("profile-page.location-label")}
             </Label>
             {!toggleEdit ? (
               <p className="max-w-60 overflow-hidden font-semibold text-primary">

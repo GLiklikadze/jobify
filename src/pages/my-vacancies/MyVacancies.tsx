@@ -12,19 +12,9 @@ import {
 import { Card } from "@/components/ui/card";
 import { useDeleteVacancy } from "@/react-query/mutation/vacancies/vacanciesMutation";
 import { useAuthContext } from "@/context/hooks/useAuthContext";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import delete_illustration from "@/assets/delete_illustration.svg";
 import { getFormattedDate } from "@/utils/dateFormatter";
+import AlertDialogComponent from "@/components/alertDialog/AlertDialog";
+import { t } from "i18next";
 
 const MyVacancies = () => {
   const { user } = useAuthContext();
@@ -48,19 +38,28 @@ const MyVacancies = () => {
       <Card className="mx-4 max-w-4xl space-y-9 px-4 pb-9 pt-6 md:mx-auto">
         <div className="mx-auto flex items-center justify-center gap-2 text-center text-xl font-bold text-primary">
           <ListCollapse />
-          <h1>My Vacancies</h1>
+          <h1>{t("my-vacancies.my-vacancies-heading")}</h1>{" "}
+          <span className="text-orange-700">({vacanciesList?.length})</span>
         </div>
         <Table className="x-4 whitespace-nowrap text-xs sm:text-sm md:text-base">
           <TableHeader>
             <TableRow>
               <TableHead className="sm:w-24">ID</TableHead>
-              <TableHead className="max-w-24 sm:w-40">Title</TableHead>
-              <TableHead className="hidden md:table-cell">Job Type</TableHead>
-              <TableHead className="hidden md:table-cell">Salary ₾</TableHead>
-              <TableHead className="hidden sm:table-cell sm:w-28">
-                Date
+              <TableHead className="max-w-24 sm:w-36 md:p-6">
+                {t("my-vacancies.my-vacancies-title")}
               </TableHead>
-              <TableHead className="text-center">Action</TableHead>
+              <TableHead className="hidden md:table-cell">
+                {t("my-vacancies.my-vacancies-jobType")}
+              </TableHead>
+              <TableHead className="hidden md:table-cell">
+                {t("my-vacancies.my-vacancies-salary")}
+              </TableHead>
+              <TableHead className="hidden sm:table-cell sm:w-28 md:p-6">
+                {t("my-vacancies.my-vacancies-date")}
+              </TableHead>
+              <TableHead className="text-center">
+                {t("my-vacancies.my-vacancies-action")}
+              </TableHead>
             </TableRow>
           </TableHeader>
 
@@ -96,43 +95,17 @@ const MyVacancies = () => {
                     >
                       <Pencil className="h-4 w-5 text-primary" />
                     </div>
-                    {/* <div
-                      className="flex w-9 justify-center rounded-md border-2 p-1 hover:bg-blue-200"
-                      onClick={() => handleDeleteClick(announcement?.id)}
+                    <AlertDialogComponent
+                      question={t("my-vacancies.alert-dialog-question")}
+                      description={t("my-vacancies.alert-dialog-description")}
+                      continueLabel={t("my-vacancies.alert-dialog-accept")}
+                      cancelLabel={t("my-vacancies.alert-dialog-cancel-btn")}
+                      onClickAction={() => handleDeleteClick(announcement?.id)}
                     >
-                      <Trash2 className="h-4 w-5 text-red-600" />
-                    </div> */}
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <div className="flex w-9 justify-center rounded-md border-2 p-1 hover:bg-blue-200">
-                          <Trash2 className="h-4 w-5 text-red-600" />
-                        </div>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent className="pt-2">
-                        <AlertDialogHeader>
-                          <AlertDialogTitle className="flex flex-row items-center justify-between">
-                            Are you sure?
-                            <img
-                              src={delete_illustration}
-                              className="m-0 h-16 w-20 p-0"
-                            />
-                          </AlertDialogTitle>
-
-                          <AlertDialogDescription>
-                            This will permanently delete your vacancy and remove
-                            your data from our servers.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction
-                            onClick={() => handleDeleteClick(announcement?.id)}
-                          >
-                            Continue
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
+                      <div className="flex w-9 justify-center rounded-md border-2 p-1 hover:bg-blue-200">
+                        <Trash2 className="h-4 w-5 text-red-600" />
+                      </div>
+                    </AlertDialogComponent>
                   </div>
                 </TableCell>
               </TableRow>

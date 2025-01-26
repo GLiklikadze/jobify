@@ -16,18 +16,19 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "../ui/textarea";
 import { VacanciesCreateFormProps } from "./vacanciesForm.types";
+import { t } from "i18next";
 
 const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
   form,
   onSubmit,
+  buttonLabel,
 }) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        {/* Basic Information */}
         <div className="space-y-4">
           <h2 className="text-lg font-semibold text-primary">
-            Basic Information
+            {t("vacancies-form.basic-section")}
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
             <FormField
@@ -35,7 +36,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Job Title</FormLabel>
+                  <FormLabel> {t("vacancies-form.title-label")}</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Senior UX Designer"
@@ -52,7 +53,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
               name="category"
               render={({ field: { value, onChange } }) => (
                 <FormItem>
-                  <FormLabel>Category</FormLabel>
+                  <FormLabel>{t("vacancies-form.category-label")}</FormLabel>
                   <Select
                     value={value}
                     onValueChange={(val) => onChange(val === "none" ? "" : val)}
@@ -84,7 +85,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
               name="location"
               render={({ field: { value, onChange } }) => (
                 <FormItem>
-                  <FormLabel>Location</FormLabel>
+                  <FormLabel>{t("vacancies-form.location-label")}</FormLabel>
                   <Select value={value} onValueChange={(val) => onChange(val)}>
                     <FormControl>
                       <SelectTrigger>
@@ -107,7 +108,9 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
               name="jobType"
               render={({ field: { value, onChange } }) => (
                 <FormItem>
-                  <FormLabel>Employment Type</FormLabel>
+                  <FormLabel>
+                    {t("vacancies-form.employmentType-label")}
+                  </FormLabel>
                   <Select value={value} onValueChange={(val) => onChange(val)}>
                     <FormControl>
                       <SelectTrigger>
@@ -132,7 +135,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
               name="salaryMin"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Min Salary ₾</FormLabel>
+                  <FormLabel>{t("vacancies-form.minSalary-label")}</FormLabel>
                   <FormControl>
                     <Input
                       type="text"
@@ -154,7 +157,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
               name="salaryMax"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Max Salary ₾</FormLabel>
+                  <FormLabel>{t("vacancies-form.maxSalary-label")}</FormLabel>
                   <FormControl>
                     <Input
                       type="text"
@@ -174,15 +177,17 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
           </div>
         </div>
 
-        {/* Job Details */}
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold">Job Details</h2>
+          <h2 className="text-lg font-semibold text-primary">
+            {" "}
+            {t("vacancies-form.details-section")}
+          </h2>
           <FormField
             control={form.control}
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Job Description</FormLabel>
+                <FormLabel>{t("vacancies-form.description-label")}</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Enter the job description..."
@@ -201,7 +206,9 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
             name="qualifications"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Qualifications</FormLabel>
+                <FormLabel>
+                  {t("vacancies-form.qualifications-label")}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Enter job requirements..."
@@ -211,7 +218,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
                   />
                 </FormControl>
                 <FormDescription>
-                  Enter each qualification on a new line
+                  {t("vacancies-form.qualifications-instruction")}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -222,7 +229,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
             name="requirements"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Requirements</FormLabel>
+                <FormLabel>{t("vacancies-form.requirements-label")}</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Enter job requirements..."
@@ -232,7 +239,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
                   />
                 </FormControl>
                 <FormDescription>
-                  Enter each requirement on a new line
+                  {t("vacancies-form.requirements-instruction")}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -244,7 +251,9 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
             name="responsibilities"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Responsibilities</FormLabel>
+                <FormLabel>
+                  {t("vacancies-form.responsibilities-label")}
+                </FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Enter job responsibilities..."
@@ -254,7 +263,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
                   />
                 </FormControl>
                 <FormDescription>
-                  Enter each responsibility on a new line
+                  {t("vacancies-form.responsibilities-instruction")}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -266,7 +275,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
             name="benefits"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Benefits</FormLabel>
+                <FormLabel>{t("vacancies-form.benefits-label")}</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Enter job benefits..."
@@ -276,7 +285,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
                   />
                 </FormControl>
                 <FormDescription>
-                  Enter each benefit on a new line
+                  {t("vacancies-form.benefits-instruction")}
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -284,7 +293,7 @@ const VacanciesCreateForm: React.FC<VacanciesCreateFormProps> = ({
           />
         </div>
         <Button type="submit" className="w-full">
-          Create Job Posting
+          {buttonLabel}
         </Button>
       </form>
     </Form>

@@ -1,0 +1,12 @@
+{
+  "my-vacancies-heading": "My Vacancies",
+  "my-vacancies-title": "Title",
+  "my-vacancies-jobType": "Job type",
+  "my-vacancies-salary": "Salary ₾",
+  "my-vacancies-date": "Date",
+  "my-vacancies-action": "Action",
+  "alert-dialog-question": "Are you sure ?",
+  "alert-dialog-description": "This will permanently delete your vacancy and remove your data from our servers.",
+  "alert-dialog-cancel-btn": "Cancel",
+  "alert-dialog-accept": "Okay"
+}

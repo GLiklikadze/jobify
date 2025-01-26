@@ -1,10 +1,11 @@
 {
   "card-title": "Profile Information",
-  "photo-label": "Company Logo",
+  "photo-label": "Logo",
   "tab-geo": "Geo",
   "tab-eng": "Eng",
   "full-name-label": "Profile Name",
-  "avatar-url-label": "Company Logo",
+  "email-label": "Email",
+  "location-label": "Location",
   "phone-number-label": "Mob Phone",
   "address-number-label": "Company Address",
   "edit-button": "Edit Information",

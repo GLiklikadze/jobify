@@ -55,11 +55,11 @@ function App() {
 
   useEffect(() => {
     if (i18n.language === "ka") {
-      document.body.classList.add("font-geo");
-      document.body.classList.remove("font-eng");
+      document.body.classList.add("font-ka");
+      document.body.classList.remove("font-en");
     } else {
-      document.body.classList.add("font-eng");
-      document.body.classList.remove("font-geo");
+      document.body.classList.add("font-en");
+      document.body.classList.remove("font-ka");
     }
   }, [i18n.language]);
 
@@ -176,7 +176,7 @@ function App() {
             />
           </Route>
         </Route>
-        <Route path="/" element={<Navigate to="/ka/home" />} />
+        <Route path="/" element={<Navigate to="/en/home" />} />
         <Route
           path="*"
           element={

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button/button";
 import {
@@ -24,25 +24,24 @@ export default function LanguageSwitcher() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [currentLanguage, setCurrentLanguage] = useState(languages[0]);
-  const handleLanguageChange = (language: languagesObj) => {
-    let newPath;
-    setCurrentLanguage(language);
-    if (currentLanguage.code === "ka") {
-      i18next.changeLanguage("en");
-      newPath = location.pathname.replace(`/${lang}`, `/en`);
-      navigate(newPath);
-    } else if (currentLanguage.code === "en") {
-      i18next.changeLanguage("ka");
-      newPath = location.pathname.replace(`/${lang}`, `/ka`);
-      navigate(newPath);
-    }
-  };
+  const [currentLanguage, setCurrentLanguage] = useState<languagesObj>(
+    languages.find((language) => language.code === lang) || languages[0],
+  );
+  useEffect(() => {
+    const selectedLanguage =
+      languages.find((language) => language.code === lang) || languages[0];
+    setCurrentLanguage(selectedLanguage);
+    i18next.changeLanguage(selectedLanguage.code);
+  }, [lang]);
 
+  const handleLanguageChange = (language: languagesObj) => {
+    const newPath = location.pathname.replace(`/${lang}`, `/${language.code}`);
+    navigate(newPath);
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="secondary" className="px-2  border-2">
+        <Button variant="secondary" className="border-2 px-2">
           <Globe />
           <span className="text-xs">{currentLanguage.name.slice(0, 3)}</span>
         </Button>

@@ -1,0 +1,14 @@
+{
+  "back-button": "უკან",
+  "apply-button": "მიმართვა",
+  "company-prefix": "კომპანია",
+  "description-label": "ვაკანსიის აღწერა",
+  "requirements-label": "მოთხოვნები",
+  "benefits-label": "უპირატესობები",
+  "qualifications-label": "კვალიფიკაცია",
+  "responsibilities-label": "პასუხისმგებლობები",
+  "overview-label": "ვაკანსიის მიმოხილვა",
+  "date-label": "განთავსების თარიღი",
+  "salary-label": "ხელფასის დიაპაზონი ( ₾ )",
+  "share-label": "ვაკანსიის გაზიარება"
+}

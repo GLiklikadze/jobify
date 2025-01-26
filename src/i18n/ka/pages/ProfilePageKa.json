@@ -1,10 +1,11 @@
 {
   "card-title": "პროფილის ინფორმაცია",
-  "photo-label": "პროფილის ფოტო",
+  "photo-label": "პროფილის ლოგო",
   "tab-geo": "ქართ",
   "tab-eng": "ინგ",
   "full-name-label": "სახელი",
-  "avatar-url-label": "ავატარის ბმული",
+  "email-label": "ელ-ფოსტა",
+  "location-label": "ლოკაცია",
   "phone-number-label": "მობილური",
   "edit-button": "რედაქტირება",
   "sign-out-button": "გამოსვლა",

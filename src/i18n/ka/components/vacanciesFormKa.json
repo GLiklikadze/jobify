@@ -1,0 +1,19 @@
+{
+  "basic-section": "ძირითადი ინფორმაცია",
+  "details-section": "ვაკანსიის დეტალები",
+  "title-label": "ვაკანსიის დასახელება",
+  "category-label": "კატეგორია",
+  "location-label": "ლოკაცია",
+  "employmentType-label": "დასაქმების ტიპი",
+  "minSalary-label": "მინ. ანაზღაურება",
+  "maxSalary-label": "მაქს. ანაზღაურება",
+  "description-label": "ვაკანსიის აღწერა",
+  "qualifications-label": "კვალიფიკაცია",
+  "qualifications-instruction": "შეიყვანეთ ყოველი კვალიფიკაცია ახალ ხაზზე",
+  "requirements-label": "მოთხოვნები",
+  "requirements-instruction": "შეიყვანეთ ყოველი მოთხოვნა ახალ ხაზზე",
+  "responsibilities-label": "პასუხისმგებლობები",
+  "responsibilities-instruction": "შეიყვანეთ ყოველი პასუხისმგებლობა ახალ ხაზზე",
+  "benefits-label": "უპირატესობები",
+  "benefits-instruction": "შეიყვანეთ ყოველი უპირატესობა ახალ ხაზზე"
+}
