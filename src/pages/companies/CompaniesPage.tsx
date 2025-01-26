@@ -1,5 +1,5 @@
 import { useFilteredProfileList } from "@/react-query/query/profile/profileQuery";
-import { BriefcaseIcon } from "lucide-react";
+import { BriefcaseIcon, Building2 } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
@@ -70,12 +70,21 @@ const CompaniesPage = () => {
               <Input type="text" placeholder="Facebook" {...field} />
             )}
           />
-
           <img src={search_illustration} className="mx-auto h-10 w-14" />
         </div>
         <img src={project_team} className="h-32 w-36" />
       </div>
-
+      <div className="mx-auto flex max-w-4xl">
+        {(filteredProfiles || !isError || !isLoading) && (
+          <div className="w-15 mx-auto my-5 flex h-9 flex-row items-center gap-2 rounded-md border-2 bg-secondary px-5 text-primary">
+            {" "}
+            <Building2 size="1.2rem" />
+            <span className="text-base font-semibold">
+              {filteredProfiles?.length}
+            </span>
+          </div>
+        )}
+      </div>
       {!isLoading ? (
         <CompaniesList filteredProfiles={filteredProfiles ?? []} />
       ) : (

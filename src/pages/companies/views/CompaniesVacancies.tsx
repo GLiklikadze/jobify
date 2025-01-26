@@ -30,6 +30,7 @@ const CompaniesVacancies = () => {
         </div>
         <hr />
       </div>
+
       <div className="space-y-2 px-4">
         {!isLoading ? (
           <VacancyList vacanciesList={vacanciesList ?? []} />
