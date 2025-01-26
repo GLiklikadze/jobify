@@ -59,7 +59,11 @@ const AddVacanciesPage = () => {
     <div className="container mx-auto max-w-3xl p-4">
       <Card>
         <CardHeader className="flex flex-row items-center gap-4">
-          <img src={new_vacancy_svg} className="h-20 w-16" />
+          <img
+            src={new_vacancy_svg}
+            className="h-20 w-16"
+            alt="new_vacancy_illustration"
+          />
           <CardTitle className="text-xl text-primary">
             {t("add-vacancies-page.heading")}
           </CardTitle>

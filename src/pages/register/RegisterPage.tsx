@@ -16,6 +16,7 @@ import { RegisterFormValues } from "./RegisterPage.types";
 import { useRegister } from "@/react-query/mutation/auth/authMutation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormSchema } from "../login/schema";
+import work_together_illustration from "@/assets/undraw_job-hunt_5umi.svg";
 
 const initialRegisterObj = {
   email: "",
@@ -41,8 +42,8 @@ const RegisterPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex h-[70vh] w-full items-center justify-center px-4">
-      <Card className="mx-auto min-h-96 w-[30rem]">
+    <div className="flex h-[70vh] w-full flex-col items-center justify-center gap-2 px-4">
+      <Card className="min-h-80 max-w-[30rem] md:px-20">
         <CardHeader>
           <CardTitle className="mx-auto text-2xl font-bold">
             {t("register-page.register-header")}
@@ -91,17 +92,6 @@ const RegisterPage = () => {
               <Controller
                 name="password"
                 control={control}
-                rules={{
-                  required: "password-required-error",
-                  minLength: {
-                    value: 5,
-                    message: "password-minLength-error",
-                  },
-                  maxLength: {
-                    value: 25,
-                    message: "password-maxLength-error",
-                  },
-                }}
                 render={({ field: { onChange, value, onBlur } }) => {
                   return (
                     <Input
@@ -151,6 +141,11 @@ const RegisterPage = () => {
           </div>
         </CardContent>
       </Card>
+      <img
+        src={work_together_illustration}
+        className="w-[10rem]"
+        alt="register-illustration"
+      />
     </div>
   );
 };

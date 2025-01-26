@@ -44,3 +44,6 @@ export type searchObjType = {
   address: string;
   category: string;
 };
+export type SingleVacancyMainContentProps = {
+  singleVacancy: VacancyType;
+};

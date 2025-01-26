@@ -27,7 +27,11 @@ const AlertDialogComponent: React.FC<AlertDialogComponentProps> = ({
         <AlertDialogHeader>
           <AlertDialogTitle className="flex flex-row items-center justify-between">
             {question}
-            <img src={delete_illustration} className="m-0 h-16 w-20 p-0" />
+            <img
+              src={delete_illustration}
+              className="m-0 h-16 w-20 p-0"
+              alt="delete_illustration"
+            />
           </AlertDialogTitle>
 
           <AlertDialogDescription>{description}</AlertDialogDescription>

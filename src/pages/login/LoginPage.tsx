@@ -16,6 +16,7 @@ import { LoginFormValues } from "./LoginPage.types";
 import { useLogin } from "@/react-query/mutation/auth/authMutation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormSchema } from "./schema";
+import login_illustration from "@/assets/profile_v54h.svg";
 
 const initialLoginObj = {
   email: "",
@@ -76,12 +77,6 @@ const LoginPage = () => {
           <div className="grid gap-2">
             <div className="flex items-center">
               <Label htmlFor="password">{t("login-page.password-label")}</Label>
-              <Link
-                to=""
-                className="ml-auto inline-block text-sm text-primary underline"
-              >
-                {t("login-page.forgot-password")}
-              </Link>
             </div>
             <Controller
               name="password"
@@ -129,8 +124,13 @@ const LoginPage = () => {
     </>
   );
   return (
-    <div className="flex h-[70vh] w-full items-center justify-center px-4">
-      <Card className="mx-auto w-[30rem]">{cardContent}</Card>
+    <div className="flex h-[70vh] w-full flex-col items-center justify-center gap-2 px-4">
+      <Card className="mx-auto max-w-[30rem] md:px-14">{cardContent}</Card>
+      <img
+        src={login_illustration}
+        className="w-[12rem]"
+        alt="login-illustration"
+      />
     </div>
   );
 };
