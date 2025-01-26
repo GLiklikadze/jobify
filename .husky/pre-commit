@@ -1,0 +1,4 @@
+#!/bin/sh
+npm run ts-check
+npm run lint
+npm run format
